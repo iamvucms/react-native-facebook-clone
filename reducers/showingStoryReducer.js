@@ -1,6 +1,6 @@
 import { showingStoryActions } from '../constants'
 import { Alert } from 'react-native'
-const defaultState = { justclosed: false }
+const defaultState = {}
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
         case showingStoryActions.SET_SHOWING_STORY_REQUEST:

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Text, TouchableOpacity, StyleSheet, ImageBackground, TextInput, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+
 import Swiper from 'react-native-swiper'
 import * as navigation from '../rootNavigation'
 import StoryDetailItem from '../components/Stories/StoryDetailItem'

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Animated, View, Image, Text, TouchableOpacity, StyleSheet, ImageBackground, TextInput, Dimensions } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import { SetShowingStoryRequest } from '../../../actions/showingStoryActions'
@@ -45,6 +46,9 @@ class index extends Component {
             displayImage: displayImage,
             displayPosition: displayImagePosition,
         })
+    }
+    onSwipeHorizontalHandler(gestureState){
+        this.widthAnim.stopAnimation()
     }
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.hasOwnProperty('showingStory')) {
@@ -94,84 +98,91 @@ class index extends Component {
             inputRange: [0, 100],
             outputRange: ['0%', '100%']
         })
-        return (
-            <ImageBackground blurRadius={50} imageStyle={{ resizeMode: 'cover' }} style={styles.backgroundWrapper} source={{ uri: this.state.displayImage.url }}>
-                <View>
-                    <View style={styles.topBarWrapper}>
-                        {storyDetail.images.map((image, index) => (
-                            <View key={index} style={{ ...styles.topBar, width: Math.round(100 / storyDetail.images.length) + "%", height: 3, backgroundColor: 'gray' }}>
-                                {index < this.state.displayPosition &&
-                                    <Animated.View style={{ ...styles.increaseBar, width: "98%", height: 3, backgroundColor: '#fff' }} />
-                                }
-                                {index === this.state.displayPosition &&
-                                    <Animated.View style={{ ...styles.increaseBar, width: width, height: 3, backgroundColor: '#fff' }} />
-                                }
-                                {index > this.state.displayPosition &&
-                                    <Animated.View style={{ ...styles.increaseBar, width: "0%", height: 3, backgroundColor: '#fff' }} />
-                                }
-                            </View>
-                        ))}
 
-                    </View>
-                    <View style={styles.userWrapper}>
-                        <TouchableOpacity onPress={this.onPressGoBackHandle.bind(this)} style={styles.backBtn}>
-                            <Icon name='arrow-left' color="#fff" size={24}></Icon>
-                        </TouchableOpacity>
-                        <Image style={styles.userAvatar} source={{ uri: storyDetail.user.avatar_url }}></Image>
-                        <View style={styles.userInfoWrapper}>
-                            <Text style={styles.name}>{storyDetail.user.name}</Text>
-                            <Text style={styles.time}>{this.state.displayImage.create_at}</Text>
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+        };
+        return (
+            <GestureRecognizer config={config} onSwipeRight={this.onSwipeHorizontalHandler.bind(this)} onSwipeLeft={this.onSwipeHorizontalHandler.bind(this)}>
+                <ImageBackground blurRadius={50} imageStyle={{ resizeMode: 'cover' }} style={styles.backgroundWrapper} source={{ uri: this.state.displayImage.url }}>
+                    <View>
+                        <View style={styles.topBarWrapper}>
+                            {storyDetail.images.map((image, index) => (
+                                <View key={index} style={{ ...styles.topBar, width: Math.round(100 / storyDetail.images.length) + "%", height: 3, backgroundColor: 'gray' }}>
+                                    {index < this.state.displayPosition &&
+                                        <Animated.View style={{ ...styles.increaseBar, width: "98%", height: 3, backgroundColor: '#fff' }} />
+                                    }
+                                    {index === this.state.displayPosition &&
+                                        <Animated.View style={{ ...styles.increaseBar, width: width, height: 3, backgroundColor: '#fff' }} />
+                                    }
+                                    {index > this.state.displayPosition &&
+                                        <Animated.View style={{ ...styles.increaseBar, width: "0%", height: 3, backgroundColor: '#fff' }} />
+                                    }
+                                </View>
+                            ))}
+
                         </View>
-                    </View>
-                    <Image resizeMode="contain" style={styles.image} source={{ uri: this.state.displayImage.url }}></Image>
-                    <ScrollView showsHorizontalScrollIndicator={false} nestedScrollEnabled={true} horizontal={true} style={styles.reactionWrapper}>
-                        <TextInput placeholderTextColor="#fff" style={styles.msgInput} placeholder="Send message to poster"></TextInput>
-                        <View style={styles.iconWrapper}>
-                            <TouchableOpacity>
-                                <FontAwesome5Icon style={styles.reactionIcon} name='paper-plane' color="white">
-                                </FontAwesome5Icon>
+                        <View style={styles.userWrapper}>
+                            <TouchableOpacity onPress={this.onPressGoBackHandle.bind(this)} style={styles.backBtn}>
+                                <Icon name='arrow-left' color="#fff" size={24}></Icon>
                             </TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                name="thumbs-up"
-                                color="#318bfb"
-                                backgroundColor="#fff"
-                                style={styles.reactionIcon}
-                            ></Icon></TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                name="heart"
-                                color="#e8304a"
-                                backgroundColor="white"
-                                style={styles.reactionIcon}
-                            ></Icon></TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                name="grin-squint"
-                                color="#f7ca51"
-                                backgroundColor="white"
-                                style={styles.reactionIcon}
-                            ></Icon></TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                name="surprise"
-                                color="#f7ca51"
-                                backgroundColor="white"
-                                style={styles.reactionIcon}
-                            ></Icon></TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                name="sad-tear"
-                                color="#f7ca51"
-                                backgroundColor="white"
-                                style={styles.reactionIcon}
-                            ></Icon></TouchableOpacity>
-                            <TouchableOpacity><Icon
-                                lineBreakMode={false}
-                                name="angry"
-                                color="#dc4311"
-                                backgroundColor="white"
-                                style={{ ...styles.reactionIcon, marginRight: 40 }}
-                            ></Icon></TouchableOpacity>
+                            <Image style={styles.userAvatar} source={{ uri: storyDetail.user.avatar_url }}></Image>
+                            <View style={styles.userInfoWrapper}>
+                                <Text style={styles.name}>{storyDetail.user.name}</Text>
+                                <Text style={styles.time}>{this.state.displayImage.create_at}</Text>
+                            </View>
                         </View>
-                    </ScrollView>
-                </View>
-            </ImageBackground>
+                        <Image resizeMode="contain" style={styles.image} source={{ uri: this.state.displayImage.url }}></Image>
+                        <ScrollView showsHorizontalScrollIndicator={false} nestedScrollEnabled={true} horizontal={true} style={styles.reactionWrapper}>
+                            <TextInput placeholderTextColor="#fff" style={styles.msgInput} placeholder="Send message to poster"></TextInput>
+                            <View style={styles.iconWrapper}>
+                                <TouchableOpacity>
+                                    <FontAwesome5Icon style={styles.reactionIcon} name='paper-plane' color="white">
+                                    </FontAwesome5Icon>
+                                </TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    name="thumbs-up"
+                                    color="#318bfb"
+                                    backgroundColor="#fff"
+                                    style={styles.reactionIcon}
+                                ></Icon></TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    name="heart"
+                                    color="#e8304a"
+                                    backgroundColor="white"
+                                    style={styles.reactionIcon}
+                                ></Icon></TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    name="grin-squint"
+                                    color="#f7ca51"
+                                    backgroundColor="white"
+                                    style={styles.reactionIcon}
+                                ></Icon></TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    name="surprise"
+                                    color="#f7ca51"
+                                    backgroundColor="white"
+                                    style={styles.reactionIcon}
+                                ></Icon></TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    name="sad-tear"
+                                    color="#f7ca51"
+                                    backgroundColor="white"
+                                    style={styles.reactionIcon}
+                                ></Icon></TouchableOpacity>
+                                <TouchableOpacity><Icon
+                                    lineBreakMode={false}
+                                    name="angry"
+                                    color="#dc4311"
+                                    backgroundColor="white"
+                                    style={{ ...styles.reactionIcon, marginRight: 40 }}
+                                ></Icon></TouchableOpacity>
+                            </View>
+                        </ScrollView>
+                    </View>
+                </ImageBackground>
+            </GestureRecognizer>
         )
     }
 }

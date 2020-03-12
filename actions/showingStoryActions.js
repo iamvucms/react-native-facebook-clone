@@ -1,10 +1,9 @@
 import { showingStoryActions } from '../constants'
-export const SetShowingStoryRequest = (story, position, justclosed = false) => {
+export const SetShowingStoryRequest = (story, position) => {
     return (dispatch) => {
         const showingStory = {
             ...story,
             position,
-            justclosed
         }
         dispatch(SetShowingStorySuccess(showingStory))
     }
