@@ -194,7 +194,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        setShowingStory: (story, position, justclosed) => dispatch(SetShowingStoryRequest(story, position, justclosed))
+        setShowingStory: (story, position) => dispatch(SetShowingStoryRequest(story, position))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)

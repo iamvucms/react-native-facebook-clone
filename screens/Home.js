@@ -6,13 +6,14 @@ import { StyleSheet, Text, View, Button, ScrollView, Alert } from 'react-native'
 import { Dimensions } from "react-native";
 import Item from '../components/Item'
 import Stories from '../components/Stories'
+import PostTool from '../components/PostTool'
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 	}
 	componentDidMount() {
-		const {fetchPosts,postLogin} = this.props
+		const { fetchPosts, postLogin } = this.props
 		fetchPosts()
 		postLogin()
 	}
@@ -22,6 +23,7 @@ class Home extends Component {
 		return (
 			<View>
 				<ScrollView style={styles.listContainter}>
+					<PostTool></PostTool>
 					<Stories></Stories>
 					{posts.map((item, key) => (
 						<Item item={item} key={key} ></Item>
@@ -33,15 +35,15 @@ class Home extends Component {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		fetchPosts: () => dispatch(FetchPostsRequest()),
-		postLogin: ()=> dispatch(LoginRequest("vucms","timboy900"))
+		postLogin: () => dispatch(LoginRequest("vucms", "timboy900"))
 	}
 }
 const mapStateToProps = (state) => {
 	return {
-		posts : state.posts
+		posts: state.posts
 	}
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 const screenHeight = Math.round(Dimensions.get('window').height);
 const styles = StyleSheet.create({
 	container: {

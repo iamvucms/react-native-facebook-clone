@@ -22,8 +22,8 @@ axios.defaults.baseURL = 'http://192.168.1.3:3000'
 
 const homeTab = () => {
 	return (
-		<Stack.Navigator screenOptions={{ headerMode: 'none' }}>
-			<Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="Home" component={Home} />
 			<Stack.Screen name="Comments" component={Comments} />
 		</Stack.Navigator>
 	)
@@ -60,7 +60,7 @@ const shortCutTab = () => {
 const MainTab = () => {
 	const navigationOptions = {
 		style: {
-			marginTop: 44,
+			paddingTop:44
 		},
 		showIcon: true,
 		showLabel: false,
@@ -90,7 +90,7 @@ const MainTab = () => {
 function App() {
 	const navigationOptions = {
 		headerShown: false,
-		gestureEnabled:false
+		gestureEnabled: false
 	}
 	return (
 		<Provider store={store}>
