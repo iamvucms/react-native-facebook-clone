@@ -9,7 +9,7 @@ class PostDetailModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            detailDisplay: true
+            detailDisplay: 'flex'
         }
         this.optionBottom = new Animated.Value(-screenHeight)
     }
@@ -35,7 +35,6 @@ class PostDetailModal extends Component {
     }
     openCommentModal() {
         const { closePostDetailModal, openCommentModal } = this.props
-        console.log("oke")
         openCommentModal()
     }
     onPressCommentsHandler() {
@@ -50,7 +49,7 @@ class PostDetailModal extends Component {
     onPressHideDetailWrapperHandler() {
         this.setState({
             ...this.state,
-            detailDisplay: !this.state.detailDisplay
+            detailDisplay: this.state.detailDisplay === 'flex' ? 'none' : 'flex'
         })
     }
     onPressBackdropOptionListHandler() {

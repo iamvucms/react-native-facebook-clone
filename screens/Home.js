@@ -8,7 +8,6 @@ import { Dimensions } from "react-native";
 import Item from '../components/Item'
 import Stories from '../components/Stories'
 import PostTool from '../components/PostTool'
-import { PostDetailModal, CommentsModal } from '../components/Modal'
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -32,8 +31,6 @@ class Home extends Component {
 						<Item item={item} key={key} ></Item>
 					))}
 				</ScrollView>
-				<PostDetailModal />
-				<CommentsModal />
 			</View>
 		);
 	}
