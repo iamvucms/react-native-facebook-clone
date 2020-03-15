@@ -23,6 +23,12 @@ class Item extends Component {
             id
         })
     }
+    onPressShareHandler() {
+        const { item } = this.props
+        navigation.navigate('SharePost', {
+            id: item.id
+        })
+    }
     render() {
         const { index, item } = this.props
         return (
@@ -90,12 +96,16 @@ class Item extends Component {
                         backgroundColor="white"
                         style={{ ...styles.reactionIcon, fontSize: 14 }}
                     ><Text style={{ fontSize: 12 }}> {item.comments.length} comments</Text></Icon></TouchableOpacity>
-                    <TouchableOpacity style={styles.shareIcon}><Icon name="share-alt"
+                    <TouchableOpacity onPress={this.onPressShareHandler.bind(this)} style={styles.shareIcon}><Icon name="share-alt"
                         color="gray" ><Text style={{ fontSize: 12, textAlignVertical: 'center' }}> Share</Text></Icon></TouchableOpacity>
                 </View>
                 <View style={styles.commentContainer}>
                     <Image source={{ uri: item.avatar_url }} style={styles.commentAvatar}></Image>
-                    <TextInput placeholder="Comment..." style={styles.commentInput}></TextInput>
+                    <View style={styles.commentInput}>
+                        <TouchableOpacity onPress={this.onPressHandle.bind(this)} style={styles.commentInputWrapper}>
+                            <Text>Comment...</Text>
+                        </TouchableOpacity>
+                    </View>
                     <TouchableOpacity><Icon style={styles.btnSendComment} name="paper-plane" color="gray"></Icon></TouchableOpacity>
                 </View>
             </View>
@@ -115,6 +125,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowOffset: { height: 0, width: 0 },
         marginBottom: 10
+    },
+    commentInputWrapper: {
+        width: "100%",
+        height: "100%",
+        justifyContent: 'center',
+        borderRadius: 20,
+        paddingHorizontal: 15
     },
     paragraph: {
 
@@ -160,8 +177,6 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'gray',
         borderRadius: 20,
-        paddingLeft: 15,
-        paddingRight: 15,
         marginLeft: 10,
         height: 30,
         width: screenWidth - 15 * 2 - 60,
