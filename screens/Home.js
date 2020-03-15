@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 import { FetchPostsRequest } from '../actions/postsAction'
 import { LoginRequest } from '../actions/userActions'
 import { StyleSheet, Text, View, Button, ScrollView, Alert } from 'react-native';
+
 import { Dimensions } from "react-native";
 import Item from '../components/Item'
 import Stories from '../components/Stories'
 import PostTool from '../components/PostTool'
-
+import { PostDetailModal, CommentsModal } from '../components/Modal'
 class Home extends Component {
 	constructor(props) {
 		super(props);
+		
 	}
 	componentDidMount() {
 		const { fetchPosts, postLogin } = this.props
@@ -20,6 +22,7 @@ class Home extends Component {
 	render() {
 		const { navigation } = this.props
 		const { posts } = this.props
+		if (posts.length === 0) return <View></View>
 		return (
 			<View>
 				<ScrollView style={styles.listContainter}>
@@ -27,7 +30,10 @@ class Home extends Component {
 					<Stories></Stories>
 					{posts.map((item, key) => (
 						<Item item={item} key={key} ></Item>
-					))}</ScrollView>
+					))}
+				</ScrollView>
+				<PostDetailModal />
+				<CommentsModal />
 			</View>
 		);
 	}

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View,SafeAreaView } from 'react-native'
 
 export default class FullPostTool extends Component {
     render() {
         return (
-            <View>
+            <SafeAreaView>
                 <Text> FullPostTool </Text>
-            </View>
+            </SafeAreaView>
         )
     }
 }

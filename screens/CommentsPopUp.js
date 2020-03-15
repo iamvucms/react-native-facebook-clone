@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import Comment from '../components/Comment'
 import * as navigation from '../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -15,6 +15,9 @@ export default class extends Component {
     onPressBtnBackHandler() {
         navigation.goBack()
     }
+    onPressBackDropHandler() {
+        navigation.goBack()
+    }
     onScrollHandler(event) {
         if (event.nativeEvent.contentOffset.y === 0) {
             // this.setState({
@@ -27,20 +30,26 @@ export default class extends Component {
     render() {
         const { comments } = this.props.route.params
         return (
-            <View>
-                <View style={styles.navigationStackBar}>
-                    <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
-                        <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
-                    </TouchableOpacity>
-                    <View style={styles.stackBarTitle}>
-                        <Text style={{ fontSize: 16 }}>Comments</Text>
+            <View style={{ backgroundColor: 'rgba(255,255,255,0.0)' }}>
+                <TouchableWithoutFeedback onPress={this.onPressBackDropHandler}>
+                    <View style={{ height: 120 }}></View>
+                </TouchableWithoutFeedback>
+
+                <View style={styles.container}>
+                    <View style={styles.navigationStackBar}>
+                        <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
+                            <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
+                        </TouchableOpacity>
+                        <View style={styles.stackBarTitle}>
+                            <Text style={{ fontSize: 16 }}>Comments</Text>
+                        </View>
                     </View>
+                    <ScrollView style={styles.commentsWrapper}>
+                        {comments.map((comment, index) => (
+                            <Comment key={index} comment={comment}>Detail</Comment>
+                        ))}
+                    </ScrollView>
                 </View>
-                <ScrollView  onScroll={this.onScrollHandler.bind(this)} scrollEnabled={this.state.scrollEnabled} style={styles.container}>
-                    {comments.map((comment, index) => (
-                        <Comment key={index} comment={comment}>Detail</Comment>
-                    ))}
-                </ScrollView>
             </View>
         )
     }
@@ -48,9 +57,12 @@ export default class extends Component {
 const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#ddd',
+    },
+    commentsWrapper: {
         padding: 10,
-        paddingBottom:30,
-        backgroundColor: '#ffffff',
+        marginBottom: 70,
+        backgroundColor: '#fff',
     },
     navigationStackBar: {
         flexDirection: 'row',
