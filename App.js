@@ -22,6 +22,7 @@ const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 const rootStack = createStackNavigator();
 import { FullPostTool, CheckIn, PhotoUploader, LiveStream } from './screens/PostTools/'
+import { Platform } from 'react-native';
 
 axios.defaults.baseURL = 'http://192.168.1.3:3000'
 
@@ -93,9 +94,10 @@ const MainTab = () => {
 	);
 }
 function App() {
+	const TransitionPreset = Platform.OS==='ios' ? TransitionPresets.ModalSlideFromBottomIOS : TransitionPresets.ModalTransition
 	const navigationOptions = {
 		headerShown: false,
-		...TransitionPresets.ModalSlideFromBottomIOS,
+		...TransitionPreset,
 		gestureResponseDistance: {
 			vertical: 800
 		}

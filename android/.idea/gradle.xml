@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../node_modules/@unimodules/core/android" />
+            <option value="$PROJECT_DIR$/../node_modules/@unimodules/react-native-adapter/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-app-loader-provider/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-constants/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-error-recovery/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-file-system/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-font/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-keep-awake/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-linear-gradient/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-location/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-permissions/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-sqlite/android" />
+            <option value="$PROJECT_DIR$/../node_modules/expo-web-browser/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-barcode-scanner-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-camera-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-constants-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-face-detector-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-file-system-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-font-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-image-loader-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-permissions-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-sensors-interface/android" />
+            <option value="$PROJECT_DIR$/../node_modules/unimodules-task-manager-interface/android" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

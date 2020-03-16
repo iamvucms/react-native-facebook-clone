@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-app-loader-provider/android/expo-app-loader-provider.iml" filepath="$PROJECT_DIR$/../node_modules/expo-app-loader-provider/android/expo-app-loader-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-constants/android/expo-constants.iml" filepath="$PROJECT_DIR$/../node_modules/expo-constants/android/expo-constants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-error-recovery/android/expo-error-recovery.iml" filepath="$PROJECT_DIR$/../node_modules/expo-error-recovery/android/expo-error-recovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-file-system/android/expo-file-system.iml" filepath="$PROJECT_DIR$/../node_modules/expo-file-system/android/expo-file-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-font/android/expo-font.iml" filepath="$PROJECT_DIR$/../node_modules/expo-font/android/expo-font.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-keep-awake/android/expo-keep-awake.iml" filepath="$PROJECT_DIR$/../node_modules/expo-keep-awake/android/expo-keep-awake.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-linear-gradient/android/expo-linear-gradient.iml" filepath="$PROJECT_DIR$/../node_modules/expo-linear-gradient/android/expo-linear-gradient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-location/android/expo-location.iml" filepath="$PROJECT_DIR$/../node_modules/expo-location/android/expo-location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-permissions/android/expo-permissions.iml" filepath="$PROJECT_DIR$/../node_modules/expo-permissions/android/expo-permissions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-sqlite/android/expo-sqlite.iml" filepath="$PROJECT_DIR$/../node_modules/expo-sqlite/android/expo-sqlite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/expo-web-browser/android/expo-web-browser.iml" filepath="$PROJECT_DIR$/../node_modules/expo-web-browser/android/expo-web-browser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-barcode-scanner-interface/android/unimodules-barcode-scanner-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-barcode-scanner-interface/android/unimodules-barcode-scanner-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-camera-interface/android/unimodules-camera-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-camera-interface/android/unimodules-camera-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-constants-interface/android/unimodules-constants-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-constants-interface/android/unimodules-constants-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/@unimodules/core/android/unimodules-core.iml" filepath="$PROJECT_DIR$/../node_modules/@unimodules/core/android/unimodules-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-face-detector-interface/android/unimodules-face-detector-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-face-detector-interface/android/unimodules-face-detector-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-file-system-interface/android/unimodules-file-system-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-file-system-interface/android/unimodules-file-system-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-font-interface/android/unimodules-font-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-font-interface/android/unimodules-font-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-image-loader-interface/android/unimodules-image-loader-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-image-loader-interface/android/unimodules-image-loader-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-permissions-interface/android/unimodules-permissions-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-permissions-interface/android/unimodules-permissions-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/@unimodules/react-native-adapter/android/unimodules-react-native-adapter.iml" filepath="$PROJECT_DIR$/../node_modules/@unimodules/react-native-adapter/android/unimodules-react-native-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-sensors-interface/android/unimodules-sensors-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-sensors-interface/android/unimodules-sensors-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/unimodules-task-manager-interface/android/unimodules-task-manager-interface.iml" filepath="$PROJECT_DIR$/../node_modules/unimodules-task-manager-interface/android/unimodules-task-manager-interface.iml" />
+    </modules>
+  </component>
+</project>

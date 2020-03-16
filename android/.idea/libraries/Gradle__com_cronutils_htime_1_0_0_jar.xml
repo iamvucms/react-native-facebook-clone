@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.cronutils:htime:1.0.0@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cronutils/htime/1.0.0/1293ef94b454f7b31276f7a7fdd067162c5a63b6/htime-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cronutils/htime/1.0.0/e46d133217793c3f7325d2ae01633c005afa9ae0/htime-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cronutils/htime/1.0.0/f802c1aa82687f58f519820b55bb2eb0715ea676/htime-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

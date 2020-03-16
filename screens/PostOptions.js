@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     optionIcon: {
-        width: 35   ,
+        width: 35,
         alignItems:'center'
     },
     postOptionTitle: {
