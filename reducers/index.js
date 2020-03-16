@@ -4,11 +4,13 @@ import userReducer from './userReducer'
 import postsReducer from './postsReducer'
 import showingStoryReducer from './showingStoryReducer'
 import postDetailReducer from './postDetailReducer'
+import recommandFriendsReducer from './recommandFriendsReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
     posts: postsReducer,
     showingStory: showingStoryReducer,
-    showingPost: postDetailReducer
+    showingPost: postDetailReducer,
+    recommandFriends: recommandFriendsReducer
 })
 export default rootReducer

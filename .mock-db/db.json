@@ -266,5 +266,49 @@
             "password": "dat09",
             "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         }
+    ],
+    "recommand_friends": [
+        {
+            "userId": 2,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 3,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 4,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 5,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 6,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 7,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        },
+        {
+            "userId": 8,
+            "mutualCount": 28,
+            "name": "Ruth Phelps",
+            "avatar_url": "https://gamek.mediacdn.vn/thumb_w/640/2019/12/25/photo-1-15772621823342037462330.jpg"
+        }
     ]
 }
