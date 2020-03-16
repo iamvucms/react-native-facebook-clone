@@ -1,20 +1,53 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Dimensions, TouchableOpacity, Share, Image } from 'react-native'
+import { Keyboard, Text, StyleSheet, View, Dimensions, TouchableOpacity, Share, Image, KeyboardAvoidingView } from 'react-native'
 import * as navigation from '../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
+import { TextInput } from 'react-native-gesture-handler'
 class SharePost extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            shareOptionStyles: {
+
+            }
+        }
+    }
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._keyboardWillShow.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this._keyboardWillHide.bind(this));
+    }
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    _keyboardWillShow(event) {
+        this.setState({
+            ...this.state,
+            shareOptionStyles: {
+                display: 'none',
+
+            }
+        })
+    }
+
+    _keyboardWillHide(event) {
+        this.setState({
+            ...this.state,
+            shareOptionStyles: {
+                display: 'flex',
+
+            }
+        })
     }
     onPressBackdropHandler() {
         navigation.goBack()
     }
     render() {
         const { user } = this.props
-        console.log(user)
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView enabled behavior="height" style={styles.container}>
                 <View style={styles.backdrop}>
                     <TouchableOpacity onPress={this.onPressBackdropHandler.bind(this)} style={{ height: "100%", width: "100%" }}>
                         <View></View>
@@ -41,10 +74,17 @@ class SharePost extends Component {
                             </View>
                         </View>
                         <View style={styles.editor}>
-
+                            <TextInput placeholderTextColor='gray' placeholder="Tell somethings about this" onSubmitEditing={Keyboard.dismiss} multiline={true} style={styles.contentInput}></TextInput>
+                            <View style={styles.btnShare}>
+                                <TouchableOpacity activeOpacity={1}>
+                                    <FontAwesome5Icon.Button style={styles.btn} name="share-alt">
+                                        Share
+                                    </FontAwesome5Icon.Button>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                    <View style={styles.shareOptionsWrapper}>
+                    <View style={{ ...styles.shareOptionsWrapper, ...this.state.shareOptionStyles }}>
                         <TouchableOpacity style={styles.shareOptionItem}>
                             <View style={styles.shareOption}>
                                 <View style={{ alignItems: 'center', width: 25 }}>
@@ -86,8 +126,9 @@ class SharePost extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
+
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -130,10 +171,16 @@ const styles = StyleSheet.create({
         padding: 15,
         bottom: 0,
         left: 0,
-
     },
     shareOptionsWrapper: {
 
+    },
+    editorWrapper: {
+        // position: 'absolute',
+        //  bottom: 15,
+        // left: 15,
+        // width: '100%',
+        // marginBottom:20
     },
     shareOptionItem: {
         paddingVertical: 10
@@ -145,8 +192,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 5
     },
-    editorWrapper: {
-    },
+
     titleWrapper: {
         flexDirection: 'row',
         alignItems: 'center'
@@ -175,6 +221,21 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     editor: {
-        height: 250
+        marginTop: 10,
+        height: 200,
+        position: 'relative',
+        width: '100%'
+    },
+    contentInput: {
+        fontSize: 16,
+        height: "100%"
+    },
+    btnShare: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+    },
+    btn:{
+        paddingHorizontal:20
     }
 })
