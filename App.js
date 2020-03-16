@@ -9,6 +9,7 @@ import Comments from './screens/Comments'
 import CommentsPopUp from './screens/CommentsPopUp'
 import PostDetail from './screens/PostDetail'
 import SharePost from './screens/SharePost'
+import PostOptions from './screens/PostOptions'
 import { navigationRef } from './rootNavigation'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import axios from 'axios'
@@ -108,6 +109,7 @@ function App() {
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="PostOptions" component={PostOptions} />
 					<rootStack.Screen name="FullPostTool" component={FullPostTool} />
 					<rootStack.Screen name="CheckIn" component={CheckIn} />
 					<rootStack.Screen name="PhotoUploader" component={PhotoUploader} />

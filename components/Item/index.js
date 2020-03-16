@@ -16,6 +16,12 @@ class Item extends Component {
             comments
         })
     }
+    onPressPostOptionsIconHandler() {
+        const { item } = this.props
+        navigation.navigate('PostOptions', {
+            postDetail: item
+        })
+    }
     onPressPostImageHandler(id) {
         // const { toggleShowPostDetail } = this.props
         // toggleShowPostDetail(id, true)
@@ -39,7 +45,7 @@ class Item extends Component {
                         subtitle={item.create_at}
                         title={item.name}
                         style={{ width: screenWidth - 40 }}></ListItem>
-                    <TouchableOpacity style={{ width: 25, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={this.onPressPostOptionsIconHandler.bind(this)} style={{ width: 25, alignItems: 'center' }}>
                         <Icon name="ellipsis-h" color="#000"></Icon>
                     </TouchableOpacity>
                 </View>
