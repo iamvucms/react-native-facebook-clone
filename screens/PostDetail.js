@@ -11,6 +11,7 @@ class PostDetailModal extends Component {
         this.state = {
             detailDisplay: 'flex'
         }
+        this._isLiked = { isLiked: false }
         this.optionBottom = new Animated.Value(-screenHeight)
     }
     componentDidMount() {
@@ -130,9 +131,9 @@ class PostDetailModal extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.btnReactionWrapper}>
-                            <TouchableOpacity style={styles.btnWrapper}>
+                            <TouchableOpacity style={styles.btnWrapper} onPres={() => this._isLiked.isLiked = !this._isLiked.isLiked}>
                                 <View style={styles.reactionBtn}>
-                                    <FontAwesome5Icon name="thumbs-up" color="#fff" size={20}>
+                                    <FontAwesome5Icon name="thumbs-up" color={!this._isLiked.isLiked ? '#fff' : '#318bfb'} size={20}>
                                     </FontAwesome5Icon>
                                     <Text style={styles.reactionBtnText}>Like</Text>
                                 </View>

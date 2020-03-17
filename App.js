@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import Home from './screens/Home'
+import 'react-native-gesture-handler';
 import Comments from './screens/Comments'
 import CommentsPopUp from './screens/CommentsPopUp'
 import PostDetail from './screens/PostDetail'
@@ -94,7 +95,7 @@ const MainTab = () => {
 	);
 }
 function App() {
-	const TransitionPreset = Platform.OS==='ios' ? TransitionPresets.ModalSlideFromBottomIOS : TransitionPresets.ModalTransition
+	const TransitionPreset = Platform.OS === 'ios' ? TransitionPresets.ModalSlideFromBottomIOS : {}
 	const navigationOptions = {
 		headerShown: false,
 		...TransitionPreset,

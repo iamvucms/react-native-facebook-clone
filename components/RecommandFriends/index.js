@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
 import RecommandItem from './RecommandItem'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
@@ -8,10 +8,39 @@ import { dispatch } from '../../rootNavigation'
 class index extends Component {
     constructor(props) {
         super(props)
+        this._pivotX = 0
     }
     componentDidMount() {
         const { fetchRecommandFriends } = this.props
         fetchRecommandFriends()
+    }
+    onScrollHandler(event) {
+        const offsetX = event.nativeEvent.contentOffset.x
+        if (this._pivotX === offsetX) return;
+        const calculatedNumber = Math.floor(offsetX / (0.6 * 0.5 * screenWidth + 5))
+        if (calculatedNumber > 0) {
+            if (calculatedNumber == 1 && this._pivotX < offsetX) {
+                this.refs._scrollView.scrollTo({
+                    y: 0,
+                    x: 0.6 * screenWidth * 0.75 + 5,
+                    animated: true
+                })
+            } else if (calculatedNumber > 1) {
+                let nextStack = 0
+                if (calculatedNumber % 2 === 1) {
+                    nextStack = calculatedNumber
+                } else {
+                    nextStack = calculatedNumber - 1
+                }
+                nextOffsetX = nextStack * (0.5 * 0.6 * screenWidth + 5) + (0.25 * 0.6 * screenWidth)
+                this.refs._scrollView.scrollTo({
+                    y: 0,
+                    x: nextOffsetX,
+                    animated: true
+                })
+            }
+        }
+        this._pivotX = offsetX
     }
     render() {
         const { recommandFriends } = this.props
@@ -24,7 +53,14 @@ class index extends Component {
                         <FontAwesome5Icon name="ellipsis-h" color="#333" size={20}></FontAwesome5Icon>
                     </TouchableOpacity>
                 </View>
-                <ScrollView style={styles.recommandsWrapper} bounces={false} horizontal={true}>
+                <ScrollView decelerationRate={0.5}
+                    scrollEventThrottle={8}
+                    showsHorizontalScrollIndicator={false}
+                    ref='_scrollView'
+                    onMomentumScrollEnd={this.onScrollHandler.bind(this)}
+                    onScrollEndDrag={this.onScrollHandler.bind(this)}
+                    style={styles.recommandsWrapper}
+                    bounces={false} horizontal={true}>
                     {recommandFriends.map((profile, index) => (
                         <RecommandItem key={index} info={profile}></RecommandItem>
                     ))}
@@ -51,6 +87,7 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)
+const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 5,

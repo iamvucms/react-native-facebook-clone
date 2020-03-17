@@ -30,7 +30,7 @@ class Home extends Component {
 					<Stories></Stories>
 					{posts.map((item, index) => (
 						<>
-							{index === 1 && <RecommandFriends></RecommandFriends>}
+							{index === 1 && <RecommandFriends ></RecommandFriends>}
 							<Item item={item} key={index} ></Item>
 						</>
 					))}

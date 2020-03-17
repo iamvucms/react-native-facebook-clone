@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         height: 300
     },
     infoWrapper: {
-        paddingVertical:10,
+        paddingVertical: 10,
         paddingLeft: 15
     },
     name: {
