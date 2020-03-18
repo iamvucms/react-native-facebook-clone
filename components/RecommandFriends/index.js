@@ -39,6 +39,12 @@ class index extends Component {
                     animated: true
                 })
             }
+        } else {
+            this.refs._scrollView.scrollTo({
+                y: 0,
+                x: 0,
+                animated: true
+            })
         }
         this._pivotX = offsetX
     }
@@ -64,7 +70,6 @@ class index extends Component {
                     {recommandFriends.map((profile, index) => (
                         <RecommandItem key={index} info={profile}></RecommandItem>
                     ))}
-
                 </ScrollView>
                 <View>
                     <TouchableOpacity style={styles.btnSeeAll}>

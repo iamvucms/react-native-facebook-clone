@@ -1,32 +1,53 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, Image, Dimensions } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, Image, Dimensions, Animated } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 export default class RecommandItem extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isHidden: false
+        }
+        this._containerOpacity = new Animated.Value(1)
+    }
+    onPressHideHandler() {
+        Animated.timing(this._containerOpacity, {
+            toValue: 0,
+            duration: 1000
+        }).start(() => {
+            this.setState({
+                ...this.state,
+                isHidden: true
+            })
+        })
+
     }
     render() {
+        const containerOpacity = this._containerOpacity
         const { info } = this.props
         return (
-            <View style={styles.container}>
+            <Animated.View style={{ ...styles.container, display: this.state.isHidden ? 'none' : 'flex', opacity: containerOpacity }}>
                 <View style={styles.itemWrapper}>
-                    <Image style={styles.avatar} source={{ uri: info.avatar_url }}></Image>
+                    <TouchableOpacity activeOpacity={0.5}>
+                        <Image style={styles.avatar} source={{ uri: info.avatar_url }}></Image>
+                    </TouchableOpacity>
                     <View>
                         <View style={styles.infoWrapper}>
-                            <Text style={styles.name}>{info.name}</Text>
+                            <TouchableOpacity activeOpacity={0.5}>
+                                <Text style={styles.name}>{info.name}</Text>
+                            </TouchableOpacity>
                             <Text style={styles.mutualCount}>{info.mutualCount} mutual friends</Text>
                         </View>
                         <View style={styles.btnWrapper}>
                             <View style={styles.btnAddFr}>
                                 <FontAwesome5Icon.Button onPress={() => console.log('click add')} style={{ justifyContent: 'center' }} name="user-plus" size={20} color="white">Add Friend</FontAwesome5Icon.Button>
                             </View>
-                            <TouchableOpacity style={styles.btnHide}>
+                            <TouchableOpacity onPress={this.onPressHideHandler.bind(this)} style={styles.btnHide}>
                                 <Text>Hide</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-            </View>
+            </Animated.View>
         )
     }
 }

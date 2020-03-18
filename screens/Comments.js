@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
+import { PanResponder, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import Comment from '../components/Comment'
 import * as navigation from '../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -7,6 +8,51 @@ import { FIXED_STATUSBAR_HEIGHT } from '../constants'
 export default class extends Component {
     constructor(props) {
         super(props)
+        this.ref = React.createRef();
+        this.scrollRef = React.createRef();
+        this.state = {
+            enable: true,
+            containerTop: 0,
+            wentBack: false
+        };
+        console.log(State)
+    }
+    _onScrollDown(event) {
+        if (!this.state.enable || this.state.wentBack) return;
+        const { translationY, velocityY, state } = event.nativeEvent;
+        // console.log(event)
+        if (translationY > 180) {
+            navigation.goBack()
+            this.setState({
+                ...this.state,
+                wentBack: true
+            })
+            return;
+        } else {
+            console.log(state)
+            if (state == State.END) {
+                console.warn("drop")
+                // this.setState({
+                //     ...this.state,
+                //     containerTop: 0
+                // })
+            } else {
+                this.setState({
+                    ...this.state,
+                    containerTop: translationY
+                })
+            }
+        }
+
+    }
+
+    _onScroll({ nativeEvent }) {
+        if (nativeEvent.contentOffset.y <= 0 && !this.state.enable) {
+            this.setState({ enable: true });
+        }
+        if (nativeEvent.contentOffset.y > 0 && this.state.enable) {
+            this.setState({ enable: false });
+        }
     }
     componentDidMount() {
     }
@@ -16,41 +62,60 @@ export default class extends Component {
     onScrollHandler(event) {
     }
     render() {
+        const { enable, containerTop } = this.state;
         const { comments } = this.props.route.params
         return (
-            <KeyboardAvoidingView behavior="height" enabled style={styles.keyboardAvoidingContainer}>
-                <View style={styles.navigationStackBar}>
-                    <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
-                        <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
-                    </TouchableOpacity>
-                    <View style={styles.stackBarTitle}>
-                        <Text style={{ fontSize: 16 }}>Comments</Text>
-                    </View>
-                </View>
-                <ScrollView style={styles.container}>
-                    {comments.map((comment, index) => (
-                        <Comment key={index} comment={comment}>Detail</Comment>
-                    ))}
-                </ScrollView>
-                <View style={styles.commentInputWrapper}>
-                    <TouchableOpacity style={styles.cameraIconWrapper}>
-                        <FontAwesome5Icon name="camera" size={20}></FontAwesome5Icon>
-                    </TouchableOpacity>
-                    <View style={styles.textInputWrapper}>
-                        <TextInput autoFocus={true} style={styles.textInput}>
+            <View>
+                <View style={styles.backdrop}>
 
-                        </TextInput>
-                    </View>
-                    <View style={styles.iconWrapper}>
-                        <TouchableOpacity style={styles.iconItem}>
-                            <FontAwesome5Icon name="grip-horizontal" size={20}></FontAwesome5Icon>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconItem}>
-                            <FontAwesome5Icon name="grin-wink" size={20}></FontAwesome5Icon>
-                        </TouchableOpacity>
-                    </View>
                 </View>
-            </KeyboardAvoidingView>
+                <KeyboardAvoidingView behavior="height" enabled style={{ ...styles.keyboardAvoidingContainer, top: containerTop }}>
+                    <View style={styles.navigationStackBar}>
+                        <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
+                            <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
+                        </TouchableOpacity>
+                        <View style={styles.stackBarTitle}>
+                            <Text style={{ fontSize: 16 }}>Comments</Text>
+                        </View>
+                    </View>
+                    <PanGestureHandler
+                        enabled={enable}
+                        ref={this.ref}
+                        activeOffsetY={5}
+                        failOffsetY={-5}
+                        onGestureEvent={this._onScrollDown.bind(this)}
+                    >
+                        <ScrollView
+                            ref={this.scrollRef}
+                            waitFor={enable ? this.ref : this.scrollRef}
+                            scrollEventThrottle={40}
+                            onScroll={this._onScroll.bind(this)} style={styles.container}
+                        >
+                            {comments.map((comment, index) => (
+                                <Comment key={index} comment={comment}>Detail</Comment>
+                            ))}
+                        </ScrollView>
+                    </PanGestureHandler>
+                    <View style={styles.commentInputWrapper}>
+                        <TouchableOpacity style={styles.cameraIconWrapper}>
+                            <FontAwesome5Icon name="camera" size={20}></FontAwesome5Icon>
+                        </TouchableOpacity>
+                        <View style={styles.textInputWrapper}>
+                            <TextInput autoFocus={true} style={styles.textInput}>
+
+                            </TextInput>
+                        </View>
+                        <View style={styles.iconWrapper}>
+                            <TouchableOpacity style={styles.iconItem}>
+                                <FontAwesome5Icon name="grip-horizontal" size={20}></FontAwesome5Icon>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.iconItem}>
+                                <FontAwesome5Icon name="grin-wink" size={20}></FontAwesome5Icon>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </KeyboardAvoidingView>
+            </View>
         )
     }
 }
@@ -59,8 +124,18 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const styles = StyleSheet.create({
     keyboardAvoidingContainer: {
-        position: 'relative',
-        height: screenHeight
+        position: 'absolute',
+        left: 0,
+        width: '100%',
+        height: screenHeight,
+        zIndex: 2
+    },
+    backdrop: {
+        backgroundColor: 'rgba(0,0,0,0)',
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        zIndex: 1
     },
     container: {
         padding: 10,
@@ -135,5 +210,10 @@ const styles = StyleSheet.create({
         width: screenWidth,
         justifyContent: 'center',
         flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
+        height: 40,
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 1
     }
 })
