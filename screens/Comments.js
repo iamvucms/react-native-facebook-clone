@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { PanResponder, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
 import { ScrollView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import Comment from '../components/Comment'
 import * as navigation from '../rootNavigation'
@@ -29,19 +29,10 @@ export default class extends Component {
             })
             return;
         } else {
-            console.log(state)
-            if (state == State.END) {
-                console.warn("drop")
-                // this.setState({
-                //     ...this.state,
-                //     containerTop: 0
-                // })
-            } else {
-                this.setState({
-                    ...this.state,
-                    containerTop: translationY
-                })
-            }
+            this.setState({
+                ...this.state,
+                containerTop: translationY
+            })
         }
 
     }
@@ -52,6 +43,18 @@ export default class extends Component {
         }
         if (nativeEvent.contentOffset.y > 0 && this.state.enable) {
             this.setState({ enable: false });
+        }
+    }
+    _onHandlerStateChangeHandler({ nativeEvent }) {
+        if (!this.state.enable || this.state.wentBack) return;
+        const { translationY, state } = nativeEvent;
+        if (translationY <= 180) {
+            if (state == State.END) {
+                this.setState({
+                    ...this.state,
+                    containerTop: 0
+                })
+            }
         }
     }
     componentDidMount() {
@@ -79,6 +82,7 @@ export default class extends Component {
                         </View>
                     </View>
                     <PanGestureHandler
+                        onHandlerStateChange={this._onHandlerStateChangeHandler.bind(this)}
                         enabled={enable}
                         ref={this.ref}
                         activeOffsetY={5}

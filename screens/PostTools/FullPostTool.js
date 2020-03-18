@@ -10,6 +10,9 @@ class FullPostTool extends Component {
     onPressGoBackHandler() {
         navigation.goBack()
     }
+    onContentSizeChangeHandler({ nativeEvent }) {
+        console.log(nativeEvent)
+    }
     render() {
         const { user } = this.props
         return (
@@ -41,9 +44,20 @@ class FullPostTool extends Component {
                 </View>
 
                 <View style={styles.editorWrapper}>
-                    <TextInput placeholder="What are you thinking ?" multiline style={{ ...styles.editor,fontSize:26,textAlign:'center',color: '#fff', fontWeight: 'bold' }}>
-                        ihihih
-                    </TextInput>
+                    <View style={{
+                        height: 100,
+                        alignSelf: 'stretch',
+                        borderRadius: 10,
+                        borderWidth: 5,
+                        borderColor: 'black',
+                        marginHorizontal: 30,
+
+                        justifyContent: 'center',
+                    }}>
+                        <TextInput onContentSizeChange={this.onContentSizeChangeHandler.bind(this)} placeholderTextColor="#fff" placeholder="What are you thinking ?" multiline style={{ ...styles.editor, fontSize: 26, textAlign: 'center', color: '#fff', fontWeight: 'bold' }}>
+
+                        </TextInput>
+                    </View>
                 </View>
             </SafeAreaView>
         )
@@ -110,12 +124,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     editorWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
         height: 300,
         backgroundColor: 'red'
     },
     editor: {
-        justifyContent:'center',
-        padding:15,
+        justifyContent: 'center',
+        padding: 15,
         height: '100%',
         width: '100%'
     }
