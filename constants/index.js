@@ -1,3 +1,4 @@
+export const BASE_URL = 'http://192.168.1.3:3000'
 export const actionStories = {
     FETCH_STORIES_REQUEST: 'FETCH_STORIES_REQUEST',
     FETCH_STORIES_FAILURE: 'FETCH_STORIES_FAILURE',
