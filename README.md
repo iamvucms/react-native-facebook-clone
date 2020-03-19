@@ -4,6 +4,11 @@ FAKEBOOK - a project clone Facebook mobile app i am doing while learning react n
 
 ## Installation
 
+Clone my repo
+```bash
+git clone https://github.com/iamvucms/react-native-facebook-clone.git
+cd react-native-facebook-clone
+```
 Use the package manager npm
 
 ```bash
