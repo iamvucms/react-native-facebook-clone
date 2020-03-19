@@ -310,5 +310,77 @@
             "name": "Ruth Phelps",
             "avatar_url": "https://photo-3-baomoi.zadn.vn/w700_r1/2019_12_26_180_33446309/21ac5bb3b5f35cad05e2.jpg"
         }
+    ],
+    "bg_colors": [
+        {
+            "id": 0,
+            "group":"Popular",
+            "isPureColor": true,
+            "color": "#fff",
+            "textColor": "#000"
+        },
+        {
+            "id": 1,
+            "group":"Popular",
+            "isPureColor": true,
+            "color": "#000",
+            "textColor": "#fff"
+        },
+        {
+            "id": 2,
+            "group":"New",
+            "isPureColor": true,
+            "color": "#020",
+            "textColor": "#fff"
+        },
+        {
+            "id": 3,
+            "group":"New",
+            "isPureColor": false,
+            "bgImage_url": "https://htmlcolorcodes.com/assets/images/html-color-codes-color-palette-generators-7a5b8241.jpg",
+            "textColor": "#fff"
+        },
+        {
+            "id": 4,
+            "group":"New",
+            "isPureColor": false,
+            "bgImage_url": "https://www.theladders.com/wp-content/uploads/Color_Is_A_Powerful_Tool-800x450.jpg",
+            "textColor": "#fff"
+        },
+        {
+            "id": 5,
+            "group":"Popular",
+            "isPureColor": false,
+            "bgImage_url": "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2018/11/color-trends-2018-blog-header.jpg",
+            "textColor": "#fff"
+        },
+        {
+            "id": 6,
+            "group":"Popular",
+            "isPureColor": false,
+            "bgImage_url": "https://image.shutterstock.com/image-vector/trendy-gradient-liquid-background-lines-260nw-1375011146.jpg",
+            "textColor": "#fff"
+        },
+        {
+            "id": 7,
+            "group":"New",
+            "isPureColor": false,
+            "bgImage_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDLlfW_vABy3scXbiZyS1FQUflPpPPobgBZbG6tH7Ft3J_HyJa",
+            "textColor": "#fff"
+        },
+        {
+            "id": 8,
+            "group":"Other",
+            "isPureColor": false,
+            "bgImage_url": "https://image.shutterstock.com/image-photo/blue-white-background-new-year-260nw-1231287469.jpg",
+            "textColor": "#000"
+        },
+        {
+            "id": 9,
+            "group":"Other",
+            "isPureColor": false,
+            "bgImage_url": "https://media.istockphoto.com/vectors/abstract-green-and-blue-low-poly-triangle-bg-vector-id952458018?k=6&m=952458018&s=170667a&w=0&h=PLP72y8WaPW6PVKM1Nle36uJhGp_qamHjAa3Zx8-LGQ=",
+            "textColor": "#000"
+        }
     ]
 }

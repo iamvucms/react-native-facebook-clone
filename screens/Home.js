@@ -29,10 +29,10 @@ class Home extends Component {
 					<PostTool></PostTool>
 					<Stories></Stories>
 					{posts.map((item, index) => (
-						<>
+						<View key={index}>
 							{index === 1 && <RecommandFriends ></RecommandFriends>}
 							<Item item={item} key={index} ></Item>
-						</>
+						</View>
 					))}
 
 				</ScrollView>

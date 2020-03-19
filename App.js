@@ -113,7 +113,7 @@ function App() {
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="PostOptions" component={PostOptions} />
-					<rootStack.Screen name="FullPostTool" component={FullPostTool} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="FullPostTool" component={FullPostTool} />
 					<rootStack.Screen name="CheckIn" component={CheckIn} />
 					<rootStack.Screen name="PhotoUploader" component={PhotoUploader} />
 					<rootStack.Screen name="LiveStream" component={LiveStream} />
