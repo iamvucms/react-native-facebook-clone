@@ -1,4 +1,5 @@
 node_modules/**/*
+ios/Pods
 .expo/*
 npm-debug.*
 *.jks
