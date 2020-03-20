@@ -7,6 +7,7 @@ import postDetailReducer from './postDetailReducer'
 import recommandFriendsReducer from './recommandFriendsReducer'
 import bgColorsReducer from './bgColorsReducer'
 import systemImagesReducer from './systemImagesReducer'
+import groupsReducer from './groupsReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     showingPost: postDetailReducer,
     recommandFriends: recommandFriendsReducer,
     bgColors: bgColorsReducer,
-    systemImages: systemImagesReducer
+    systemImages: systemImagesReducer,
+    groups: groupsReducer
 })
 export default rootReducer
