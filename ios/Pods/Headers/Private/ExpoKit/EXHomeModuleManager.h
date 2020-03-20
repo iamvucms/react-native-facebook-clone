@@ -1,0 +1,1 @@
+../../../ExpoKit/ios/Exponent/Kernel/Services/EXHomeModuleManager.h

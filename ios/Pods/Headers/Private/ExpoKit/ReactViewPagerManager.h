@@ -1,0 +1,1 @@
+../../../ExpoKit/ios/Exponent/Versioned/Core/Api/Components/ViewPager/ReactViewPagerManager.h

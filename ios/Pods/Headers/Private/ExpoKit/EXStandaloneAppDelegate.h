@@ -1,0 +1,1 @@
+../../../ExpoKit/ios/Exponent/ExpoKit/EXStandaloneAppDelegate.h

@@ -1,0 +1,11 @@
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/ExpoKit
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Crashlytics/iOS" "${PODS_ROOT}/Fabric/iOS" "${PODS_ROOT}/GoogleMaps/Base/Frameworks" "${PODS_ROOT}/GoogleMaps/Maps/Frameworks"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/ExpoKit" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Amplitude-iOS" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/DoubleConversion" "${PODS_ROOT}/Headers/Public/ExpoKit" "${PODS_ROOT}/Headers/Public/Google-Maps-iOS-Utils" "${PODS_ROOT}/Headers/Public/JKBigInteger2" "${PODS_ROOT}/Headers/Public/React-Core" "${PODS_ROOT}/Headers/Public/React-RCTBlob" "${PODS_ROOT}/Headers/Public/React-RCTText" "${PODS_ROOT}/Headers/Public/React-cxxreact" "${PODS_ROOT}/Headers/Public/React-jsi" "${PODS_ROOT}/Headers/Public/React-jsiexecutor" "${PODS_ROOT}/Headers/Public/React-jsinspector" "${PODS_ROOT}/Headers/Public/UMCameraInterface" "${PODS_ROOT}/Headers/Public/UMConstantsInterface" "${PODS_ROOT}/Headers/Public/UMCore" "${PODS_ROOT}/Headers/Public/UMFileSystemInterface" "${PODS_ROOT}/Headers/Public/UMFontInterface" "${PODS_ROOT}/Headers/Public/UMPermissionsInterface" "${PODS_ROOT}/Headers/Public/UMReactNativeAdapter" "${PODS_ROOT}/Headers/Public/UMSensorsInterface" "${PODS_ROOT}/Headers/Public/Yoga" "${PODS_ROOT}/Headers/Public/glog" "${PODS_ROOT}/Headers/Public/lottie-ios"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/ExpoKit
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

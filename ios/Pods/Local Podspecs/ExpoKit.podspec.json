@@ -1,0 +1,107 @@
+{
+  "name": "ExpoKit",
+  "version": "36.0.0",
+  "summary": "ExpoKit",
+  "description": "ExpoKit allows native projects to integrate with the Expo SDK.",
+  "homepage": "http://docs.expo.io",
+  "license": "MIT",
+  "authors": "650 Industries, Inc.",
+  "requires_arc": true,
+  "platforms": {
+    "ios": "10.0"
+  },
+  "default_subspecs": "Core",
+  "source": {
+    "git": "http://github.com/expo/expo.git"
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": [
+        "ios/Exponent/**/*.{h,m}",
+        "template-files/keys.json"
+      ],
+      "preserve_paths": "ios/Exponent/**/*.{h,m}",
+      "exclude_files": [
+        "ios/Exponent/Supporting/**",
+        "ios/Exponent/Versioned/Optional/**/*.{h,m}"
+      ],
+      "dependencies": {
+        "Amplitude-iOS": [
+          "~> 4.7.1"
+        ],
+        "CocoaLumberjack": [
+          "~> 3.5.3"
+        ],
+        "Crashlytics": [
+          "~> 3.14.0"
+        ],
+        "GoogleMaps": [
+          "~> 3.3"
+        ],
+        "Google-Maps-iOS-Utils": [
+          "~> 2.1.0"
+        ],
+        "lottie-ios": [
+          "~> 2.5.0"
+        ],
+        "JKBigInteger2": [
+          "0.0.5"
+        ],
+        "React": [
+
+        ],
+        "UMCore": [
+
+        ],
+        "UMReactNativeAdapter": [
+
+        ],
+        "UMSensorsInterface": [
+
+        ],
+        "UMFileSystemInterface": [
+
+        ],
+        "UMPermissionsInterface": [
+
+        ],
+        "UMCameraInterface": [
+
+        ],
+        "UMConstantsInterface": [
+
+        ]
+      }
+    },
+    {
+      "name": "Payments",
+      "dependencies": {
+        "ExpoKit/Core": [
+
+        ],
+        "Stripe": [
+          "~> 10.1.0"
+        ]
+      },
+      "source_files": "ios/Exponent/Versioned/Optional/Payments/*.{h,m}"
+    },
+    {
+      "name": "AR",
+      "dependencies": {
+        "ExpoKit/Core": [
+
+        ]
+      },
+      "source_files": "ios/Exponent/Versioned/Optional/ARKit/**"
+    },
+    {
+      "name": "FaceDetector",
+      "dependencies": {
+        "EXFaceDetector": [
+
+        ]
+      }
+    }
+  ]
+}

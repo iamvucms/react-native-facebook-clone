@@ -25,6 +25,8 @@ target 'rozy' do
  require_relative '../node_modules/react-native/scripts/autolink-ios.rb'
  use_react_native!
 
+  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+
   post_install do |installer|
     installer.pods_project.main_group.tab_width = '2';
     installer.pods_project.main_group.indent_width = '2';

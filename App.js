@@ -24,10 +24,17 @@ const Stack = createStackNavigator();
 const rootStack = createStackNavigator();
 import { FullPostTool, CheckIn, PhotoUploader, LiveStream } from './screens/PostTools/'
 import { Platform } from 'react-native';
-
-axios.defaults.baseURL = 'http://192.168.1.3:3000'
+import CameraRoll from '@react-native-community/cameraroll'
+import { BASE_URL } from './constants'
+axios.defaults.baseURL = BASE_URL
 
 const homeTab = () => {
+	// CameraRoll.getPhotos({
+	// 	first: 20,
+	// 	assetType: 'Photos',
+	// }).then(result => {
+	// 	console.log(result)
+	// })
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false, ...TransitionPresets.ModalSlideFromBottomIOS, gestureResponseDistance: { vertical: 800 } }}>
 			<Stack.Screen name="Home" component={Home} />

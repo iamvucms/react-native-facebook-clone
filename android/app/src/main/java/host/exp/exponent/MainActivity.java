@@ -5,9 +5,7 @@ import android.os.Bundle;
 import com.facebook.react.ReactPackage;
 
 import org.unimodules.core.interfaces.Package;
-import com.facebook.react.ReactActivityDelegate;
-import com.facebook.react.ReactRootView;
-import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
 import java.util.List;
 
 import host.exp.exponent.experience.DetachActivity;
