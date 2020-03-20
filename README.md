@@ -19,7 +19,7 @@ npm install json-server -g
 ## Usage
 Config the variable BASE_URL in ./constants/index to your private ip example 192.168.1.x:3000
 ```bash
-npm run db
+npm run dbstart
 expo start 
 ```
 
