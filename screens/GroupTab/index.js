@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native-gesture-handler'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import { FetchGroupsRequest } from '../../actions/groupsActions'
+import GroupPosts from '../../components/GroupPosts'
+import * as navigation from '../../rootNavigation'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -11,6 +13,9 @@ class index extends Component {
     componentDidMount() {
         const { fetchGroups } = this.props
         fetchGroups()
+    }
+    onPressGroupSearchHandler() {
+        navigation.navigate('GroupSearch')
     }
     componentDidUpdate() {
     }
@@ -23,7 +28,7 @@ class index extends Component {
                     <View style={styles.topWrapper}>
                         <View style={styles.titleWrapper}>
                             <Text style={styles.title}>Group</Text>
-                            <TouchableOpacity style={styles.btnSearch}>
+                            <TouchableOpacity onPress={this.onPressGroupSearchHandler} style={styles.btnSearch}>
                                 <FontAwesome5Icon size={20} name="search"></FontAwesome5Icon>
                             </TouchableOpacity>
                         </View>
@@ -77,6 +82,7 @@ class index extends Component {
                             </TouchableOpacity>
                         </ScrollView>
                     </View>
+                    <GroupPosts></GroupPosts>
                 </ScrollView>
             </View>
         )
@@ -101,7 +107,8 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         backgroundColor: '#fff',
         borderBottomColor: '#ddd',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        marginBottom: 10
     },
     titleWrapper: {
         flexDirection: 'row',

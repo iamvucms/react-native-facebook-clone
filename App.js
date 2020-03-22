@@ -19,6 +19,8 @@ import NotificationScreen from './screens/NotificationTab'
 import WatchScreen from './screens/WatchTab'
 import ShortCutScreen from './screens/ShortCutTab'
 import StoryDetailScreen from './screens/StoryDetail'
+import GroupSearch from './screens/Search/GroupSearch'
+import GroupCategory from './screens/GroupTab/GroupCategory'
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 const rootStack = createStackNavigator();
@@ -117,6 +119,8 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupCategory" component={GroupCategory} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupSearch" component={GroupSearch} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="PostOptions" component={PostOptions} />

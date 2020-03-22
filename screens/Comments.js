@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
+import { Animated, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native'
 import { ScrollView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import Comment from '../components/Comment'
 import * as navigation from '../rootNavigation'
@@ -13,28 +13,13 @@ export default class extends Component {
         this.state = {
             enable: true,
             containerTop: 0,
-            wentBack: false
         };
-        console.log(State)
+        this._containerTop = new Animated.Value(0)
     }
     _onScrollDown(event) {
-        if (!this.state.enable || this.state.wentBack) return;
-        const { translationY, velocityY, state } = event.nativeEvent;
-        // console.log(event)
-        if (translationY > 180) {
-            navigation.goBack()
-            this.setState({
-                ...this.state,
-                wentBack: true
-            })
-            return;
-        } else {
-            this.setState({
-                ...this.state,
-                containerTop: translationY
-            })
-        }
-
+        if (!this.state.enable) return;
+        const { translationY } = event.nativeEvent;
+        this._containerTop.setValue(translationY)
     }
 
     _onScroll({ nativeEvent }) {
@@ -46,16 +31,19 @@ export default class extends Component {
         }
     }
     _onHandlerStateChangeHandler({ nativeEvent }) {
-        if (!this.state.enable || this.state.wentBack) return;
+        if (!this.state.enable) return;
         const { translationY, state } = nativeEvent;
-        if (translationY <= 180) {
-            if (state == State.END) {
-                this.setState({
-                    ...this.state,
-                    containerTop: 0
-                })
+        if (state === State.END) {
+            if (translationY <= 500) {
+                Animated.timing(this._containerTop, {
+                    toValue: 0,
+                    duration: 200,
+                }).start()
+            } else {
+                navigation.goBack()
             }
         }
+
     }
     componentDidMount() {
     }
@@ -65,59 +53,61 @@ export default class extends Component {
     onScrollHandler(event) {
     }
     render() {
-        const { enable, containerTop } = this.state;
+        const { enable } = this.state;
+        const containerTop = this._containerTop
         const { comments } = this.props.route.params
         return (
             <View>
                 <View style={styles.backdrop}>
-
                 </View>
-                <KeyboardAvoidingView behavior="height" enabled style={{ ...styles.keyboardAvoidingContainer, top: containerTop }}>
-                    <View style={styles.navigationStackBar}>
-                        <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
-                            <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
-                        </TouchableOpacity>
-                        <View style={styles.stackBarTitle}>
-                            <Text style={{ fontSize: 16 }}>Comments</Text>
+                <KeyboardAvoidingView behavior="height" enabled style={{ ...styles.keyboardAvoidingContainer }}>
+                    <Animated.View style={{ ...styles.wrapper, top: containerTop }} >
+                        <View style={styles.navigationStackBar}>
+                            <TouchableOpacity onPress={this.onPressBtnBackHandler} style={styles.btnBack}>
+                                <FontAwesome5Icon name="arrow-left" size={24}></FontAwesome5Icon>
+                            </TouchableOpacity>
+                            <View style={styles.stackBarTitle}>
+                                <Text style={{ fontSize: 16 }}>Comments</Text>
+                            </View>
                         </View>
-                    </View>
-                    <PanGestureHandler
-                        onHandlerStateChange={this._onHandlerStateChangeHandler.bind(this)}
-                        enabled={enable}
-                        ref={this.ref}
-                        activeOffsetY={5}
-                        failOffsetY={-5}
-                        onGestureEvent={this._onScrollDown.bind(this)}
-                    >
-                        <ScrollView
-                            ref={this.scrollRef}
-                            waitFor={enable ? this.ref : this.scrollRef}
-                            scrollEventThrottle={40}
-                            onScroll={this._onScroll.bind(this)} style={styles.container}
+                        <PanGestureHandler
+                            onHandlerStateChange={this._onHandlerStateChangeHandler.bind(this)}
+                            enabled={enable}
+                            ref={this.ref}
+                            activeOffsetY={5}
+                            failOffsetY={-5}
+                            onGestureEvent={this._onScrollDown.bind(this)}
                         >
-                            {comments.map((comment, index) => (
-                                <Comment key={index} comment={comment}>Detail</Comment>
-                            ))}
-                        </ScrollView>
-                    </PanGestureHandler>
-                    <View style={styles.commentInputWrapper}>
-                        <TouchableOpacity style={styles.cameraIconWrapper}>
-                            <FontAwesome5Icon name="camera" size={20}></FontAwesome5Icon>
-                        </TouchableOpacity>
-                        <View style={styles.textInputWrapper}>
-                            <TextInput autoFocus={true} style={styles.textInput}>
+                            <ScrollView
+                                ref={this.scrollRef}
+                                waitFor={enable ? this.ref : this.scrollRef}
+                                scrollEventThrottle={40}
+                                onScroll={this._onScroll.bind(this)} style={styles.container}
+                            >
+                                {comments.map((comment, index) => (
+                                    <Comment key={index} comment={comment}>Detail</Comment>
+                                ))}
+                            </ScrollView>
+                        </PanGestureHandler>
+                        <View style={styles.commentInputWrapper}>
+                            <TouchableOpacity style={styles.cameraIconWrapper}>
+                                <FontAwesome5Icon name="camera" size={20}></FontAwesome5Icon>
+                            </TouchableOpacity>
+                            <View style={styles.textInputWrapper}>
+                                <TextInput autoFocus={true} style={styles.textInput}>
 
-                            </TextInput>
+                                </TextInput>
+                            </View>
+                            <View style={styles.iconWrapper}>
+                                <TouchableOpacity style={styles.iconItem}>
+                                    <FontAwesome5Icon name="grip-horizontal" size={20}></FontAwesome5Icon>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.iconItem}>
+                                    <FontAwesome5Icon name="grin-wink" size={20}></FontAwesome5Icon>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <View style={styles.iconWrapper}>
-                            <TouchableOpacity style={styles.iconItem}>
-                                <FontAwesome5Icon name="grip-horizontal" size={20}></FontAwesome5Icon>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.iconItem}>
-                                <FontAwesome5Icon name="grin-wink" size={20}></FontAwesome5Icon>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    </Animated.View>
                 </KeyboardAvoidingView>
             </View>
         )
@@ -128,11 +118,14 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const styles = StyleSheet.create({
     keyboardAvoidingContainer: {
+        height: screenHeight,
+        zIndex: 2
+    },
+    wrapper: {
         position: 'absolute',
         left: 0,
         width: '100%',
-        height: screenHeight,
-        zIndex: 2
+        height: '100%'
     },
     backdrop: {
         backgroundColor: 'rgba(0,0,0,0)',

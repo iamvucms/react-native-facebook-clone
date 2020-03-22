@@ -8,6 +8,11 @@ import recommandFriendsReducer from './recommandFriendsReducer'
 import bgColorsReducer from './bgColorsReducer'
 import systemImagesReducer from './systemImagesReducer'
 import groupsReducer from './groupsReducer'
+import groupPostsReducer from './groupPostsReducer'
+import groupCategoriesReducer from './groupCategoriesReducer'
+import historyReducer from './historyReducer'
+import groupDetailReducer from './groupDetailReducer'
+import categoryGroupListReducer from './categoryGroupListReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -17,6 +22,11 @@ const rootReducer = combineReducers({
     recommandFriends: recommandFriendsReducer,
     bgColors: bgColorsReducer,
     systemImages: systemImagesReducer,
-    groups: groupsReducer
+    groups: groupsReducer,
+    groupPosts: groupPostsReducer,
+    groupCategories: groupCategoriesReducer,
+    history: historyReducer,
+    groupDetail: groupDetailReducer,
+    categoryGroupList: categoryGroupListReducer
 })
 export default rootReducer

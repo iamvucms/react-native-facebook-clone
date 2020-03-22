@@ -11,7 +11,7 @@ class Item extends Component {
     }
     onPressHandle() {
         const { comments } = this.props.item
-        navigation.navigate('Comments', {
+        navigation.navigate('CommentsPopUp', {
             comments
         })
     }
@@ -45,6 +45,10 @@ class Item extends Component {
                             <View style={styles.namesWrapper}>
                                 <TouchableOpacity>
                                     <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.name}</Text>
+                                </TouchableOpacity>
+                                <Text style={{ fontSize: 16, fontWeight: '500', marginHorizontal: 5 }}>▶</Text>
+                                <TouchableOpacity style={{ maxWidth: 150 }}>
+                                    <Text ellipsizeMode='tail' numberOfLines={1} style={{ fontSize: 16, fontWeight: '500' }}>{item.group.name} </Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.extraInfoWrapper}>

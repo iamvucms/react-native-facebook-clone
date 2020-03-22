@@ -4,7 +4,6 @@ import RecommandItem from './RecommandItem'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import { FetchRecommandFriendsRequest } from '../../actions/friendActions'
-import { dispatch } from '../../rootNavigation'
 class index extends Component {
     constructor(props) {
         super(props)
