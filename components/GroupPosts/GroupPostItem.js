@@ -21,6 +21,12 @@ class Item extends Component {
             postDetail: item
         })
     }
+    onPressGroupNameHandler() {
+        const { item } = this.props
+        navigation.navigate('GroupProfile', {
+            id: item.group.id
+        })
+    }
     onPressPostImageHandler(id) {
         // const { toggleShowPostDetail } = this.props
         // toggleShowPostDetail(id, true)
@@ -35,7 +41,7 @@ class Item extends Component {
         })
     }
     render() {
-        const { index, item } = this.props
+        const { index, item, isInGroup } = this.props
         return (
             <View style={styles.item}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -46,10 +52,15 @@ class Item extends Component {
                                 <TouchableOpacity>
                                     <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.name}</Text>
                                 </TouchableOpacity>
-                                <Text style={{ fontSize: 16, fontWeight: '500', marginHorizontal: 5 }}>▶</Text>
-                                <TouchableOpacity style={{ maxWidth: 150 }}>
-                                    <Text ellipsizeMode='tail' numberOfLines={1} style={{ fontSize: 16, fontWeight: '500' }}>{item.group.name} </Text>
-                                </TouchableOpacity>
+                                {!isInGroup && (
+                                    <>
+                                        <Text style={{ fontSize: 16, fontWeight: '500', marginHorizontal: 5 }}>▶</Text>
+                                        <TouchableOpacity onPress={this.onPressGroupNameHandler.bind(this)} style={{ maxWidth: 150 }}>
+                                            <Text ellipsizeMode='tail' numberOfLines={1} style={{ fontSize: 16, fontWeight: '500' }}>{item.group.name} </Text>
+                                        </TouchableOpacity>
+                                    </>
+                                )}
+
                             </View>
                             <View style={styles.extraInfoWrapper}>
                                 <Text style={{ color: '#333', fontSize: 14 }}>{item.create_at}</Text>

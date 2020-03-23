@@ -1,3 +1,6 @@
+import { Dimensions } from 'react-native'
+export const SCREEN_HEIGHT = Math.round(Dimensions.get('window').height);
+export const SCREEN_WIDTH = Math.round(Dimensions.get('window').width);
 export const BASE_URL = 'http://192.168.1.3:3000'
 export const permission = {
     PUBLIC: 1,
@@ -42,7 +45,8 @@ export const systemImagesActions = {
 export const groupPostsActions = {
     FETCH_GROUP_POSTS_REQUEST: 'FETCH_GROUP_POSTS_REQUEST',
     FETCH_GROUP_POSTS_FAILURE: 'FETCH_GROUP_POSTS_FAILURE',
-    FETCH_GROUP_POSTS_SUCCESS: 'FETCH_GROUP_POSTS_SUCCESS'
+    FETCH_ALLGROUP_POSTS_SUCCESS: 'FETCH_ALLGROUP_POSTS_SUCCESS',
+    FETCH_INGROUP_POSTS_SUCCESS: 'FETCH_INGROUP_POSTS_SUCCESS'
 }
 export const groupActions = {
     FETCH_GROUPS_REQUEST: 'FETCH_GROUPS_REQUEST',

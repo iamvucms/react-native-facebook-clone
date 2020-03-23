@@ -1,7 +1,7 @@
 import * as React from 'react';
-
+import { StackActions } from '@react-navigation/native';
 export const navigationRef = React.createRef();
-export const navigation = navigationRef.current 
+export const navigation = navigationRef.current
 export function navigate(name, params) {
 	navigationRef.current?.navigate(name, params);
 }
@@ -10,6 +10,12 @@ export function dispatch(action) {
 }
 export function jumpTo(name, params) {
 	navigationRef.current?.jumpTo(name, params);
+}
+export function replace(name, params) {
+	navigationRef.current?.dispatch(StackActions.replace(name, params));
+}
+export function push(name, params) {
+	navigationRef.current?.dispatch(StackActions.push(name, params));
 }
 export function goBack() {
 	navigationRef.current?.goBack();

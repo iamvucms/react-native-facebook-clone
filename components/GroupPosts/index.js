@@ -8,19 +8,48 @@ class index extends Component {
         super(props)
     }
     componentDidMount() {
-        const { fetchGroupPosts } = this.props
-        fetchGroupPosts()
+        console.log("did mount")
+        const { fetchGroupPosts, isInGroup } = this.props
+        if (!!!isInGroup) {
+            fetchGroupPosts()
+        }
     }
     render() {
-        const { groupPosts } = this.props
-        if (groupPosts.length === 0) {
-            return <View></View>
+        const { groupPosts, isInGroup, groupId } = this.props
+        if (isInGroup) {
+            console.log("render", groupId)
+            if (groupPosts.inGroup.length > 0
+                && groupPosts.inGroup[0].group.id !== groupId
+                || groupPosts.inGroup.length === 0) {
+                const { fetchGroupPosts } = this.props
+                fetchGroupPosts(groupId)
+                return <View></View>
+            }
+        } else {
+            if (groupPosts.allGroups.length === 0) {
+                return <View></View>
+            }
         }
+
         return (
             <View style={styles.container}>
-                {groupPosts.map((item, index) => (
-                    <GroupPostItem key={index} item={item} />
-                ))}
+                {isInGroup ? (
+                    <>
+                        {
+                            groupPosts.inGroup.map((item, index) => (
+                                <GroupPostItem isInGroup={isInGroup ?? false} key={index} item={item} />
+                            ))
+                        }
+                    </>
+                ) : (
+                        <>
+                            {
+                                groupPosts.allGroups.map((item, index) => (
+                                    <GroupPostItem isInGroup={isInGroup ?? false} key={index} item={item} />
+                                ))
+                            }
+                        </>
+                    )}
             </View>
         )
     }
@@ -32,7 +61,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchGroupPosts: () => dispatch(FetchGroupPostsRequest())
+        fetchGroupPosts: (id = null) => dispatch(FetchGroupPostsRequest(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)

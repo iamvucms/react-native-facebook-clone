@@ -5,7 +5,7 @@ import * as navigation from '../../rootNavigation'
 import GroupCategories from '../../components/GroupCategories'
 import { FetchGroupHistoriesRequest } from '../../actions/historyActions'
 import { connect } from 'react-redux'
-
+import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 class GroupSearch extends PureComponent {
     constructor(props) {
         super(props)
@@ -13,6 +13,9 @@ class GroupSearch extends PureComponent {
     componentDidMount() {
         const { fetchGroupHistories } = this.props
         fetchGroupHistories()
+    }
+    onPressGroupCategoriesHandler() {
+        navigation.push('GroupCategories')
     }
     onPressGoBackHandler() {
         navigation.goBack()
@@ -22,9 +25,9 @@ class GroupSearch extends PureComponent {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.searchToolWrapper}>
-                    <TouchableOpacity onPress={this.onPressGoBackHandler} style={styles.btnBack}>
+                    <ExTouchableOpacity onPress={this.onPressGoBackHandler} style={styles.btnBack}>
                         <FontAwesome5Icon size={20} name="arrow-left"></FontAwesome5Icon>
-                    </TouchableOpacity>
+                    </ExTouchableOpacity>
                     <TextInput placeholder="Search groups" style={styles.searchInput}>
 
                     </TextInput>
@@ -34,24 +37,24 @@ class GroupSearch extends PureComponent {
                         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
                             Recent searched groups
                         </Text>
-                        <TouchableOpacity>
+                        <ExTouchableOpacity>
                             <Text>
                                 MODIFY
                             </Text>
-                        </TouchableOpacity>
+                        </ExTouchableOpacity>
                     </View>
                     {groupHistories.map((history, index) => (
                         <View key={index}>
                             {history.isResult ? (
-                                <TouchableOpacity style={styles.searchResult}>
+                                <ExTouchableOpacity style={styles.searchResult}>
                                     <Image style={{ width: 20, height: 20, marginRight: 5, borderRadius: 5 }} source={{ uri: history.group.avatar_url }}></Image>
                                     <Text>{history.group.name}</Text>
-                                </TouchableOpacity>
+                                </ExTouchableOpacity>
                             ) : (
-                                    <TouchableOpacity style={styles.searchResult}>
-                                        <FontAwesome5Icon style={{ width: 25 }} name="search" color="#333"></FontAwesome5Icon>
+                                    <ExTouchableOpacity style={styles.searchResult}>
+                                        <FontAwesome5Icon style={{ width: 25 }} name="search" color="#ddd"></FontAwesome5Icon>
                                         <Text>{history.keyword}</Text>
-                                    </TouchableOpacity>
+                                    </ExTouchableOpacity>
                                 )}
                         </View>
                     ))}
@@ -61,6 +64,10 @@ class GroupSearch extends PureComponent {
                         <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Popular group categories</Text>
                     </View>
                     <GroupCategories></GroupCategories>
+                    <ExTouchableOpacity onPress={this.onPressGroupCategoriesHandler} style={styles.btnSeeAll}>
+                        <Text>See all</Text>
+                        <FontAwesome5Icon name="arrow-right"></FontAwesome5Icon>
+                    </ExTouchableOpacity>
                 </View>
             </SafeAreaView>
         )
@@ -81,7 +88,6 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        height: '100%'
     },
     searchToolWrapper: {
         flexDirection: 'row',
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderBottomWidth: 0.3,
-        borderBottomColor: '#333'
+        borderBottomColor: '#ddd'
     },
     btnBack: {
         width: 30,
@@ -113,9 +119,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 40,
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         borderBottomWidth: 0.2,
-        borderBottomColor: '#333'
+        borderBottomColor: '#ddd'
     },
     searchResult: {
         paddingHorizontal: 15,
@@ -131,6 +137,14 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         borderBottomWidth: 0.3,
-        borderBottomColor: '#333'
+        borderBottomColor: '#ddd'
+    },
+    btnSeeAll: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+        height: 40,
+        alignItems: 'center',
+
     }
 })

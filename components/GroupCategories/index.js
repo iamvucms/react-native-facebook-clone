@@ -15,7 +15,7 @@ class index extends Component {
         const { groupCategories } = this.props
         if (groupCategories.length === 0) return <View></View>
         return (
-            <ScrollView bounces={false}>
+            <ScrollView style={styles.container} bounces={false}>
                 {groupCategories.map((category, index) => (
                     <View key={index}>
                         {category.isPopular && (
@@ -40,6 +40,8 @@ const mapDispatchToProps = (dispatch, props) => {
 export default connect(mapStateToProps, mapDispatchToProps)(index)
 const styles = StyleSheet.create({
     container: {
-
+        paddingVertical:5,
+        borderBottomColor:'#ddd',
+        borderBottomWidth:0.2,
     }
 })

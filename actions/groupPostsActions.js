@@ -1,11 +1,14 @@
 import { groupPostsActions } from '../constants'
 import axios from 'axios'
-const taskURI = '/group_posts'
-export const FetchGroupPostsRequest = () => {
+export const FetchGroupPostsRequest = (id = null) => {
+    let taskURI = null
+    if (id !== null) taskURI = `/group_posts?group.id=${id}`
+    else taskURI = `/group_posts`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.get(taskURI).then(v => { 
             const posts = v.data
-            dispatch(FetchGroupPostsSuccess(posts))
+            if (id !== null) dispatch(FetchInGroupPostsSuccess(posts))
+            else dispatch(FetchAllGroupPostsSuccess(posts))
         }).catch(error => {
             dispatch(FetchGroupPostsFailure(error))
         })
@@ -22,9 +25,15 @@ export const FetchGroupPostsFailure = (error) => {
         error
     }
 }
-export const FetchGroupPostsSuccess = (posts) => {
+export const FetchInGroupPostsSuccess = (posts) => {
     return {
-        type: groupPostsActions.FETCH_GROUP_POSTS_SUCCESS,
+        type: groupPostsActions.FETCH_INGROUP_POSTS_SUCCESS,
+        payload: posts
+    }
+}
+export const FetchAllGroupPostsSuccess = (posts) => {
+    return {
+        type: groupPostsActions.FETCH_ALLGROUP_POSTS_SUCCESS,
         payload: posts
     }
 }

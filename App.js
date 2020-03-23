@@ -21,6 +21,8 @@ import ShortCutScreen from './screens/ShortCutTab'
 import StoryDetailScreen from './screens/StoryDetail'
 import GroupSearch from './screens/Search/GroupSearch'
 import GroupCategory from './screens/GroupTab/GroupCategory'
+import GroupCategories from './screens/GroupTab/GroupCategories'
+import GroupProfile from './screens/GroupTab/Group'
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 const rootStack = createStackNavigator();
@@ -28,6 +30,7 @@ import { FullPostTool, CheckIn, PhotoUploader, LiveStream } from './screens/Post
 import { Platform } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll'
 import { BASE_URL } from './constants'
+
 axios.defaults.baseURL = BASE_URL
 
 const homeTab = () => {
@@ -119,8 +122,14 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
-					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupCategory" component={GroupCategory} />
-					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupSearch" component={GroupSearch} />
+					<rootStack.Screen options={{ gestureEnabled: false }}
+						name="GroupCategory" component={GroupCategory} />
+					<rootStack.Screen options={{ gestureEnabled: false }}
+						name="GroupCategories" component={GroupCategories} />
+					<rootStack.Screen options={{ gestureEnabled: false }}
+						name="GroupSearch" component={GroupSearch} />
+					<rootStack.Screen options={{ gestureEnabled: false }}
+						name="GroupProfile" component={GroupProfile} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="PostOptions" component={PostOptions} />
