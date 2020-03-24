@@ -8,7 +8,6 @@ class index extends Component {
         super(props)
     }
     componentDidMount() {
-        console.log("did mount")
         const { fetchGroupPosts, isInGroup } = this.props
         if (!!!isInGroup) {
             fetchGroupPosts()
@@ -17,7 +16,6 @@ class index extends Component {
     render() {
         const { groupPosts, isInGroup, groupId } = this.props
         if (isInGroup) {
-            console.log("render", groupId)
             if (groupPosts.inGroup.length > 0
                 && groupPosts.inGroup[0].group.id !== groupId
                 || groupPosts.inGroup.length === 0) {

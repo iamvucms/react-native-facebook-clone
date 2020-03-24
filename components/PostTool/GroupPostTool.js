@@ -20,7 +20,11 @@ class GroupPostTool extends Component {
         navigation.navigate('CheckIn')
     }
     onFullPostToolPressHandler() {
-        navigation.navigate('FullPostTool')
+        const { groupDetail } = this.props
+        navigation.navigate('FullPostTool', {
+            isInGroup: true,
+            groupDetail
+        })
     }
     render() {
         const { user } = this.props
@@ -30,7 +34,7 @@ class GroupPostTool extends Component {
                     <TouchableOpacity activeOpacity={0.5} style={styles.userAvatarWrapper}>
                         <Image source={{ uri: user.avatar_url }} style={styles.userAvatar} ></Image>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.onFullPostToolPressHandler} style={styles.postInputWrapper}>
+                    <TouchableOpacity onPress={this.onFullPostToolPressHandler.bind(this)} style={styles.postInputWrapper}>
                         <View style={{ ...styles.postInput, backgroundColor: this.state.inputBgColor }}>
                             <Text>What are you thinking ?</Text>
                         </View>

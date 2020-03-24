@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ScrollView, ImageBackground, Image, Modal } from 'react-native'
+import { Animated, Text, StyleSheet, View, ScrollView, ImageBackground, Image, Modal } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import GroupPostTool from '../../components/PostTool/GroupPostTool'
@@ -11,6 +11,10 @@ import GroupPosts from '../../components/GroupPosts'
 class Group extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isScrollOverLimit: false,
+        }
+        this._groupTitleOpacity = new Animated.Value(0)
     }
     componentDidMount() {
         const { id } = this.props.route.params
@@ -20,26 +24,64 @@ class Group extends Component {
     onPressGoBackHandler() {
         navigation.goBack()
     }
+    onScrollHandler({ nativeEvent }) {
+        const { isScrollOverLimit } = this.state
+        const offsetY = nativeEvent.contentOffset.y
+        const limit = 250 - 94 //cover height - topbar height
+        if (offsetY > limit && isScrollOverLimit !== true) {
+            Animated.timing(this._groupTitleOpacity, {
+                toValue: 1,
+                duration: 200
+            }).start()
+            this.setState({
+                ...this.state,
+                isScrollOverLimit: true
+            })
+        }
+        if (offsetY < limit && isScrollOverLimit !== false) {
+            Animated.timing(this._groupTitleOpacity, {
+                toValue: 0,
+                duration: 200
+            }).start()
+            this.setState({
+                ...this.state,
+                isScrollOverLimit: false
+            })
+        }
+    }
     render() {
+        const groupTitleOpacity = this._groupTitleOpacity
         const { groupDetail } = this.props
+        const { isScrollOverLimit } = this.state
         if (!groupDetail.hasOwnProperty('id')) return <View></View>
         const { friendsInGroup } = groupDetail
         return (
             <View style={styles.container}>
-                <View style={styles.searchToolWrapper}>
-                    <ExTouchableOpacity onPress={this.onPressGoBackHandler}>
-                        <FontAwesome5Icon size={20} color="#fff" name="arrow-left"></FontAwesome5Icon>
+                <View style={{
+                    ...styles.searchToolWrapper,
+                    backgroundColor: isScrollOverLimit ? '#fff' : 'rgba(0,0,0,0)',
+                    borderBottomColor: isScrollOverLimit ? '#ddd' : 'rgba(0,0,0,0)'
+                }}>
+                    <ExTouchableOpacity style={{ width: 20 }} onPress={this.onPressGoBackHandler}>
+                        <FontAwesome5Icon size={20} color={isScrollOverLimit ? '#333' : '#fff'} name="arrow-left"></FontAwesome5Icon>
                     </ExTouchableOpacity>
+                    <Animated.View style={{ ...styles.groupTitle, opacity: groupTitleOpacity }}>
+                        <Image style={{ ...styles.groupAvatar }} source={{ uri: groupDetail.avatar_url }}></Image>
+                        <Text numberOfLines={1} style={{ fontSize: 20, fontWeight: '500' }}>{groupDetail.name}</Text>
+                    </Animated.View>
                     <View style={styles.rightIconsWrapper}>
                         <ExTouchableOpacity>
-                            <FontAwesome5Icon name="search" size={20} color="#fff"></FontAwesome5Icon>
+                            <FontAwesome5Icon name="search" size={20} color={isScrollOverLimit ? '#333' : '#fff'}></FontAwesome5Icon>
                         </ExTouchableOpacity>
                         <ExTouchableOpacity>
-                            <FontAwesome5Icon name="ellipsis-h" size={20} color="#fff"></FontAwesome5Icon>
+                            <FontAwesome5Icon name="ellipsis-h" size={20} color={isScrollOverLimit ? '#333' : '#fff'}></FontAwesome5Icon>
                         </ExTouchableOpacity>
                     </View>
                 </View>
-                <ScrollView bounces={false}>
+                <ScrollView showsVerticalScrollIndicator={false}
+                    scrollEventThrottle={50}
+                    onScroll={this.onScrollHandler.bind(this)}
+                    bounces={false}>
                     <ImageBackground source={{ uri: groupDetail.cover_url }}
                         style={styles.cover}>
                         <View style={styles.darkBox}></View>
@@ -100,7 +142,7 @@ class Group extends Component {
                         </ExTouchableOpacity>
                     </ScrollView>
                     <View style={styles.postToolWrapper}>
-                        <GroupPostTool />
+                        <GroupPostTool groupDetail={groupDetail} />
                     </View>
                     <GroupPosts isInGroup={true} groupId={groupDetail.id}></GroupPosts>
                 </ScrollView>
@@ -129,7 +171,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         paddingHorizontal: 15,
         position: 'absolute',
         width: '100%',
@@ -137,7 +178,23 @@ const styles = StyleSheet.create({
         paddingTop: 44,
         left: 0,
         top: 0,
-        zIndex: 99
+        zIndex: 99,
+        borderBottomWidth: 1,
+    },
+    groupTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 50,
+        paddingHorizontal: 10,
+        width: SCREEN_WIDTH - 30 - 20 - 70, //padding arrowLeft width rightIcon width
+    },
+    groupAvatar: {
+        height: 40,
+        width: 40,
+        borderRadius: 10,
+        borderWidth: 0.2,
+        borderColor: '#333',
+        marginRight: 10
     },
     rightIconsWrapper: {
         flexDirection: 'row',

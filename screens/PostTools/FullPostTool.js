@@ -191,6 +191,8 @@ class FullPostTool extends Component {
         }
     }
     render() {
+        if (this.props.route.params === undefined) this.props.route.params = {}
+        const { isInGroup, groupDetail } = this.props.route.params
         const { user } = this.props
         const { bgColors } = this.props
         const bgColorListWidth = this._bgColorListWidth
@@ -214,7 +216,7 @@ class FullPostTool extends Component {
                         <TouchableOpacity onPress={this.onPressGoBackHandler.bind(this)} style={styles.naviIcon}>
                             <FontAwesome5Icon color="#000" name="arrow-left" size={20}></FontAwesome5Icon>
                         </TouchableOpacity>
-                        <Text style={styles.naviTitle}>Create a post</Text>
+                        <Text style={styles.naviTitle}>{isInGroup ? groupDetail.name : 'Create a post'}</Text>
                         <TouchableOpacity style={styles.btnPost}>
                             <Text style={{ fontSize: 16 }}>POST</Text>
                         </TouchableOpacity>
