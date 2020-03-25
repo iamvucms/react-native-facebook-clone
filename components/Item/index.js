@@ -22,8 +22,6 @@ class Item extends Component {
         })
     }
     onPressPostImageHandler(id) {
-        // const { toggleShowPostDetail } = this.props
-        // toggleShowPostDetail(id, true)
         navigation.navigate('PostDetail', {
             id
         })

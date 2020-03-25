@@ -25,7 +25,7 @@ class Home extends Component {
 		if (posts.length === 0) return <View></View>
 		return (
 			<View>
-				<ScrollView style={styles.listContainter}>
+				<ScrollView bounces={false} style={styles.listContainter}>
 					<PostTool></PostTool>
 					<Stories></Stories>
 					{posts.map((item, index) => (

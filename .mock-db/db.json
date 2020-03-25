@@ -261,6 +261,17 @@
             "name": "Hoàng Vũ",
             "username": "vucms",
             "password": "timboy900",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/p720x720/86370478_619895375244123_7254001103526690816_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_eui2=AeHUZrRLoQykjTFqt7gs5L9lh09Rz8nyoZsSI_2eLwXRugMlgYrJH0Qqu8DK5WTvrjWLpY_zrc3NLHmA8Dna0XX4BUHlvYNAbmXP28w0B48LXg&_nc_oc=AQm8_ZGccvvCMu4FMBStgtxlUwzkj91GIoB7VAE4PrVO3DwnOCvZBfaOo-jliFWmZFbOj3xyVeXgGAeLbgJ0xRAP&_nc_pt=1&_nc_ht=scontent-sin6-1.xx&_nc_tp=6&oh=3b517b78285307fb143f674b0ef4de4c&oe=5E9E84E0"
         },
         {
@@ -268,6 +279,17 @@
             "name": "Thành Đạt2",
             "username": "dat09",
             "password": "dat09",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://cdn.lifehack.org/wp-content/uploads/2015/02/what-makes-people-happy.jpeg"
         },
         {
@@ -275,6 +297,17 @@
             "name": "Thành Đạt3",
             "username": "dat093",
             "password": "dat093",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSUY4REi5YyxbfCgR67r8H7eFopj6S8l5txKWBE-KpGibQaO_f0"
         },
         {
@@ -282,6 +315,17 @@
             "name": "Thành Đạt4",
             "username": "dat04",
             "password": "dat04",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://about.fb.com/wp-content/uploads/2019/11/CompanyInfo_OurCulture_Grace_Image-1.jpg?fit=890%2C668"
         },
         {
@@ -289,6 +333,17 @@
             "name": "Thành Đạt5",
             "username": "dat095",
             "password": "dat095",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://www.tubefilter.com/wp-content/uploads/2019/11/dobrik-people.jpg"
         },
         {
@@ -296,6 +351,17 @@
             "name": "Thành Đạt6",
             "username": "dat096",
             "password": "dat096",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://vinid.net/wp-content/uploads/2019/06/photo1515891509206-1515891509206.jpg"
         },
         {
@@ -303,6 +369,17 @@
             "name": "Thành Đạt7",
             "username": "dat097",
             "password": "dat097",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://scstylecaster.files.wordpress.com/2016/12/model-curly-hair-nose-ring.jpg"
         },
         {
@@ -310,6 +387,17 @@
             "name": "Thành Đạt8",
             "username": "dat098",
             "password": "dat098",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         },
         {
@@ -317,6 +405,17 @@
             "name": "Thành Đạt9",
             "username": "dat099",
             "password": "dat099",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         },
         {
@@ -324,6 +423,17 @@
             "name": "Thành Đạt10",
             "username": "dat0910",
             "password": "dat0910",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         },
         {
@@ -331,6 +441,17 @@
             "name": "Thành Đạt11",
             "username": "dat0911",
             "password": "dat0911",
+            "watch_list": [
+                {
+                    "pageId": 1
+                },
+                {
+                    "pageId": 2
+                },
+                {
+                    "pageId": 3
+                }
+            ],
             "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         }
     ],
@@ -1356,5 +1477,42 @@
             }
         ],
         "home": []
-    }
+    },
+    "pages": [
+        {
+            "id": 1,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 2,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 3,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 4,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 5,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 6,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        },
+        {
+            "id": 7,
+            "name": "News center VTV24",
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+        }
+    ]
 }

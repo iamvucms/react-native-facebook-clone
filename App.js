@@ -18,6 +18,7 @@ import GroupScreen from './screens/GroupTab'
 import NotificationScreen from './screens/NotificationTab'
 import WatchScreen from './screens/WatchTab'
 import ShortCutScreen from './screens/ShortCutTab'
+import ProfileScreen from './screens/ProfileTab'
 import StoryDetailScreen from './screens/StoryDetail'
 import GroupSearch from './screens/Search/GroupSearch'
 import GroupCategory from './screens/GroupTab/GroupCategory'
@@ -63,6 +64,13 @@ const watchTab = () => {
 		</Stack.Navigator>
 	)
 }
+const profileTab = () => {
+	return (
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="Profile" component={ProfileScreen} />
+		</Stack.Navigator>
+	)
+}
 const notificationTab = () => {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -97,7 +105,10 @@ const MainTab = () => {
 				options={{ tabBarIcon: ({ tintColor, focused }) => (<Icon name='video' size={20} color={focused ? '#318bfb' : '#ddd'}></Icon>) }}
 				name="Watch" component={watchTab} />
 			<Tab.Screen
-				options={{ tabBarIcon: ({ tintColor, focused }) => (<Icon name='bell' size={20} color={focused ? '#318bfb' : '#ddd'}></Icon>) }}
+				options={{ tabBarIcon: ({ tintColor, focused }) => (<Icon name='user-circle' size={22} color={focused ? '#318bfb' : '#ddd'}></Icon>) }}
+				name="Profile" component={profileTab} />
+			<Tab.Screen
+				options={{ tabBarIcon: ({ tintColor, focused }) => (<Icon name='bell' size={22} color={focused ? '#318bfb' : '#ddd'}></Icon>) }}
 				name="Notification" component={notificationTab} />
 			<Tab.Screen
 				options={{ tabBarIcon: ({ tintColor, focused }) => (<Icon name='bars' size={20} color={focused ? '#318bfb' : '#ddd'}></Icon>) }}
