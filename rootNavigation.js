@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { StackActions } from '@react-navigation/native';
+import store from './store'
+
 export const navigationRef = React.createRef();
 export const navigation = navigationRef.current
+console.log(navigation)
 export function navigate(name, params) {
+	// if(name)
 	navigationRef.current?.navigate(name, params);
 }
 export function dispatch(action) {

@@ -17,6 +17,8 @@ import axios from 'axios'
 import GroupScreen from './screens/GroupTab'
 import NotificationScreen from './screens/NotificationTab'
 import WatchScreen from './screens/WatchTab'
+import WatchDetailList from './screens/WatchTab/WatchDetailList'
+import WatchOptions from './screens/WatchTab/WatchOptions'
 import ShortCutScreen from './screens/ShortCutTab'
 import ProfileScreen from './screens/ProfileTab'
 import StoryDetailScreen from './screens/StoryDetail'
@@ -24,6 +26,7 @@ import GroupSearch from './screens/Search/GroupSearch'
 import GroupCategory from './screens/GroupTab/GroupCategory'
 import GroupCategories from './screens/GroupTab/GroupCategories'
 import GroupProfile from './screens/GroupTab/Group'
+
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 const rootStack = createStackNavigator();
@@ -133,6 +136,8 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
+					<rootStack.Screen name="WatchOptions" component={WatchOptions} />
+					<rootStack.Screen name="WatchDetailList" component={WatchDetailList} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />
 					<rootStack.Screen options={{ gestureEnabled: false }}

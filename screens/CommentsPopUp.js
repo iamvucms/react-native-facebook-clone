@@ -32,7 +32,7 @@ export default class extends Component {
         return (
             <KeyboardAvoidingView behavior="height" style={{ backgroundColor: 'rgba(255,255,255,0.0)', position: 'relative', height: screenHeight }} enabled>
                 <TouchableWithoutFeedback onPress={this.onPressBackDropHandler}>
-                    <View style={{ height: 120 }}></View>
+                    <View style={{ height: 92 }}></View>
                 </TouchableWithoutFeedback>
 
                 <View style={styles.container}>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         backgroundColor: '#ddd',
         width: "100%",
-        height: screenHeight - 120
+        height: screenHeight - 92
     },
     commentInputWrapper: {
         borderWidth: 1,

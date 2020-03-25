@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native'
 import Toast from 'react-native-root-toast';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import * as navigation from '../rootNavigation'
+import * as navigation from '../../rootNavigation'
 export default class WatchOptions extends Component {
     constructor(props) {
         super(props)

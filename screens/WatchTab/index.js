@@ -1,22 +1,62 @@
 import React, { Component } from 'react'
+import shallowCompare from 'react-addons-shallow-compare'
 import { Text, StyleSheet, View, ScrollView, Image } from 'react-native'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import WatchList from '../../components/WatchList'
+import { SetWatchingVideo } from '../../actions/videoControlActions'
 class index extends Component {
+    constructor(props) {
+        super(props)
+    }
+    componentDidMount() {
+        const { setWatchingVideo } = this.props
+
+        setWatchingVideo(1)
+    }
+    test() {
+        this.refs._scrollRef.scrollTo({
+            x: 0,
+            y: 2636 + 110
+        })
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        const { user, videoControl, watchVideos } = this.props
+        const nextUser = nextProps.user
+        const nextVideoControl = nextProps.videoControl
+        if (!isNaN(videoControl.playingId)
+            && videoControl.playingId !== nextVideoControl.playingId) {
+            watchVideos.every((video, index) => {
+                if (video.id === nextVideoControl.playingId) {
+                    this.refs._scrollRef.scrollTo({
+                        x: 0,
+                        y: index * (nextVideoControl.fixedHeightWatchVideo + 10) + 100
+                    })
+                    return false
+                }
+                return true
+            })
+
+        }
+        return JSON.stringify(user) !== JSON.stringify(nextUser)
+    }
+
     render() {
+        console.log("renderParent")
         const { user } = this.props
         if (!user.hasOwnProperty('id')) return <View></View>
         const { watch_list } = user
         return (
             <View style={styles.container}>
                 <View>
-                    <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+                    <ScrollView ref="_scrollRef"
+                        bounces={false}
+                        showsVerticalScrollIndicator={false}>
                         <View style={styles.titleWrapper}>
                             <Text style={styles.title}>Watch</Text>
                             <View style={styles.rightOptionWrapper}>
-                                <ExTouchableOpacity style={styles.btnMyList}>
+                                <ExTouchableOpacity onPress={this.test.bind(this)} style={styles.btnMyList}>
                                     <FontAwesome5Icon name="user-alt" size={20}></FontAwesome5Icon>
                                 </ExTouchableOpacity>
                                 <ExTouchableOpacity style={styles.btnSearch}>
@@ -28,7 +68,7 @@ class index extends Component {
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Your view list </Text>
                             <ExTouchableOpacity style={styles.watchListPreview}>
                                 {watch_list.map((page, index) => (
-                                    <Image source={{ uri: page.avatar_url }}
+                                    <Image key={index} source={{ uri: page.avatar_url }}
                                         style={{
                                             ...styles.watchListItem,
                                             marginLeft: index === 0 ? 0 : -10,
@@ -48,10 +88,17 @@ class index extends Component {
 }
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        videoControl: state.videoControl,
+        watchVideos: state.watchVideos
     }
 }
-export default connect(mapStateToProps, null)(index)
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        setWatchingVideo: (playingId, isPlaying = true) => dispatch(SetWatchingVideo(playingId, isPlaying))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(index)
 const styles = StyleSheet.create({
     container: {
     },

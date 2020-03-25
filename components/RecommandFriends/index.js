@@ -59,7 +59,7 @@ class index extends Component {
                     </TouchableOpacity>
                 </View>
                 <ScrollView decelerationRate={0.5}
-                    scrollEventThrottle={8}
+                    scrollEventThrottle={30}
                     showsHorizontalScrollIndicator={false}
                     ref='_scrollView'
                     onMomentumScrollEnd={this.onScrollHandler.bind(this)}

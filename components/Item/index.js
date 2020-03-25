@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import * as navigation from '../../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { permission } from '../../constants'
+import { connect } from 'react-redux'
+
 class Item extends Component {
     constructor(props) {
         super(props)
@@ -33,7 +35,7 @@ class Item extends Component {
         })
     }
     render() {
-        const { index, item } = this.props
+        const { user, item } = this.props
         return (
             <View style={styles.item}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -121,7 +123,7 @@ class Item extends Component {
                         color="gray" ><Text style={{ fontSize: 12, textAlignVertical: 'center' }}> Share</Text></Icon></TouchableOpacity>
                 </View>
                 <View style={styles.commentContainer}>
-                    <Image source={{ uri: item.avatar_url }} style={styles.commentAvatar}></Image>
+                    <Image source={{ uri: user.avatar_url }} style={styles.commentAvatar}></Image>
                     <View style={styles.commentInput}>
                         <TouchableOpacity onPress={this.onPressHandle.bind(this)} style={styles.commentInputWrapper}>
                             <Text>Comment...</Text>
@@ -133,8 +135,12 @@ class Item extends Component {
         )
     }
 }
-
-export default Item
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps, null)(Item)
 const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     customListView: {
