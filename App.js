@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux'
 import store from './store'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import Home from './screens/Home'
@@ -60,10 +60,14 @@ const groupTab = () => {
 		</Stack.Navigator>
 	)
 }
+const WatchScreenWithIsFocused = (props) => {
+	const isFocused = useIsFocused();
+	return <WatchScreen {...props} isFocused={isFocused}></WatchScreen>;
+}
 const watchTab = () => {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="Watch" component={WatchScreen} />
+			<Stack.Screen name="Watch" component={WatchScreenWithIsFocused} />
 		</Stack.Navigator>
 	)
 }

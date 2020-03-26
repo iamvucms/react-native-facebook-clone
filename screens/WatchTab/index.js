@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import shallowCompare from 'react-addons-shallow-compare'
 import { Text, StyleSheet, View, ScrollView, Image } from 'react-native'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -9,10 +8,11 @@ import { SetWatchingVideo } from '../../actions/videoControlActions'
 class index extends Component {
     constructor(props) {
         super(props)
+        this._isFocused = false
     }
     componentDidMount() {
-        // const { setWatchingVideo } = this.props
-
+        const { setWatchingVideo, isFocused } = this.props
+        // console.log(isFocused)
         // setWatchingVideo(1)
     }
     test() {
@@ -21,9 +21,18 @@ class index extends Component {
             y: 2636 + 110
         })
     }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        const { isFocused, setWatchingVideo, videoControl } = nextProps
+        if (this._isFocused !== isFocused) {
+            this._isFocused = isFocused
+            if (isFocused) return setWatchingVideo(videoControl.playingId, true)
+            setWatchingVideo(videoControl.playingId, false)
+        }
+    }
     shouldComponentUpdate(nextProps, nextState) {
         const { user, videoControl, watchVideos } = this.props
         const nextUser = nextProps.user
+        const nextWatchVideos = nextProps.watchVideos
         const nextVideoControl = nextProps.videoControl
         if (!isNaN(videoControl.playingId)
             && videoControl.playingId !== nextVideoControl.playingId) {
@@ -40,8 +49,17 @@ class index extends Component {
 
         }
         return JSON.stringify(user) !== JSON.stringify(nextUser)
+            || JSON.stringify(watchVideos) !== JSON.stringify(nextWatchVideos)
     }
-
+    onScrollHandler({ nativeEvent }) {
+        const offSetY = nativeEvent.contentOffset.y
+        const { videoControl, watchVideos, setWatchingVideo } = this.props
+        const { fixedHeightWatchVideo } = videoControl
+        const index = Math.round((offSetY - 100) / (fixedHeightWatchVideo + 10))
+        console.log(index)
+        const nextId = watchVideos[index].id
+        setWatchingVideo(nextId)
+    }
     render() {
         console.log("renderParent")
         const { user } = this.props
@@ -50,7 +68,12 @@ class index extends Component {
         return (
             <View style={styles.container}>
                 <View>
-                    <ScrollView ref="_scrollRef"
+                    <ScrollView
+                        decelerationRate={0.8}
+                        onMomentumScrollEnd={this.onScrollHandler.bind(this)}
+                        onScrollEndDrag={this.onScrollHandler.bind(this)}
+                        scrollEventThrottle={50}
+                        ref="_scrollRef"
                         bounces={false}
                         showsVerticalScrollIndicator={false}>
                         <View style={styles.titleWrapper}>
@@ -95,7 +118,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        setWatchingVideo: (playingId, isPlaying = true) => dispatch(SetWatchingVideo(playingId, isPlaying))
+        setWatchingVideo: (playingId, isPlaying = true) => dispatch(SetWatchingVideo(playingId, isPlaying)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)
