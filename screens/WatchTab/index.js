@@ -11,9 +11,9 @@ class index extends Component {
         super(props)
     }
     componentDidMount() {
-        const { setWatchingVideo } = this.props
+        // const { setWatchingVideo } = this.props
 
-        setWatchingVideo(1)
+        // setWatchingVideo(1)
     }
     test() {
         this.refs._scrollRef.scrollTo({
