@@ -21,7 +21,7 @@ class WatchItem extends Component {
     onPressWatchOptionsIconHandler() {
         const { item } = this.props
         navigation.navigate('WatchOptions', {
-            postDetail: item
+            watchDetail: item
         })
     }
     onPressWatchVideoHandler(id) {

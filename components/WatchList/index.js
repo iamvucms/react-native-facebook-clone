@@ -24,7 +24,7 @@ class index extends Component {
 }
 const mapStateToProps = state => {
     return {
-        watchVideos: state.watchVideos
+        watchVideos: state.watch.watchVideos
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

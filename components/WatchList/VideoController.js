@@ -24,7 +24,7 @@ class VideoController extends Component {
             if (this._isFinished) {
                 this._videoRef.replayAsync()
                 this._isFinished = false
-            }else this._videoRef.playAsync()
+            } else this._videoRef.playAsync()
 
         } else {
             this._videoRef.pauseAsync()
@@ -72,7 +72,7 @@ class VideoController extends Component {
             if (this._isFinished) {
                 this._videoRef.replayAsync()
                 this._isFinished = false
-            }else this._videoRef.playAsync()
+            } else this._videoRef.playAsync()
         } else {
             this._videoRef.pauseAsync()
             this._videoRef.setIsMutedAsync(true)
@@ -89,7 +89,6 @@ class VideoController extends Component {
         })
         const { item, videoControl } = this.props
         const { video } = item
-        console.log("renderItem", item.id)
         return (
             <View style={styles.container}>
                 <Video
@@ -120,13 +119,13 @@ class VideoController extends Component {
 const mapStateToProps = state => {
     return {
         videoControl: state.videoControl,
-        watchVideos: state.watchVideos
+        watchVideos: state.watch.watchVideos
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
         setWatchingVideo: (playingId, isPlaying = true) => dispatch(SetWatchingVideo(playingId, isPlaying)),
-        
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(VideoController);

@@ -15,6 +15,7 @@ import groupDetailReducer from './groupDetailReducer'
 import categoryGroupListReducer from './categoryGroupListReducer'
 import watchVideosReducer from './watchVideosReducer'
 import videoControlReducer from './videoControlReducer'
+import watchSearchRecommandsReducer from './watchSearchRecommandsReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     history: historyReducer,
     groupDetail: groupDetailReducer,
     categoryGroupList: categoryGroupListReducer,
-    watchVideos: watchVideosReducer,
-    videoControl: videoControlReducer
+    watch: watchVideosReducer,
+    videoControl: videoControlReducer,
+    watchSearchRecommands: watchSearchRecommandsReducer
 })
 export default rootReducer

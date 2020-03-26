@@ -5,6 +5,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import WatchList from '../../components/WatchList'
 import { SetWatchingVideo } from '../../actions/videoControlActions'
+import * as navigation from '../../rootNavigation'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -15,12 +16,7 @@ class index extends Component {
         // console.log(isFocused)
         // setWatchingVideo(1)
     }
-    test() {
-        this.refs._scrollRef.scrollTo({
-            x: 0,
-            y: 2636 + 110
-        })
-    }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
         const { isFocused, setWatchingVideo, videoControl } = nextProps
         if (this._isFocused !== isFocused) {
@@ -56,12 +52,13 @@ class index extends Component {
         const { videoControl, watchVideos, setWatchingVideo } = this.props
         const { fixedHeightWatchVideo } = videoControl
         const index = Math.round((offSetY - 100) / (fixedHeightWatchVideo + 10))
-        console.log(index)
         const nextId = watchVideos[index].id
         setWatchingVideo(nextId)
     }
+    onPressWatchSearchHandler() {
+        navigation.navigate('WatchSearch')
+    }
     render() {
-        console.log("renderParent")
         const { user } = this.props
         if (!user.hasOwnProperty('id')) return <View></View>
         const { watch_list } = user
@@ -79,10 +76,10 @@ class index extends Component {
                         <View style={styles.titleWrapper}>
                             <Text style={styles.title}>Watch</Text>
                             <View style={styles.rightOptionWrapper}>
-                                <ExTouchableOpacity onPress={this.test.bind(this)} style={styles.btnMyList}>
+                                <ExTouchableOpacity style={styles.btnMyList}>
                                     <FontAwesome5Icon name="user-alt" size={20}></FontAwesome5Icon>
                                 </ExTouchableOpacity>
-                                <ExTouchableOpacity style={styles.btnSearch}>
+                                <ExTouchableOpacity onPress={this.onPressWatchSearchHandler} style={styles.btnSearch}>
                                     <FontAwesome5Icon size={20} name="search"></FontAwesome5Icon>
                                 </ExTouchableOpacity>
                             </View>
@@ -113,7 +110,7 @@ const mapStateToProps = state => {
     return {
         user: state.user,
         videoControl: state.videoControl,
-        watchVideos: state.watchVideos
+        watchVideos: state.watch.watchVideos
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

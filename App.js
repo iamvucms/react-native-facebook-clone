@@ -19,6 +19,7 @@ import NotificationScreen from './screens/NotificationTab'
 import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
 import WatchOptions from './screens/WatchTab/WatchOptions'
+import WatchSearch from './screens/Search/WatchSearch'
 import ShortCutScreen from './screens/ShortCutTab'
 import ProfileScreen from './screens/ProfileTab'
 import StoryDetailScreen from './screens/StoryDetail'
@@ -34,6 +35,7 @@ import { FullPostTool, CheckIn, PhotoUploader, LiveStream } from './screens/Post
 import { Platform } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll'
 import { BASE_URL } from './constants'
+import SeenVideos from './screens/WatchTab/SeenVideos';
 
 axios.defaults.baseURL = BASE_URL
 
@@ -129,9 +131,9 @@ function App() {
 	const navigationOptions = {
 		headerShown: false,
 		...TransitionPreset,
-		gestureResponseDistance: {
-			vertical: 800
-		}
+		// gestureResponseDistance: {
+		// 	// vertical: 800
+		// }
 	}
 	return (
 		<Provider store={store}>
@@ -140,7 +142,9 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
-					<rootStack.Screen name="WatchOptions" component={WatchOptions} />
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchSearch" component={WatchSearch} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="SeenVideos" component={SeenVideos} />
 					<rootStack.Screen name="WatchDetailList" component={WatchDetailList} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />

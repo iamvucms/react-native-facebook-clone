@@ -59,7 +59,7 @@ export default class WatchOptions extends Component {
                         <View style={styles.postOptionItem}>
                             <View style={styles.optionIcon}><FontAwesome5Icon name="clock" size={24}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Temporarily hide {watchDetail.name} for 30 days</Text>
+                                <Text style={styles.postOptionTitle}>Temporarily hide {watchDetail.page.name} for 30 days</Text>
                                 <Text style={styles.postOptionSubtitle}>Temporarily stop viewing posts</Text>
                             </View>
                         </View>
@@ -68,8 +68,8 @@ export default class WatchOptions extends Component {
                         <View style={styles.postOptionItem}>
                             <View style={styles.optionIcon}><FontAwesome5Icon name="user-times" size={24}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Unfollow {watchDetail.name}</Text>
-                                <Text style={styles.postOptionSubtitle}>Don't want to see {watchDetail.name}'s posts</Text>
+                                <Text style={styles.postOptionTitle}>Unfollow {watchDetail.page.name}</Text>
+                                <Text style={styles.postOptionSubtitle}>Don't want to see {watchDetail.page.name}'s posts</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
