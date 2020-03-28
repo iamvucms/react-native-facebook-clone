@@ -1,0 +1,387 @@
+import React, { Component } from 'react'
+import { Text, StyleSheet, View, Image, TouchableOpacity, Dimensions, Animated } from 'react-native'
+import { connect, useSelector } from 'react-redux'
+import { SetCurrentWatchingPosition } from '../../actions/watchVideosActions'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import * as navigation from '../../rootNavigation'
+import { Video } from 'expo-av'
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
+import { PanGestureHandler, State } from 'react-native-gesture-handler'
+class VideoPlayer extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            detailDisplay: 'none',
+            videoSize: {},
+            maxTimeString: ""
+        }
+        this._maxPositionMillis = 0
+        this._currentPositionMillis = 0
+        this._offsetXTimePoint = 0
+        this._isLiked = { isLiked: false }
+        this._optionRight = new Animated.Value(-SCREEN_WIDTH)
+        this._videoRef = {}
+        this._handleVideoRef = component => {
+            if (!component) return;
+            this._videoRef = component;
+        }
+        this._isPaused = false
+        this._playBtnOpacity = new Animated.Value(0)
+        this._currentVideoPosition = new Animated.Value(0)
+        this._isDraggingTimePoint = false
+        this._startDraggingPosition = 0
+        this._isShowOptions = false
+    }
+    componentDidMount() {
+    }
+    onPressOptionIconHandler() {
+        Animated.timing(this._optionRight, {
+            toValue: 0,
+            duration: 300
+        }).start(() => this._isShowOptions = true)
+    }
+    onPressBackdropOptionListHandler() {
+        Animated.timing(this._optionRight, {
+            toValue: -SCREEN_WIDTH,
+            duration: 400
+        }).start(() => this._isShowOptions = false)
+    }
+    onReadyForDisplay({ naturalSize, status }) {
+        if (this._videoRef.hasOwnProperty("_nativeRef")) this._videoRef.replayAsync()
+        this._offsetXTimePoint = this._currentVideoPosition.interpolate({
+            inputRange: [0, status.durationMillis],
+            outputRange: [0, maxTimeBarWidth]
+        })
+        this._maxPositionMillis = status.durationMillis
+        const maxSeconds = Math.round(this._maxPositionMillis / 1000)
+        const hours = Math.floor(maxSeconds / 3600) >= 10 ? Math.floor(maxSeconds / 3600) : `0${Math.floor(maxSeconds / 3600)}`
+        const minutes = Math.floor((maxSeconds - hours * 3600) / 60) >= 10 ? Math.floor((maxSeconds - hours * 3600) / 60) : `0${Math.floor((maxSeconds - hours * 3600) / 60)}`
+        const minutes2 = Math.floor(maxSeconds / 60) >= 10 ? Math.floor(maxSeconds / 60) : `0${Math.floor(maxSeconds / 60)}`
+        const second = maxSeconds - hours * 3600 - minutes * 60 >= 10 ? maxSeconds - hours * 3600 - minutes * 60 : `0${maxSeconds - hours * 3600 - minutes * 60}`
+        const second2 = maxSeconds - minutes2 * 60 >= 10 ? maxSeconds - minutes2 * 60 : `0${maxSeconds - minutes2 * 60}`
+        const maxTimeString = maxSeconds >= 3600 ? `${hours}:${minutes}:${second}`
+            : `${minutes2}:${second2}`
+
+        this.setState({
+            ...this.state,
+            videoSize: naturalSize,
+            maxTimeString: maxTimeString
+        })
+    }
+    onPressTogglePlayVideoHandler() {
+        if (this._isPaused) {
+            this._videoRef.playAsync()
+            this._playBtnOpacity.setValue(0)
+            this._isPaused = false
+            const { onPlay } = this.props
+            if (typeof onPlay === 'function') onPlay()
+        } else {
+            this._videoRef.pauseAsync()
+            this._playBtnOpacity.setValue(1)
+            this._isPaused = true
+            const { onPause } = this.props
+            if (typeof onPause === 'function') onPause()
+        }
+    }
+    onPlaybackStatusUpdateHandler(status) {
+        if (status.didJustFinish && !status.isPlaying) {
+            const { onFinish } = this.props
+            onFinish()
+        }
+        this._currentPositionMillis = status.positionMillis
+        if (!this._isDraggingTimePoint) {
+            this._currentVideoPosition.setValue(status.positionMillis)
+            const { setCurrentWatchingPosition } = this.props
+            setCurrentWatchingPosition(status.positionMillis)
+        }
+    }
+    onGestureEventHandler({ nativeEvent }) {
+        const { translationX } = nativeEvent
+        let nextPositionMillis = this._startDraggingPosition + translationX / maxTimeBarWidth * this._maxPositionMillis
+        nextPositionMillis = nextPositionMillis < 0 ? 0 : (nextPositionMillis > this._maxPositionMillis ? this._maxPositionMillis : nextPositionMillis)
+        this._currentVideoPosition.setValue(nextPositionMillis)
+        const { setCurrentWatchingPosition } = this.props
+        setCurrentWatchingPosition(nextPositionMillis)
+
+    }
+    onHandlerStateChangeHandler({ nativeEvent }) {
+        const { state, translationX } = nativeEvent
+        if (state === State.END) {
+            let nextPositionMillis = this._startDraggingPosition + translationX / maxTimeBarWidth * this._maxPositionMillis
+            nextPositionMillis = nextPositionMillis < 0 ? 0 : (nextPositionMillis > this._maxPositionMillis ? this._maxPositionMillis : nextPositionMillis)
+            this._videoRef.setPositionAsync(nextPositionMillis)
+            this._isDraggingTimePoint = false
+        } else if (state === State.BEGAN) {
+            this._startDraggingPosition = this._currentPositionMillis
+            this._isDraggingTimePoint = true
+        }
+    }
+    onPressTimeBarHandler({ nativeEvent }) {
+        const { locationX } = nativeEvent
+        const nextPositionMillis = locationX / maxTimeBarWidth * this._maxPositionMillis
+        if (nextPositionMillis < 0) this._videoRef.setPositionAsync(0)
+        else if (nextPositionMillis > this._maxPositionMillis) this._videoRef.setPositionAsync(this._maxPositionMillis)
+        else this._videoRef.setPositionAsync(nextPositionMillis)
+    }
+    onOptionsGestureEventHandler({ nativeEvent }) {
+        const { translationX } = nativeEvent
+        if (translationX < 0 || !this._isShowOptions) return;
+        this._optionRight.setValue(-translationX)
+    }
+    onOptionsandlerStateChangeHandler({ nativeEvent }) {
+        const { translationX, state } = nativeEvent
+        if (state === State.END) {
+            if (translationX > SCREEN_WIDTH / 9) {
+                this._isShowOptions = false
+                Animated.timing(this._optionRight, {
+                    toValue: -SCREEN_WIDTH,
+                    duration: 400
+                }).start()
+            } else {
+                this._isShowOptions = true
+                Animated.timing(this._optionRight, {
+                    toValue: 0,
+                    duration: 200
+                }).start()
+            }
+        }
+    }
+    render() {
+        const playBtnOpacity = this._playBtnOpacity
+        const pauseBtnOpacity = this._playBtnOpacity.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0]
+        })
+        const { source, showController, containerStyle, isCenterVertical } = this.props
+        if (source === undefined) return <View></View>
+        const { videoSize, maxTimeString } = this.state
+        const fixedVideoHeight = videoSize.hasOwnProperty('height') ? SCREEN_WIDTH / videoSize.width * videoSize.height : 0
+        let videoWrapperOffsetTop;
+        if (isCenterVertical) videoWrapperOffsetTop = (SCREEN_HEIGHT - fixedVideoHeight) / 2
+        else videoWrapperOffsetTop = 0
+        const optionRight = this._optionRight
+        return (
+            <View style={{ ...styles.postWrapper, ...containerStyle, top: videoWrapperOffsetTop, position: isCenterVertical ? 'absolute' : 'relative' }}>
+                <View style={{
+                    ...styles.videoWrapper,
+                    width: SCREEN_WIDTH,
+                    height: fixedVideoHeight
+                }}>
+                    <Video
+                        progressUpdateIntervalMillis={250}
+                        onPlaybackStatusUpdate={this.onPlaybackStatusUpdateHandler.bind(this)}
+                        ref={this._handleVideoRef}
+                        onReadyForDisplay={this.onReadyForDisplay.bind(this)}
+                        style={{
+                            ...styles.video,
+                            width: SCREEN_WIDTH,
+                            height: fixedVideoHeight
+                        }}
+                        source={source}>
+                    </Video>
+                    <View style={{ ...styles.postContentWrapper, display: showController ? 'flex' : 'none' }}>
+                        <View style={{
+                            ...styles.videoToolWrapper, height: fixedVideoHeight / 2 + 35,
+                        }}>
+                            <View style={styles.btnControlWrapper}>
+                                <TouchableOpacity style={{ height: 75, width: 60 }}
+                                    onPress={this.onPressTogglePlayVideoHandler.bind(this)}>
+                                    <Animated.View style={{ position: 'absolute', opacity: pauseBtnOpacity }}>
+                                        <FontAwesome5Icon name="pause-circle" size={60} color="#fff" />
+                                    </Animated.View>
+                                    <Animated.View style={{ opacity: playBtnOpacity }}>
+                                        <FontAwesome5Icon name="play-circle" size={60} color="#fff" />
+                                    </Animated.View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.videoToolBar}>
+                                <View style={styles.timeBar}>
+                                    <CurrentTimeText style={styles.currentTime} />
+                                    <TouchableOpacity onPress={this.onPressTimeBarHandler.bind(this)} activeOpacity={1} style={styles.timingBar}>
+                                        <TouchableOpacity activeOpacity={1}>
+                                            <PanGestureHandler
+                                                onHandlerStateChange={this.onHandlerStateChangeHandler.bind(this)}
+                                                onGestureEvent={this.onGestureEventHandler.bind(this)}>
+                                                <Animated.View style={{ ...styles.btnTimeControl, left: this._offsetXTimePoint }}></Animated.View>
+                                            </PanGestureHandler>
+                                        </TouchableOpacity>
+                                        <Animated.View style={{ ...styles.playedBar, width: this._offsetXTimePoint }}></Animated.View>
+                                    </TouchableOpacity>
+                                    <Text style={styles.maxTime}>
+                                        {maxTimeString}
+                                    </Text>
+                                </View>
+                                <TouchableOpacity onPress={this.onPressOptionIconHandler.bind(this)} style={styles.btnSetting}>
+                                    <FontAwesome5Icon name="cog" color="#fff" size={20}>
+
+                                    </FontAwesome5Icon>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+
+                </View>
+                <PanGestureHandler
+                    onHandlerStateChange={this.onOptionsandlerStateChangeHandler.bind(this)}
+                    onGestureEvent={this.onOptionsGestureEventHandler.bind(this)}>
+                    <Animated.View style={{ ...styles.optionListWrapper, right: optionRight, height: fixedVideoHeight }}>
+                        <View style={styles.optionBackDrop}>
+                            <TouchableOpacity onPress={this.onPressBackdropOptionListHandler.bind(this)} style={{ width: "100%", height: "100%" }}>
+                                <View></View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.allOptionWrapper}>
+                            <TouchableOpacity onPress={this.onPressBackdropOptionListHandler.bind(this)}>
+                                <View style={styles.optionItemWrapper}>
+                                    <Text style={styles.optionText}>Auto</Text>
+                                    <Text style={{ fontSize: 12, color: '#333' }}>Always choose best quality</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressBackdropOptionListHandler.bind(this)}>
+                                <View style={styles.optionItemWrapper}>
+                                    <Text style={styles.optionText}>720p</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressBackdropOptionListHandler.bind(this)}>
+                                <View style={styles.optionItemWrapper}>
+                                    <Text style={styles.optionText}>360p</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </Animated.View>
+                </PanGestureHandler>
+            </View>
+        )
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        setCurrentWatchingPosition: (position) => dispatch(SetCurrentWatchingPosition(position))
+    }
+}
+const maxTimeBarWidth = SCREEN_WIDTH - 40 - 100 - 20 - 7.5
+const screenHeight = Math.round(Dimensions.get('window').height);
+export default connect(null, mapDispatchToProps)(VideoPlayer)
+const CurrentTimeText = (props) => {
+    const position = useSelector(state => state.watch.currentWatchTimePosition)
+    const maxSeconds = Math.round(position / 1000)
+    const hours = Math.floor(maxSeconds / 3600) >= 10 ? Math.floor(maxSeconds / 3600) : `0${Math.floor(maxSeconds / 3600)}`
+    const minutes = Math.floor((maxSeconds - hours * 3600) / 60) >= 10 ? Math.floor((maxSeconds - hours * 3600) / 60) : `0${Math.floor((maxSeconds - hours * 3600) / 60)}`
+    const minutes2 = Math.floor(maxSeconds / 60) >= 10 ? Math.floor(maxSeconds / 60) : `0${Math.floor(maxSeconds / 60)}`
+    const second = maxSeconds - hours * 3600 - minutes * 60 >= 10 ? maxSeconds - hours * 3600 - minutes * 60 : `0${maxSeconds - hours * 3600 - minutes * 60}`
+    const second2 = maxSeconds - minutes2 * 60 >= 10 ? maxSeconds - minutes2 * 60 : `0${maxSeconds - minutes2 * 60}`
+    const maxTimeString = maxSeconds >= 3600 ? `${hours}:${minutes}:${second}`
+        : `${minutes2}:${second2}`
+    return <Text {...props}>{maxTimeString}</Text>
+}
+const styles = StyleSheet.create({
+    postWrapper: {
+
+    },
+    optionListWrapper: {
+        flexDirection: 'row',
+        position: 'absolute',
+        zIndex: 9999999999,
+        top: 0,
+        backgroundColor: "rgba(0,0,0,0)",
+        width: SCREEN_WIDTH,
+    },
+    allOptionWrapper: {
+        backgroundColor: '#fff',
+        width: SCREEN_WIDTH / 3,
+        padding: 20,
+        height: '100%',
+    },
+    optionBackDrop: {
+        width: SCREEN_WIDTH / 3 * 2,
+        backgroundColor: 'rgba(0,0,0,0)',
+        zIndex: 999,
+        height: "100%",
+        flex: 2
+    },
+    optionItemWrapper: {
+        paddingVertical: 15,
+        justifyContent: 'center'
+    },
+    optionText: {
+        fontSize: 16
+    },
+    postContentWrapper: {
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        width: "100%",
+        height: "100%",
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+    },
+    videoToolWrapper: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+
+    },
+    btnControlWrapper: {
+        alignItems: 'center'
+    },
+    videoToolBar: {
+        flexDirection: 'row',
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        alignItems: 'center'
+    },
+    timeBar: {
+        flexDirection: 'row',
+        width: SCREEN_WIDTH - 40,
+        alignItems: 'center'
+    },
+    currentTime: {
+        color: '#fff',
+        fontWeight: '500',
+        width: 50,
+        textAlign: 'center'
+    },
+    timingBar: {
+        position: 'relative',
+        width: SCREEN_WIDTH - 40 - 100 - 20,
+        height: 5,
+        marginHorizontal: 10,
+        backgroundColor: 'rgba(255,255,255,0.4)',
+    },
+    playedBar: {
+        height: 5,
+        left: 0,
+        top: 0,
+        backgroundColor: '#318bfb',
+        zIndex: 1
+    },
+    btnTimeControl: {
+        zIndex: 2,
+        width: 15,
+        height: 15,
+        borderRadius: 50,
+        position: 'absolute',
+        top: -(15 - 5) / 2,
+        backgroundColor: '#fff'
+    },
+    maxTime: {
+        color: '#fff',
+        fontWeight: '500',
+        width: 50,
+        textAlign: 'center'
+    },
+    btnSetting: {
+        width: 40,
+        alignItems: 'center'
+    },
+    videoWrapper: {
+        position: 'relative',
+        width: '100%'
+    },
+    video: {
+        backgroundColor: "rgba(0,0,0,0)",
+    },
+
+})
