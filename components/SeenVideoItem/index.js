@@ -3,15 +3,22 @@ import { Text, StyleSheet, View } from 'react-native'
 import { Video } from 'expo-av'
 import { SCREEN_WIDTH } from '../../constants'
 import ExTouchableOpacity from '../ExTouchableOpacity'
+import { navigate } from '../../rootNavigation'
 export default class index extends Component {
     constructor(props) {
         super(props)
+    }
+    onPressWatchVideoDetail() {
+        const { item } = this.props
+        navigate('WatchDetail', {
+            id: item.id
+        })
     }
     render() {
         const { item } = this.props
         const { video } = item
         return (
-            <ExTouchableOpacity style={styles.container}>
+            <ExTouchableOpacity onPress={this.onPressWatchVideoDetail.bind(this)} style={styles.container}>
                 <View style={styles.videoWrapper}>
                     <Video
                         posterStyle={styles.posterStyle}
@@ -22,6 +29,9 @@ export default class index extends Component {
                         source={{ uri: video.video_url }}
                         style={styles.video}>
                     </Video>
+                    <View style={styles.seenLable}>
+                        <Text style={{ color: '#fff' }}>Seen</Text>
+                    </View>
                 </View>
                 <View style={styles.infoWrapper}>
                     <Text style={styles.title}>{item.title}</Text>
@@ -60,5 +70,13 @@ const styles = StyleSheet.create({
     },
     videoWrapper: {
         position: 'relative'
+    },
+    seenLable: {
+        position: 'absolute',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        bottom: 8,
+        right: 13,
+        borderRadius: 2.5,
+        paddingHorizontal: 2.5
     }
 })

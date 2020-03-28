@@ -92,7 +92,6 @@ class VideoController extends Component {
         return (
             <View style={styles.container}>
                 <Video
-                    progressUpdateIntervalMillis={400}
                     onPlaybackStatusUpdate={this.onPlaybackStatusUpdateHandler.bind(this)}
                     ref={this._handleVideoRef}
                     source={{ uri: video.video_url }}

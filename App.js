@@ -20,6 +20,7 @@ import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
 import WatchOptions from './screens/WatchTab/WatchOptions'
 import WatchSearch from './screens/Search/WatchSearch'
+import WatchDetail from './screens/WatchTab/WatchDetail';
 import ShortCutScreen from './screens/ShortCutTab'
 import ProfileScreen from './screens/ProfileTab'
 import StoryDetailScreen from './screens/StoryDetail'
@@ -36,6 +37,7 @@ import { Platform } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll'
 import { BASE_URL } from './constants'
 import SeenVideos from './screens/WatchTab/SeenVideos';
+
 
 axios.defaults.baseURL = BASE_URL
 
@@ -131,9 +133,9 @@ function App() {
 	const navigationOptions = {
 		headerShown: false,
 		...TransitionPreset,
-		// gestureResponseDistance: {
-		// 	// vertical: 800
-		// }
+		gestureResponseDistance: {
+			vertical: 800
+		}
 	}
 	return (
 		<Provider store={store}>
@@ -145,6 +147,7 @@ function App() {
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchSearch" component={WatchSearch} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="SeenVideos" component={SeenVideos} />
+					<rootStack.Screen  name="WatchDetail" component={WatchDetail} />
 					<rootStack.Screen name="WatchDetailList" component={WatchDetailList} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />

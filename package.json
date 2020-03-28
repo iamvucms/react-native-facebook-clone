@@ -18,6 +18,7 @@
     "expo": "~36.0.0",
     "expo-av": "^8.0.0",
     "expo-file-system": "^8.0.0",
+    "expo-media-library": "8.0.0",
     "expokit": "^36.0.1",
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",
