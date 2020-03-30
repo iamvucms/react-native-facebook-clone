@@ -1,10 +1,17 @@
-import { watchVidesActions } from '../constants'
+import { watchVidesActions, postDetailActions } from '../constants'
 import { Alert } from 'react-native'
 const defaultState = {
     watchVideos: [],
     seenWatchVideos: [],
     watchVideoDetail: {},
-    currentWatchTimePosition: 0
+    currentWatchTimePosition: [
+
+    ],
+    videosFromThread: [],
+    threadWatchingController: {
+        isPlaying: false,
+        playingId: undefined
+    }
 }
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -44,11 +51,37 @@ const reducer = (state = defaultState, action) => {
             break
         case watchVidesActions.FETCH_WATCH_VIDEO_DETAIL_FAILURE:
             const { message3 } = action.error
-            Alert.alert('Error', message)
+            Alert.alert('Error', message3)
+            return state
+            break
+        case watchVidesActions.FETCH_VIDEOS_FROM_THREAD_REQUEST:
+            state = { ...state, videosFromThread: [] }
+            return state
+            break
+        case watchVidesActions.FETCH_VIDEOS_FROM_THREAD_SUCCESS:
+            state = { ...state, videosFromThread: action.payload }
+            return state
+            break
+        case watchVidesActions.FETCH_VIDEOS_FROM_THREAD_FAILURE:
+            const { message4 } = action.error
+            Alert.alert('Error', message4)
+            return state
+            break
+        case watchVidesActions.SET_THREAD_WATCHING_STATUS:
+            state = { ...state, threadWatchingController: action.payload }
             return state
             break
         case watchVidesActions.SET_CURRENT_WATCHING_POSITION:
-            state = { ...state, currentWatchTimePosition: action.payload }
+            const { payload } = action
+            const { currentWatchTimePosition } = state
+            const ids = currentWatchTimePosition.map(position => position.videoId)
+            const index = ids.indexOf(payload.videoId)
+            if (index > -1) {
+                currentWatchTimePosition[index].position = payload.position
+            } else {
+                currentWatchTimePosition.push(payload)
+            }
+            state = { ...state, currentWatchTimePosition: [...currentWatchTimePosition] }
             return state
             break
         default:

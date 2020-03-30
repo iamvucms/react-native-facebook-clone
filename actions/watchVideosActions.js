@@ -76,9 +76,54 @@ export const FetchWatchVideoDetailSuccess = (video) => {
         payload: video
     }
 }
-export const SetCurrentWatchingPosition = (position) => {
+//FETCH VIDEOS FROM THREAD
+export const FetchVideosFromThreadRequest = (threadId, videoId) => {
+    const taskURI = `/watch_videos?watch_threadId=${threadId}`
+    return (dispatch) => {
+        axios.get(taskURI).then(v => {
+            let videos = v.data
+            const ids = videos.map(video => video.id)
+            const index = ids.indexOf(videoId)
+            const firstVideo = videos.splice(index, 1)[0]
+            videos.push(firstVideo)
+            videos.reverse()
+            dispatch(FetchVideosFromThreadSuccess(videos))
+        }).catch(error => {
+            dispatch(FetchVideosFromThreadFailure(error))
+        })
+    }
+}
+export const FetchVideosFromThreadFailure = (error) => {
+    return {
+        type: watchVidesActions.FETCH_VIDEOS_FROM_THREAD_FAILURE,
+        error
+    }
+}
+export const FetchVideosFromThreadSuccess = (videos) => {
+    return {
+        type: watchVidesActions.FETCH_VIDEOS_FROM_THREAD_SUCCESS,
+        payload: videos
+    }
+}
+//
+export const SetCurrentWatchingPosition = (position, videoId) => {
+    const payload = {
+        position,
+        videoId
+    }
     return {
         type: watchVidesActions.SET_CURRENT_WATCHING_POSITION,
-        payload: position
+        payload
+    }
+}
+//
+export const SetThreadWatchingStatus = (playingId, isPlaying) => {
+    const payload = {
+        playingId,
+        isPlaying
+    }
+    return {
+        type: watchVidesActions.SET_THREAD_WATCHING_STATUS,
+        payload
     }
 }

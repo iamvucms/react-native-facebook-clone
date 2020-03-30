@@ -1519,7 +1519,7 @@
         {
             "id": 1,
             "pageId": 4,
-            "watch_groupId": 2,
+            "watch_threadId": 2,
             "isFollowed": false,
             "seeCount": 904367,
             "isSeen": true,
@@ -1581,7 +1581,7 @@
         {
             "id": 2,
             "pageId": 2,
-            "watch_groupId": 5,
+            "watch_threadId": 5,
             "isFollowed": false,
             "seeCount": 855529,
             "isSeen": true,
@@ -1643,7 +1643,7 @@
         {
             "id": 3,
             "pageId": 4,
-            "watch_groupId": 6,
+            "watch_threadId": 6,
             "isFollowed": false,
             "seeCount": 637901,
             "isSeen": true,
@@ -1705,7 +1705,7 @@
         {
             "id": 4,
             "pageId": 3,
-            "watch_groupId": 6,
+            "watch_threadId": 6,
             "isFollowed": false,
             "seeCount": 723838,
             "isSeen": true,
@@ -1767,7 +1767,7 @@
         {
             "id": 5,
             "pageId": 3,
-            "watch_groupId": 1,
+            "watch_threadId": 1,
             "isFollowed": false,
             "seeCount": 700431,
             "isSeen": true,
@@ -1829,7 +1829,7 @@
         {
             "id": 6,
             "pageId": 4,
-            "watch_groupId": 2,
+            "watch_threadId": 2,
             "isFollowed": false,
             "seeCount": 797865,
             "isSeen": true,
@@ -1891,7 +1891,7 @@
         {
             "id": 7,
             "pageId": 3,
-            "watch_groupId": 1,
+            "watch_threadId": 1,
             "isFollowed": false,
             "seeCount": 870774,
             "isSeen": true,
@@ -1953,7 +1953,7 @@
         {
             "id": 8,
             "pageId": 3,
-            "watch_groupId": 2,
+            "watch_threadId": 2,
             "isFollowed": false,
             "seeCount": 351651,
             "isSeen": true,
@@ -2015,7 +2015,7 @@
         {
             "id": 9,
             "pageId": 3,
-            "watch_groupId": 2,
+            "watch_threadId": 2,
             "isFollowed": false,
             "seeCount": 351651,
             "isSeen": true,
@@ -2075,7 +2075,7 @@
             ]
         }
     ],
-    "watch_groups": [
+    "watch_threads": [
         {
             "id": 1,
             "name": "Funny"

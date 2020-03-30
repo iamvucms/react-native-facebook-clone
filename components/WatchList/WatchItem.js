@@ -24,9 +24,10 @@ class WatchItem extends Component {
             watchDetail: item
         })
     }
-    onPressWatchVideoHandler(id) {
+    onPressWatchVideoHandler(id, threadId) {
         navigation.navigate('WatchDetailList', {
-            id
+            id,
+            threadId
         })
     }
     onPressShareHandler() {
@@ -74,7 +75,7 @@ class WatchItem extends Component {
                 <View style={styles.contentContainer}>
                     <Text style={styles.paragraph}>{item.content}</Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.8} onPress={this.onPressWatchVideoHandler.bind(this, item.id)}>
+                <TouchableOpacity activeOpacity={0.8} onPress={this.onPressWatchVideoHandler.bind(this, item.id, item.watch_threadId)}>
                     <View style={styles.videoContainer}>
                         <VideoController item={item} />
                     </View>

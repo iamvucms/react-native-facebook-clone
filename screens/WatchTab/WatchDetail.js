@@ -17,6 +17,7 @@ class WatchDetail extends Component {
         }
         this._isLiked = false
         this._hideSto = {}
+        this._isCalledGoBack = false
     }
     componentDidMount() {
         const { id } = this.props.route.params
@@ -37,6 +38,18 @@ class WatchDetail extends Component {
             detailDisplay: !this.state.detailDisplay
         })
     }
+    onShowControllerHandler() {
+        this.setState({
+            ...this.state,
+            detailDisplay: true
+        })
+    }
+    onHideControllerHandler() {
+        this.setState({
+            ...this.state,
+            detailDisplay: false
+        })
+    }
     onPauseHandler() {
         clearTimeout(this._hideSto)
     }
@@ -49,7 +62,10 @@ class WatchDetail extends Component {
         }, 2000);
     }
     onFinishHandler() {
-        navigation.goBack()
+        if (!this._isCalledGoBack) {
+            navigation.goBack()
+            this._isCalledGoBack = true
+        }
     }
     render() {
 
@@ -84,10 +100,15 @@ class WatchDetail extends Component {
                             <Text style={styles.content}>{watchingVideo.content}</Text>
                         </View>
                         <VideoPlayer
+                            videoId={watchingVideo.id}
+                            onShowController={this.onShowControllerHandler.bind(this)}
+                            onHideController={this.onHideControllerHandler.bind(this)}
+                            isAutoToggleController={true}
+                            shouldPlay={true}
                             source={{ uri: watchingVideo.video.video_url }}
                             onPause={this.onPauseHandler.bind(this)}
                             onPlay={this.onPlayHandler.bind(this)}
-                            onFinish={this.onFinishHandler}
+                            onFinish={this.onFinishHandler.bind(this)}
                             isCenterVertical={true}
                             containerStyle={{}}
                             watchingVideo={watchingVideo}

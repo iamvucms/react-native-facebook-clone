@@ -15,7 +15,7 @@ class index extends Component {
         const { watchSearchRecommands } = this.props
         if (watchSearchRecommands.length === 0) return <View></View>
         return (
-            <ScrollView style={styles.container} bounces={false}>
+            <ScrollView bounces={false} style={styles.container} bounces={false}>
                 {watchSearchRecommands.map((recommand, index) => (
                     <WatchSearchRecommandItem key={index} recommand={recommand} />
                 ))}
