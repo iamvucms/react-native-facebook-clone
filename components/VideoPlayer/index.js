@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image, TouchableOpacity, Dimensions, Animated } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, Animated } from 'react-native'
 import { connect, useSelector, useDispatch } from 'react-redux'
 import { SetCurrentWatchingPosition, SetThreadWatchingStatus } from '../../actions/watchVideosActions'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import * as navigation from '../../rootNavigation'
 import { Video } from 'expo-av'
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
-import { PanGestureHandler, State, TouchableOpacity as TouchableOpacity2, TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { PanGestureHandler, State, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 class VideoPlayer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            videoSize: {},
+            videoSize: {
+                height: 250,
+                width: SCREEN_WIDTH
+            },
             maxTimeString: ""
         }
         const { onRefReady } = props
@@ -19,9 +21,11 @@ class VideoPlayer extends Component {
         //install context
         this.pause = this.pause.bind(this)
         this.play = this.play.bind(this)
+        this.play = this.play.bind(this)
         this.hideController = this.hideController.bind(this)
         this.showController = this.showController.bind(this)
 
+        this._didFinished = false
         this._isShowController = false
         this._maxPositionMillis = 0
         this._currentPositionMillis = 0
@@ -42,12 +46,9 @@ class VideoPlayer extends Component {
         this._zIndexController = new Animated.Value(-1)
     }
     componentDidMount() {
-        const { setThreadWatchingStatus, videoId } = this.props
         if (this._isPaused) {
-            setThreadWatchingStatus(videoId, false)
             this._playBtnOpacity.setValue(1)
         } else {
-            setThreadWatchingStatus(videoId, true)
             this._playBtnOpacity.setValue(0)
         }
     }
@@ -57,8 +58,15 @@ class VideoPlayer extends Component {
         this._playBtnOpacity.setValue(1)
     }
     play() {
+        this._didFinished = false
         this._isPaused = false
         this._videoRef.playAsync()
+        this._playBtnOpacity.setValue(0)
+    }
+    replay() {
+        this._didFinished = false
+        this._isPaused = false
+        this._videoRef.replayAsync()
         this._playBtnOpacity.setValue(0)
     }
     showController() {
@@ -85,6 +93,7 @@ class VideoPlayer extends Component {
         if (this._videoRef.hasOwnProperty("_nativeRef") && !this._isPaused) {
             this._playBtnOpacity.setValue(0)
             this._videoRef.replayAsync()
+            this._didFinished = false
         }
         this._offsetXTimePoint = this._currentVideoPosition.interpolate({
             inputRange: [0, status.durationMillis],
@@ -106,16 +115,16 @@ class VideoPlayer extends Component {
         })
     }
     onPressTogglePlayVideoHandler() {
-        const { videoId, setThreadWatchingStatus } = this.props
+        const { videoId, setThreadWatchingStatus, isInThreadList } = this.props
         if (this._isPaused) {
-            setThreadWatchingStatus(videoId, true)
+            if (isInThreadList === true) setThreadWatchingStatus(videoId, true)
             this._videoRef.playAsync()
             this._playBtnOpacity.setValue(0)
             this._isPaused = false
             const { onPlay } = this.props
             if (typeof onPlay === 'function') onPlay()
         } else {
-            setThreadWatchingStatus(videoId, false)
+            if (isInThreadList === true) setThreadWatchingStatus(videoId, false)
             this._videoRef.pauseAsync()
             this._playBtnOpacity.setValue(1)
             this._isPaused = true
@@ -124,9 +133,14 @@ class VideoPlayer extends Component {
         }
     }
     onPlaybackStatusUpdateHandler(status) {
-        if (this.props.videoId === 4) console.log(this._currentPositionMillis)
-        if (this._currentPositionMillis >= this._maxPositionMillis && this._currentPositionMillis !== 0) {
+        if (this._currentPositionMillis >= this._maxPositionMillis && this._currentPositionMillis !== 0 && !this._didFinished) {
             const { onFinish } = this.props
+            this._didFinished = true
+            this._isPaused = true
+            this._videoRef.setPositionAsync(0, {
+                toleranceMillisBefore: 0,
+                toleranceMillisAfter: 0
+            })
             this._playBtnOpacity.setValue(1)
             if (typeof onFinish === 'function') onFinish()
         }
@@ -156,7 +170,6 @@ class VideoPlayer extends Component {
                 toleranceMillisAfter: 0
             });
             this._currentPositionMillis = nextPositionMillis
-            console.log("nextPositionMillis", nextPositionMillis)
             const { setCurrentWatchingPosition, videoId } = this.props
             if (!isNaN(videoId)) setCurrentWatchingPosition(nextPositionMillis, videoId)
             this._isDraggingTimePoint = false
@@ -213,7 +226,7 @@ class VideoPlayer extends Component {
         }
     }
     render() {
-
+        console.log(Math.random())
         const playBtnOpacity = this._playBtnOpacity
         const pauseBtnOpacity = this._playBtnOpacity.interpolate({
             inputRange: [0, 1],
@@ -239,7 +252,7 @@ class VideoPlayer extends Component {
                 }}>
                     <TouchableOpacity activeOpacity={1} onPress={this.onPressToggleControllerHandler.bind(this)}>
                         <Video
-                            progressUpdateIntervalMillis={250}
+                            progressUpdateIntervalMillis={500}
                             onPlaybackStatusUpdate={this.onPlaybackStatusUpdateHandler.bind(this)}
                             ref={this._handleVideoRef}
                             onReadyForDisplay={this.onReadyForDisplay.bind(this)}
@@ -252,7 +265,7 @@ class VideoPlayer extends Component {
                         </Video>
                     </TouchableOpacity>
                     <Animated.View style={{ ...styles.postContentWrapper, zIndex: this._zIndexController }}>
-                        <TouchableOpacity
+                        <View
                             activeOpacity={1} onPress={this.onPressToggleControllerHandler.bind(this)}
                             style={{
                                 ...styles.videoToolWrapper, height: fixedVideoHeight / 2 + 35,
@@ -291,14 +304,13 @@ class VideoPlayer extends Component {
                                     </FontAwesome5Icon>
                                 </TouchableOpacity>
                             </View>
-                        </TouchableOpacity>
+                        </View>
                     </Animated.View>
-
                 </View>
                 <PanGestureHandler
                     onHandlerStateChange={this.onOptionsandlerStateChangeHandler.bind(this)}
                     onGestureEvent={this.onOptionsGestureEventHandler.bind(this)}>
-                    <Animated.View style={{ ...styles.optionListWrapper, right: optionRight, height: fixedVideoHeight }}>
+                    <Animated.View style={{ ...styles.optionListWrapper, right: optionRight, height: fixedVideoHeight < 250 ? fixedVideoHeight : 'auto' }}>
                         <View style={styles.optionBackDrop}>
                             <TouchableOpacity onPress={this.onPressBackdropOptionListHandler.bind(this)} style={{ width: "100%", height: "100%" }}>
                                 <View></View>
@@ -365,7 +377,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         position: 'absolute',
         zIndex: 9999999999,
-        top: 0,
+        bottom: 0,
         backgroundColor: "rgba(0,0,0,0)",
         width: SCREEN_WIDTH,
     },
@@ -465,6 +477,7 @@ const styles = StyleSheet.create({
     },
     video: {
         backgroundColor: "rgba(0,0,0,0)",
+        zIndex: 0
     },
 
 })

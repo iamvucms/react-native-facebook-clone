@@ -78,7 +78,7 @@ export const FetchWatchVideoDetailSuccess = (video) => {
 }
 //FETCH VIDEOS FROM THREAD
 export const FetchVideosFromThreadRequest = (threadId, videoId) => {
-    const taskURI = `/watch_videos?watch_threadId=${threadId}`
+    const taskURI = `/watch_videos?watch_threadId=${threadId}&_expand=page`
     return (dispatch) => {
         axios.get(taskURI).then(v => {
             let videos = v.data
@@ -124,6 +124,22 @@ export const SetThreadWatchingStatus = (playingId, isPlaying) => {
     }
     return {
         type: watchVidesActions.SET_THREAD_WATCHING_STATUS,
+        payload
+    }
+}
+export const PauseThreadWatchingStatus = () => {
+
+    return {
+        type: watchVidesActions.PAUSE_THREAD_WATCHING_STATUS,
+    }
+}
+export const PushThreadHeightMap = (videoId, height) => {
+    const payload = {
+        videoId,
+        height
+    }
+    return {
+        type: watchVidesActions.PUSH_THREAD_HEIGHT_MAP,
         payload
     }
 }

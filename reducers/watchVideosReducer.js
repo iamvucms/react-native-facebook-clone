@@ -11,7 +11,8 @@ const defaultState = {
     threadWatchingController: {
         isPlaying: false,
         playingId: undefined
-    }
+    },
+    threadHeightMap: []
 }
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -82,6 +83,23 @@ const reducer = (state = defaultState, action) => {
                 currentWatchTimePosition.push(payload)
             }
             state = { ...state, currentWatchTimePosition: [...currentWatchTimePosition] }
+            return state
+            break
+        case watchVidesActions.PAUSE_THREAD_WATCHING_STATUS:
+            state = { ...state, threadWatchingController: { ...state.threadWatchingController, isPlaying: false } }
+            return state
+            break
+        case watchVidesActions.PUSH_THREAD_HEIGHT_MAP:
+            let { threadHeightMap } = state
+            const ids2 = threadHeightMap.map(video => video.videoId)
+            const index2 = ids2.indexOf(action.payload.videoId)
+            if (index2 > -1) {
+                threadHeightMap[index2].height = action.payload.height
+            } else threadHeightMap.push({
+                videoId: action.payload.videoId,
+                height: action.payload.height
+            })
+            state = { ...state, threadHeightMap: [...threadHeightMap] }
             return state
             break
         default:

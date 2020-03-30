@@ -147,8 +147,8 @@ function App() {
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchSearch" component={WatchSearch} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="SeenVideos" component={SeenVideos} />
-					<rootStack.Screen  name="WatchDetail" component={WatchDetail} />
-					<rootStack.Screen name="WatchDetailList" component={WatchDetailList} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchDetail" component={WatchDetail} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchDetailList" component={WatchDetailList} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
