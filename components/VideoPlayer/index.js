@@ -40,7 +40,6 @@ class VideoPlayer extends Component {
         this._startDraggingPosition = 0
         this._isShowOptions = false
         this._zIndexController = new Animated.Value(-1)
-
     }
     componentDidMount() {
         const { setThreadWatchingStatus, videoId } = this.props
@@ -85,7 +84,7 @@ class VideoPlayer extends Component {
     onReadyForDisplay({ naturalSize, status }) {
         if (this._videoRef.hasOwnProperty("_nativeRef") && !this._isPaused) {
             this._playBtnOpacity.setValue(0)
-            this._videoRef.playAsync()
+            this._videoRef.replayAsync()
         }
         this._offsetXTimePoint = this._currentVideoPosition.interpolate({
             inputRange: [0, status.durationMillis],
@@ -100,7 +99,6 @@ class VideoPlayer extends Component {
         const second2 = maxSeconds - minutes2 * 60 >= 10 ? maxSeconds - minutes2 * 60 : `0${maxSeconds - minutes2 * 60}`
         const maxTimeString = maxSeconds >= 3600 ? `${hours}:${minutes}:${second}`
             : `${minutes2}:${second2}`
-        console.log("hihij")
         this.setState({
             ...this.state,
             videoSize: naturalSize,
@@ -110,7 +108,6 @@ class VideoPlayer extends Component {
     onPressTogglePlayVideoHandler() {
         const { videoId, setThreadWatchingStatus } = this.props
         if (this._isPaused) {
-            console.log("play")
             setThreadWatchingStatus(videoId, true)
             this._videoRef.playAsync()
             this._playBtnOpacity.setValue(0)
@@ -119,7 +116,6 @@ class VideoPlayer extends Component {
             if (typeof onPlay === 'function') onPlay()
         } else {
             setThreadWatchingStatus(videoId, false)
-            console.log("pause")
             this._videoRef.pauseAsync()
             this._playBtnOpacity.setValue(1)
             this._isPaused = true
@@ -128,6 +124,7 @@ class VideoPlayer extends Component {
         }
     }
     onPlaybackStatusUpdateHandler(status) {
+        if (this.props.videoId === 4) console.log(this._currentPositionMillis)
         if (this._currentPositionMillis >= this._maxPositionMillis && this._currentPositionMillis !== 0) {
             const { onFinish } = this.props
             this._playBtnOpacity.setValue(1)
@@ -147,14 +144,18 @@ class VideoPlayer extends Component {
         this._currentVideoPosition.setValue(nextPositionMillis)
         const { setCurrentWatchingPosition, videoId } = this.props
         if (!isNaN(videoId)) setCurrentWatchingPosition(nextPositionMillis, videoId)
-
     }
-    onHandlerStateChangeHandler({ nativeEvent }) {
+    async onHandlerStateChangeHandler({ nativeEvent }) {
+
         const { state, translationX } = nativeEvent
         if (state === State.END) {
             let nextPositionMillis = this._startDraggingPosition + translationX / maxTimeBarWidth * this._maxPositionMillis
             nextPositionMillis = nextPositionMillis < 0 ? 0 : (nextPositionMillis > this._maxPositionMillis ? this._maxPositionMillis : nextPositionMillis)
-            this._videoRef.setPositionAsync(nextPositionMillis)
+            await this._videoRef.setPositionAsync(nextPositionMillis, {
+                toleranceMillisBefore: 0,
+                toleranceMillisAfter: 0
+            });
+            this._currentPositionMillis = nextPositionMillis
             console.log("nextPositionMillis", nextPositionMillis)
             const { setCurrentWatchingPosition, videoId } = this.props
             if (!isNaN(videoId)) setCurrentWatchingPosition(nextPositionMillis, videoId)
@@ -162,15 +163,17 @@ class VideoPlayer extends Component {
         } else if (state === State.BEGAN) {
             this._startDraggingPosition = this._currentPositionMillis
             this._isDraggingTimePoint = true
+            console.log(this._startDraggingPosition)
         }
     }
-    onPressTimeBarHandler({ nativeEvent }) {
+    async onPressTimeBarHandler({ nativeEvent }) {
         const { locationX } = nativeEvent
-        const nextPositionMillis = locationX / maxTimeBarWidth * this._maxPositionMillis
-        if (nextPositionMillis < 0) this._videoRef.setPositionAsync(0)
-        else if (nextPositionMillis > this._maxPositionMillis) this._videoRef.setPositionAsync(this._maxPositionMillis)
-        else this._videoRef.setPositionAsync(nextPositionMillis)
-
+        let nextPositionMillis = locationX / maxTimeBarWidth * this._maxPositionMillis
+        nextPositionMillis = nextPositionMillis < 0 ? 0 : (nextPositionMillis > this._maxPositionMillis ? this._maxPositionMillis : nextPositionMillis)
+        await this._videoRef.setPositionAsync(nextPositionMillis, {
+            toleranceMillisBefore: 0,
+            toleranceMillisAfter: 0
+        });
     }
     onOptionsGestureEventHandler({ nativeEvent }) {
         const { translationX } = nativeEvent
