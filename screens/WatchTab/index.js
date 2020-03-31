@@ -108,7 +108,7 @@ class index extends Component {
 }
 const mapStateToProps = state => {
     return {
-        user: state.user,
+        user: state.user.user,
         videoControl: state.videoControl,
         watchVideos: state.watch.watchVideos
     }

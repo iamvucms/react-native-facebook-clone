@@ -153,7 +153,7 @@ class Item extends Component {
 }
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user.user
     }
 }
 export default connect(mapStateToProps, null)(Item)

@@ -34,7 +34,7 @@ const mapDispatchToProp = (dispatch, props) => {
 const mapStateToProps = (state) => {
     return {
         stories: state.stories,
-        user: state.user
+        user: state.user.user
     }
 }
 export default connect(mapStateToProps,mapDispatchToProp)(index)

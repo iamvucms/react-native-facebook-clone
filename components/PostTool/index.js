@@ -10,16 +10,16 @@ class index extends Component {
             inputBgColor: "#fff"
         }
     }
-    onLiveStreamPressHandler(){
+    onLiveStreamPressHandler() {
         navigation.navigate('LiveStream')
     }
-    onPhotoUploaderPressHandler(){
+    onPhotoUploaderPressHandler() {
         navigation.navigate('PhotoUploader')
     }
-    onCheckInPressHandler(){
+    onCheckInPressHandler() {
         navigation.navigate('CheckIn')
     }
-    onFullPostToolPressHandler(){
+    onFullPostToolPressHandler() {
         navigation.navigate('FullPostTool')
     }
     render() {
@@ -62,7 +62,7 @@ class index extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user.user
     }
 }
 export default connect(mapStateToProps, null)(index)
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
     postInput: {
-        justifyContent:'center',
+        justifyContent: 'center',
         borderRadius: 48,
         height: 40,
         width: "100%",
