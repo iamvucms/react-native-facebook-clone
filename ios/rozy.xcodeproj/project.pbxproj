@@ -22,8 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C1548D9E4CB1AEFA5CCAE6D /* Pods-rozy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rozy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rozy/Pods-rozy.debug.xcconfig"; sourceTree = "<group>"; };
-		A47FE4D7F70906B7DC8CE39B /* Pods-rozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rozy.release.xcconfig"; path = "Pods/Target Support Files/Pods-rozy/Pods-rozy.release.xcconfig"; sourceTree = "<group>"; };
+		0D7221C758A1100AF2D80BD0 /* Pods-rozy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rozy.debug.xcconfig"; path = "Target Support Files/Pods-rozy/Pods-rozy.debug.xcconfig"; sourceTree = "<group>"; };
+		59507D969426EFD5D3D60DA9 /* Pods-rozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rozy.release.xcconfig"; path = "Target Support Files/Pods-rozy/Pods-rozy.release.xcconfig"; sourceTree = "<group>"; };
 		B501732A1DC01252003445D9 /* EXShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXShell.plist; sourceTree = "<group>"; };
 		B56386411DB9693800A0598C /* rozy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rozy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56386471DB9693800A0598C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,22 +61,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5B29BC350A332C58878A9F13 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2C1548D9E4CB1AEFA5CCAE6D /* Pods-rozy.debug.xcconfig */,
-				A47FE4D7F70906B7DC8CE39B /* Pods-rozy.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		B56386381DB9693800A0598C = {
 			isa = PBXGroup;
 			children = (
 				B56386431DB9693800A0598C /* rozy */,
 				B56386421DB9693800A0598C /* Products */,
-				5B29BC350A332C58878A9F13 /* Pods */,
 				1A42804E64B7E9E0AB8B6799 /* Frameworks */,
+				F1253743ADA8BCB265F967F4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +107,16 @@
 			path = Supporting;
 			sourceTree = "<group>";
 		};
+		F1253743ADA8BCB265F967F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D7221C758A1100AF2D80BD0 /* Pods-rozy.debug.xcconfig */,
+				59507D969426EFD5D3D60DA9 /* Pods-rozy.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,7 +152,6 @@
 				TargetAttributes = {
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = C8D8QTF339;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -161,6 +161,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -385,10 +386,10 @@
 		};
 		B56386591DB9693800A0598C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-rozy.debug.xcconfig */;
+			baseConfigurationReference = 0D7221C758A1100AF2D80BD0 /* Pods-rozy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C8D8QTF339;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/rozy/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ios;
@@ -399,10 +400,10 @@
 		};
 		B563865A1DB9693800A0598C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-rozy.release.xcconfig */;
+			baseConfigurationReference = 59507D969426EFD5D3D60DA9 /* Pods-rozy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C8D8QTF339;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/rozy/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ios;

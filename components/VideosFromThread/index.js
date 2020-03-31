@@ -19,7 +19,6 @@ class index extends Component {
     }
     shouldComponentUpdate(nextProps) {
         this.threadHeightMap = nextProps.threadHeightMap
-        console.log(this.threadHeightMap)
         return JSON.stringify(this.props.videosFromThread) !== JSON.stringify(nextProps.videosFromThread)
     }
     onScrollHandler({ nativeEvent }) {

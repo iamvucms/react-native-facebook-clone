@@ -4,9 +4,7 @@
   "summary": "Provides a React component that renders a gradient view.",
   "description": "Provides a React component that renders a gradient view.",
   "license": "MIT",
-  "authors": {
-    "name": "650 Industries, Inc."
-  },
+  "authors": "650 Industries, Inc.",
   "homepage": "https://docs.expo.io/versions/latest/sdk/linear-gradient/",
   "platforms": {
     "ios": "10.0"

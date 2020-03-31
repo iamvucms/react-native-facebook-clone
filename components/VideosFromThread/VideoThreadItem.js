@@ -36,11 +36,12 @@ class VideoThreadItem extends Component {
         return JSON.stringify(video) !== JSON.stringify(nextVideo)
     }
     onPressToggleControllerHandler() {
-        if (this._videoRef._isShowController) {
-            if (!this._videoRef.isPaused) this._videoRef.hideController()
-        } else {
-            if (!this._videoRef.isPaused) this._videoRef.showController()
-        }
+        
+        // if (this._videoRef._isShowController) {
+        //      this._videoRef.hideController()
+        // } else {
+        //     if (!this._videoRef.isPaused) this._videoRef.showController()
+        // }
     }
 
     onPressCommentsHandler() {
@@ -155,8 +156,8 @@ class VideoThreadItem extends Component {
                                     <View style={styles.optionItemWrapper}>
                                         <FontAwesome5Icon name="minus-square" size={20}></FontAwesome5Icon>
                                         <View>
-                                            <Text style={styles.optionText}>Save video</Text>
-                                            <Text style={{ ...styles.optionText, fontSize: 10 }}>Add to your saved video list</Text>
+                                            <Text style={styles.optionText}>Hide {video.page.name}</Text>
+                                            <Text style={{ ...styles.optionText, fontSize: 10 }}>Hide this page in 30 days</Text>
                                         </View>
                                     </View>
                                 </TouchableOpacity>
@@ -164,8 +165,7 @@ class VideoThreadItem extends Component {
                                     <View style={styles.optionItemWrapper}>
                                         <FontAwesome5Icon name="exclamation-triangle" size={20}></FontAwesome5Icon>
                                         <View>
-                                            <Text style={styles.optionText}>Save video</Text>
-                                            <Text style={{ ...styles.optionText, fontSize: 10 }}>Add to your saved video list</Text>
+                                            <Text style={styles.optionText}>Report or find supporting</Text>
                                         </View>
                                     </View>
                                 </TouchableOpacity>

@@ -12,12 +12,11 @@ import VideoPlayer from '../../components/VideoPlayer'
 class WatchDetail extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            detailDisplay: false,
-        }
+        this._videoRef = {}
+        this._infoOpacity = new Animated.Value(1)
         this._isLiked = false
-        this._hideSto = {}
         this._isCalledGoBack = false
+        this._isShowInfo = true
     }
     componentDidMount() {
         const { id } = this.props.route.params
@@ -33,33 +32,33 @@ class WatchDetail extends Component {
         })
     }
     onPressHideDetailWrapperHandler() {
-        this.setState({
-            ...this.state,
-            detailDisplay: !this.state.detailDisplay
-        })
+        console.log(Math.random())
+
+        if (this._isShowInfo) {
+            this._isShowInfo = false
+            this._infoOpacity.setValue(0)
+            this._videoRef.hideController()
+        } else {
+            this._isShowInfo = true
+            this._infoOpacity.setValue(1)
+            this._videoRef.showController()
+        }
     }
     onShowControllerHandler() {
-        this.setState({
-            ...this.state,
-            detailDisplay: true
-        })
+        this._infoOpacity.setValue(1)
+        this._isShowInfo = true
     }
     onHideControllerHandler() {
-        this.setState({
-            ...this.state,
-            detailDisplay: false
-        })
+        this._infoOpacity.setValue(0)
+        this._isShowInfo = false
     }
     onPauseHandler() {
-        clearTimeout(this._hideSto)
+        // this._infoOpacity.setValue(1)
+        // this._isShowInfo = true
     }
     onPlayHandler() {
-        this._hideSto = setTimeout(() => {
-            this.setState({
-                ...this.state,
-                detailDisplay: false
-            })
-        }, 2000);
+        // this._infoOpacity.setValue(0)
+        // this._videoRef.hideController()
     }
     onFinishHandler() {
         if (!this._isCalledGoBack) {
@@ -67,10 +66,11 @@ class WatchDetail extends Component {
             this._isCalledGoBack = true
         }
     }
+    onRefReadyHandler(ref) {
+        this._videoRef = ref
+    }
     render() {
-
         const { watchingVideo } = this.props
-        const { detailDisplay } = this.state
         if (!watchingVideo.hasOwnProperty("id")) return <View></View>
         let reactionValue = 0;
         for (let emoji in watchingVideo.reactions) {
@@ -80,7 +80,7 @@ class WatchDetail extends Component {
             <TouchableWithoutFeedback onPress={this.onPressHideDetailWrapperHandler.bind(this)}>
                 <View style={styles.postWrapper}>
                     <View style={{ ...styles.postContentWrapper }}>
-                        <View style={{ ...styles.infoWrapper, opacity: detailDisplay ? 1 : 0 }}>
+                        <Animated.View style={{ ...styles.infoWrapper, opacity: this._infoOpacity }}>
                             <View style={styles.listItemInfoWrapper}>
                                 <View style={styles.listItemInfo}>
                                     <Image style={styles.avatar} source={{ uri: watchingVideo.page.avatar_url }}></Image>
@@ -98,8 +98,9 @@ class WatchDetail extends Component {
                                 )}
                             </View>
                             <Text style={styles.content}>{watchingVideo.content}</Text>
-                        </View>
+                        </Animated.View>
                         <VideoPlayer
+                            onRefReady={this.onRefReadyHandler.bind(this)}
                             videoId={watchingVideo.id}
                             onShowController={this.onShowControllerHandler.bind(this)}
                             onHideController={this.onHideControllerHandler.bind(this)}
@@ -112,8 +113,8 @@ class WatchDetail extends Component {
                             isCenterVertical={true}
                             containerStyle={{}}
                             watchingVideo={watchingVideo}
-                            showController={detailDisplay} />
-                        <View style={{ ...styles.reactionsWrapper, opacity: detailDisplay ? 1 : 0 }}>
+                            showController={true} />
+                        <Animated.View style={{ ...styles.reactionsWrapper, opacity: this._infoOpacity }}>
                             <View style={styles.reactionValueWrapper}>
                                 <TouchableOpacity >
                                     <View style={styles.reactionNumberWrapper}>
@@ -153,7 +154,7 @@ class WatchDetail extends Component {
                                     </View>
                                 </TouchableOpacity>
                             </View>
-                        </View>
+                        </Animated.View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>

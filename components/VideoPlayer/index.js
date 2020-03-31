@@ -25,6 +25,7 @@ class VideoPlayer extends Component {
         this.hideController = this.hideController.bind(this)
         this.showController = this.showController.bind(this)
 
+        this._sToHideController = null
         this._didFinished = false
         this._isShowController = false
         this._maxPositionMillis = 0
@@ -115,20 +116,24 @@ class VideoPlayer extends Component {
         })
     }
     onPressTogglePlayVideoHandler() {
-        const { videoId, setThreadWatchingStatus, isInThreadList } = this.props
+        const { videoId, setThreadWatchingStatus, isInThreadList, onShowController, onHideController, onPause, onPlay } = this.props
         if (this._isPaused) {
             if (isInThreadList === true) setThreadWatchingStatus(videoId, true)
             this._videoRef.playAsync()
             this._playBtnOpacity.setValue(0)
             this._isPaused = false
-            const { onPlay } = this.props
+            this._sToHideController = setTimeout(() => {
+                this._zIndexController.setValue(-1)
+                this._isShowController = false
+                if (typeof onHideController === 'function') onHideController()
+            }, 3000);
             if (typeof onPlay === 'function') onPlay()
         } else {
             if (isInThreadList === true) setThreadWatchingStatus(videoId, false)
             this._videoRef.pauseAsync()
             this._playBtnOpacity.setValue(1)
             this._isPaused = true
-            const { onPause } = this.props
+            clearTimeout(this._sToHideController)
             if (typeof onPause === 'function') onPause()
         }
     }
@@ -176,7 +181,6 @@ class VideoPlayer extends Component {
         } else if (state === State.BEGAN) {
             this._startDraggingPosition = this._currentPositionMillis
             this._isDraggingTimePoint = true
-            console.log(this._startDraggingPosition)
         }
     }
     async onPressTimeBarHandler({ nativeEvent }) {
@@ -212,21 +216,31 @@ class VideoPlayer extends Component {
         }
     }
     onPressToggleControllerHandler() {
+        console.log("xxxx")
         const { isAutoToggleController, onShowController, onHideController } = this.props
         if (isAutoToggleController) {
             if (this._isShowController) {
                 this._zIndexController.setValue(-1)
                 this._isShowController = false
                 if (typeof onHideController === 'function') onHideController()
+                if (this._isPaused) {
+                    clearTimeout(this._sToHideController)
+                }
             } else {
                 this._zIndexController.setValue(1)
                 this._isShowController = true
                 if (typeof onShowController === 'function') onShowController()
+                if (!this._isPaused) {
+                    this._sToHideController = setTimeout(() => {
+                        this._zIndexController.setValue(-1)
+                        this._isShowController = false
+                        if (typeof onHideController === 'function') onHideController()
+                    }, 3000);
+                }
             }
         }
     }
     render() {
-        console.log(Math.random())
         const playBtnOpacity = this._playBtnOpacity
         const pauseBtnOpacity = this._playBtnOpacity.interpolate({
             inputRange: [0, 1],
@@ -244,26 +258,24 @@ class VideoPlayer extends Component {
         if (showController === true) this._zIndexController.setValue(1)
         else this._zIndexController.setValue(-1)
         return (
-            <View style={{ ...styles.postWrapper, ...containerStyle, top: videoWrapperOffsetTop, position: isCenterVertical ? 'absolute' : 'relative' }}>
+            <TouchableOpacity activeOpacity={1} onPress={this.onPressToggleControllerHandler.bind(this)} style={{ ...styles.postWrapper, ...containerStyle, top: videoWrapperOffsetTop, position: isCenterVertical ? 'absolute' : 'relative' }}>
                 <View style={{
                     ...styles.videoWrapper,
                     width: SCREEN_WIDTH,
                     height: fixedVideoHeight
                 }}>
-                    <TouchableOpacity activeOpacity={1} onPress={this.onPressToggleControllerHandler.bind(this)}>
-                        <Video
-                            progressUpdateIntervalMillis={500}
-                            onPlaybackStatusUpdate={this.onPlaybackStatusUpdateHandler.bind(this)}
-                            ref={this._handleVideoRef}
-                            onReadyForDisplay={this.onReadyForDisplay.bind(this)}
-                            style={{
-                                ...styles.video,
-                                width: SCREEN_WIDTH,
-                                height: fixedVideoHeight
-                            }}
-                            source={source}>
-                        </Video>
-                    </TouchableOpacity>
+                    <Video
+                        progressUpdateIntervalMillis={500}
+                        onPlaybackStatusUpdate={this.onPlaybackStatusUpdateHandler.bind(this)}
+                        ref={this._handleVideoRef}
+                        onReadyForDisplay={this.onReadyForDisplay.bind(this)}
+                        style={{
+                            ...styles.video,
+                            width: SCREEN_WIDTH,
+                            height: fixedVideoHeight
+                        }}
+                        source={source}>
+                    </Video>
                     <Animated.View style={{ ...styles.postContentWrapper, zIndex: this._zIndexController }}>
                         <View
                             activeOpacity={1} onPress={this.onPressToggleControllerHandler.bind(this)}
@@ -271,7 +283,7 @@ class VideoPlayer extends Component {
                                 ...styles.videoToolWrapper, height: fixedVideoHeight / 2 + 35,
                             }}>
                             <View style={styles.btnControlWrapper}>
-                                <TouchableWithoutFeedback ref="sss" style={{ height: 75, width: 60 }}
+                                <TouchableOpacity ref="sss" style={{ height: 75, width: 60 }}
                                     onPress={this.onPressTogglePlayVideoHandler.bind(this)}>
                                     <Animated.View style={{ position: 'absolute', opacity: pauseBtnOpacity }}>
                                         <FontAwesome5Icon name="pause-circle" size={60} color="#fff" />
@@ -279,7 +291,7 @@ class VideoPlayer extends Component {
                                     <Animated.View style={{ opacity: playBtnOpacity }}>
                                         <FontAwesome5Icon name="play-circle" size={60} color="#fff" />
                                     </Animated.View>
-                                </TouchableWithoutFeedback>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.videoToolBar}>
                                 <View style={styles.timeBar}>
@@ -336,7 +348,7 @@ class VideoPlayer extends Component {
                         </View>
                     </Animated.View>
                 </PanGestureHandler>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

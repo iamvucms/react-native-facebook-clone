@@ -4,9 +4,7 @@
   "summary": "The adapter to use universal modules with the React Native bridge",
   "description": "The adapter to use universal modules with the React Native bridge",
   "license": "MIT",
-  "authors": {
-    "name": "650 Industries, Inc."
-  },
+  "authors": "650 Industries, Inc.",
   "homepage": "https://github.com/expo/expo/tree/master/packages/@unimodules/react-native-adapter",
   "platforms": {
     "ios": "10.0"

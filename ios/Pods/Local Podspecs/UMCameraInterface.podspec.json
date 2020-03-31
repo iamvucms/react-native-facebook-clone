@@ -4,9 +4,7 @@
   "summary": "An interface package for camera",
   "description": "An interface package for camera",
   "license": "MIT",
-  "authors": {
-    "name": "650 Industries, Inc."
-  },
+  "authors": "650 Industries, Inc.",
   "homepage": "https://github.com/expo/expo/tree/master/packages/unimodules-camera-interface",
   "platforms": {
     "ios": "10.0"

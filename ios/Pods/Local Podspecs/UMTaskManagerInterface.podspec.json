@@ -4,9 +4,7 @@
   "summary": "Universal module interface package for TaskManager",
   "description": "Universal module interface package for TaskManager",
   "license": "MIT",
-  "authors": {
-    "name": "650 Industries, Inc."
-  },
+  "authors": "650 Industries, Inc.",
   "homepage": "https://github.com/expo/expo/tree/master/packages/unimodules-task-manager-interface",
   "platforms": {
     "ios": "10.0"
