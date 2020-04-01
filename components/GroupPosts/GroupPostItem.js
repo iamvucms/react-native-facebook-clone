@@ -47,11 +47,11 @@ class Item extends Component {
             <View style={styles.item}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={styles.customListView}>
-                        <Image style={styles.avatar} source={{ uri: item.avatar_url }}></Image>
+                        <Image style={styles.avatar} source={{ uri: item.user?.avatar_url }}></Image>
                         <View style={styles.infoWrapper}>
                             <View style={styles.namesWrapper}>
                                 <TouchableOpacity>
-                                    <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.name}</Text>
+                                    <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.user?.name}</Text>
                                 </TouchableOpacity>
                                 {!isInGroup && (
                                     <>

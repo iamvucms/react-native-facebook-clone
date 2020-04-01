@@ -2,13 +2,25 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { SCREEN_WIDTH } from '../../constants'
+import * as navigation from '../../rootNavigation'
 class index extends Component {
+    constructor(props) {
+        super(props)
+    }
+    onPressViewAllFriendsHandler() {
+        const { friends } = this.props
+        navigation.navigate("FullFriends", {
+            friends
+        })
+    }
     render() {
         const friends = [...this.props.friends]
         return (
             <View style={styles.friendsWrapper}>
                 <View style={{ backgroundColor: "#000", borderRadius: 5, }}>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.friendsBar}>
+                    <TouchableOpacity
+                        onPress={this.onPressViewAllFriendsHandler.bind(this)}
+                        activeOpacity={0.8} style={styles.friendsBar}>
                         <View>
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Friends</Text>
                             <Text style={{ fontSize: 16, fontWeight: '500', color: '#333' }}>{friends.length} friends</Text>
@@ -32,7 +44,9 @@ class index extends Component {
                         </View>
                     ))}
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnViewAllFriends}>
+                <TouchableOpacity
+                    onPress={this.onPressViewAllFriendsHandler.bind(this)}
+                    activeOpacity={0.8} style={styles.btnViewAllFriends}>
                     <Text style={{ fontSize: 16, fontWeight: '500' }}>View all friends</Text>
                 </TouchableOpacity>
             </View>

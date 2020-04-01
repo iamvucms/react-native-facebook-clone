@@ -1,7 +1,7 @@
 import { postDetailActions } from '../constants'
 import axios from 'axios'
 export const FetchPostDetailRequest = (id, isShowModal) => {
-    const taskURI = `/posts/${id}`
+    const taskURI = `/posts/${id}?_expand=user`
     return (dispatch) => {
         axios.get(taskURI).then(result => {
             const showingPost = {

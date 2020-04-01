@@ -2,16 +2,32 @@ import React, { PureComponent } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { SCREEN_WIDTH } from '../../constants'
+import * as navigation from '../../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import PostTool from '../../components/PostTool'
 import FriendsShowing from '../../components/FriendsShowing'
 import HighlightPhotos from '../../components/HighlightPhotos'
+import ProfilePosts from '../../components/ProfilePosts'
 class index extends PureComponent {
     constructor(props) {
         super(props)
     }
+    onPressEditPublicInfoHandler() {
+        const user = { ...this.props.user }
+        const highlightPhotos = [...this.props.highlightPhotos]
+        navigation.navigate("EditPublicInfo", {
+            userInfo: user,
+            highlightPhotos
+        })
+    }
+    onPressViewAllFriendsHandler() {
+        const { friends } = this.props
+        navigation.navigate("FullFriends", {
+            friends
+        })
+    }
     render() {
-        const { user, highlightPhotos } = this.props
+        const { user, highlightPhotos, profilePosts } = this.props
         if (!user.hasOwnProperty('id')) return <View></View>
         const friends = [...this.props.friends]
         return (
@@ -108,13 +124,40 @@ class index extends PureComponent {
                     </View>
                     <HighlightPhotos photos={highlightPhotos} />
                     <View style={{ paddingVertical: 20, borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}>
-                        <TouchableOpacity style={styles.btnEditPublicDetail}>
-                            <Text style={{ color: '#318bfb', fontSize: 16, fontWeight: '500' }}>Edit public detail</Text>
+                        <TouchableOpacity
+                            onPress={this.onPressEditPublicInfoHandler.bind(this)}
+                            activeOpacity={0.8}
+                            style={styles.btnEditPublicDetail}>
+                            <Text style={{ color: '#318bfb', fontSize: 16, fontWeight: '500' }}>Edit public info</Text>
                         </TouchableOpacity>
                     </View>
                     <FriendsShowing friends={friends} />
                 </View>
                 <PostTool />
+                <ScrollView
+                    alignItems="center"
+                    bounces={false}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    style={styles.navigationsWrapper}>
+                    <TouchableOpacity style={styles.navigation}>
+                        <FontAwesome5Icon style={styles.navigationIcon} color="#000" size={20} name="images" />
+                        <Text style={{ fontSize: 16, fontWeight: "500" }}>Images</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.navigation}>
+                        <FontAwesome5Icon style={styles.navigationIcon} color="#000" size={20} name="video" />
+                        <Text style={{ fontSize: 16, fontWeight: "500" }}>Videos</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.navigation}>
+                        <FontAwesome5Icon style={styles.navigationIcon} color="#000" size={20} name="calendar-week" />
+                        <Text style={{ fontSize: 16, fontWeight: "500" }}>Life event</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.navigation, ...styles.lastNavigation }}>
+                        <FontAwesome5Icon style={styles.navigationIcon} color="#000" size={20} name="music" />
+                        <Text style={{ fontSize: 16, fontWeight: "500" }}>Music</Text>
+                    </TouchableOpacity>
+                </ScrollView >
+                <ProfilePosts highLightPhotos={highlightPhotos} profilePosts={profilePosts}></ProfilePosts>
             </ScrollView>
         )
     }
@@ -123,7 +166,8 @@ const mapStateToProps = state => {
     return {
         user: state.user.user,
         highlightPhotos: state.user.highlightPhotos,
-        friends: state.user.friends
+        friends: state.user.friends,
+        profilePosts: state.user.posts
     }
 }
 export default connect(mapStateToProps, null)(index);
@@ -300,5 +344,34 @@ const styles = StyleSheet.create({
         backgroundColor: '#ddd',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    navigationsWrapper: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        marginTop: 15,
+        borderTopColor: '#ddd',
+        borderTopWidth: 1,
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 1,
+        height: 100,
+        width: SCREEN_WIDTH,
+        paddingHorizontal: 10
+    },
+    navigation: {
+        flexDirection: 'row',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 15,
+        backgroundColor: '#ddd',
+        borderRadius: 48,
+        marginHorizontal: 5
+    },
+    lastNavigation: {
+        marginRight: 25
+    },
+    navigationIcon: {
+        width: 30,
+        alignItems: "center"
     }
 })

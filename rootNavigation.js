@@ -3,7 +3,7 @@ import { StackActions } from '@react-navigation/native';
 import store from './store'
 
 export const navigationRef = React.createRef();
-export const navigation = navigationRef.current
+// export const navigation = navigationRef.current
 export function navigate(name, params) {
 	navigationRef.current?.navigate(name, params);
 }
@@ -21,4 +21,12 @@ export function push(name, params) {
 }
 export function goBack() {
 	navigationRef.current?.goBack();
+}
+export const navigation = {
+	navigate,
+	dispatch,
+	jumpTo,
+	replace,
+	push,
+	goBack
 }

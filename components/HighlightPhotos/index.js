@@ -4,12 +4,13 @@ import { SCREEN_WIDTH } from '../../constants'
 
 export default class index extends Component {
     render() {
+        const { isFullRadius } = this.props
         const highlightPhotos = [...this.props.photos]
         return (
             <View style={styles.highlightPhotosWrapper}>
                 {highlightPhotos.map((photo, index) => (
                     <TouchableOpacity key={index} activeOpacity={0.8}>
-                        <Image style={{ ...styles.photo, marginBottom: index < 6 ? 6 : 0 }} source={{ uri: photo.photo_url }} />
+                        <Image style={{ ...styles.photo, marginBottom: index < 6 ? 6 : 0, borderRadius: isFullRadius === true ? 10 : 0 }} source={{ uri: photo.photo_url }} />
                     </TouchableOpacity>
                 ))}
             </View>

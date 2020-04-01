@@ -47,6 +47,19 @@ const reducer = (state = defaultState, action) => {
             Alert.alert('Error', message3)
             return state
             break
+        case userActions.FETCH_PROFILE_POSTS_REQUEST:
+            state = { ...state, posts: [] }
+            return state
+            break
+        case userActions.FETCH_PROFILE_POSTS_SUCCESS:
+            state = { ...state, posts: [...action.payload] }
+            return state
+            break
+        case userActions.FETCH_PROFILE_POSTS_FAILURE:
+            const { message4 } = action.error
+            Alert.alert('Error', message4)
+            return state
+            break
         default:
             return state
     }

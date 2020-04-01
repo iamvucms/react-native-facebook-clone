@@ -2,11 +2,10 @@
     "posts": [
         {
             "id": 1,
-            "name": "Amy Farha",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
             "image": "https://gamek.mediacdn.vn/2019/10/20/photo-1-1571521922264714072244.jpg",
             "create_at": "12h ago",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 1,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -58,11 +57,10 @@
         },
         {
             "id": 2,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://i.ytimg.com/vi/dkvaprtP6L8/maxresdefault.jpg",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 1,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -90,11 +88,10 @@
         },
         {
             "id": 3,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://images.unsplash.com/photo-1534142499731-a32a99935397?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 3,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -122,11 +119,10 @@
         },
         {
             "id": 4,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://cdna.artstation.com/p/assets/images/images/019/387/690/large/inward-vertical-city.jpg?1563272711",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 2,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -280,30 +276,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 177,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 218,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 470,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 479,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 404,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 189,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 313,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 481,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 95,
                     "userId": 10
                 }
             ],
@@ -345,30 +354,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 143,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 411,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 9,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 170,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 489,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 275,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 264,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 378,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 158,
                     "userId": 10
                 }
             ],
@@ -410,30 +432,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 432,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 40,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 394,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 268,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 139,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 289,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 380,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 431,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 232,
                     "userId": 10
                 }
             ],
@@ -475,30 +510,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 466,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 52,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 493,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 414,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 130,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 399,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 77,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 286,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 209,
                     "userId": 10
                 }
             ],
@@ -540,30 +588,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 208,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 235,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 109,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 176,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 94,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 316,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 22,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 363,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 274,
                     "userId": 10
                 }
             ],
@@ -605,30 +666,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 72,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 377,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 279,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 274,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 219,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 405,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 47,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 336,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 391,
                     "userId": 10
                 }
             ],
@@ -670,30 +744,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 446,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 199,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 197,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 105,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 5,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 415,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 59,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 342,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 203,
                     "userId": 10
                 }
             ],
@@ -735,30 +822,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 11,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 167,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 159,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 216,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 73,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 495,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 160,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 158,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 478,
                     "userId": 10
                 }
             ],
@@ -800,30 +900,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 169,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 244,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 471,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 415,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 132,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 411,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 454,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 87,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 359,
                     "userId": 10
                 }
             ],
@@ -865,30 +978,43 @@
             },
             "friends": [
                 {
-                    "userId": 2
+                    "mutualFriends": 207,
+                    "userId": 2,
+                    "isRecent": true
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 495,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 152,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 177,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 486,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 174,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 155,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 417,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 166,
                     "userId": 10
                 }
             ],
@@ -930,30 +1056,42 @@
             },
             "friends": [
                 {
+                    "mutualFriends": 33,
                     "userId": 2
                 },
                 {
-                    "userId": 3
+                    "mutualFriends": 199,
+                    "userId": 3,
+                    "isRecent": true
                 },
                 {
-                    "userId": 4
+                    "mutualFriends": 457,
+                    "userId": 4,
+                    "isRecent": true
                 },
                 {
-                    "userId": 5
+                    "mutualFriends": 102,
+                    "userId": 5,
+                    "isRecent": true
                 },
                 {
+                    "mutualFriends": 113,
                     "userId": 6
                 },
                 {
+                    "mutualFriends": 74,
                     "userId": 7
                 },
                 {
+                    "mutualFriends": 40,
                     "userId": 8
                 },
                 {
+                    "mutualFriends": 242,
                     "userId": 9
                 },
                 {
+                    "mutualFriends": 476,
                     "userId": 10
                 }
             ],
@@ -1372,11 +1510,10 @@
     "group_posts": [
         {
             "id": 1,
-            "name": "Amy Farha",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
             "image": "https://gamek.mediacdn.vn/2019/10/20/photo-1-1571521922264714072244.jpg",
             "create_at": "12h ago",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 1,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -1432,11 +1569,10 @@
         },
         {
             "id": 2,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://i.ytimg.com/vi/dkvaprtP6L8/maxresdefault.jpg",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 9,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -1468,11 +1604,10 @@
         },
         {
             "id": 3,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://images.unsplash.com/photo-1534142499731-a32a99935397?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 7,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -1504,11 +1639,10 @@
         },
         {
             "id": 4,
-            "name": "Chris Jackson",
-            "avatar_url": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
             "image": "https://cdna.artstation.com/p/assets/images/images/019/387/690/large/inward-vertical-city.jpg?1563272711",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
+            "userId": 3,
             "reactions": {
                 "love": 12,
                 "like": 20,

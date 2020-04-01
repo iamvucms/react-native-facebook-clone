@@ -14,20 +14,30 @@ import PostOptions from './screens/PostOptions'
 import { navigationRef } from './rootNavigation'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import axios from 'axios'
-import GroupScreen from './screens/GroupTab'
+
 import NotificationScreen from './screens/NotificationTab'
+
 import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
 import WatchOptions from './screens/WatchTab/WatchOptions'
 import WatchSearch from './screens/Search/WatchSearch'
 import WatchDetail from './screens/WatchTab/WatchDetail';
+
 import ShortCutScreen from './screens/ShortCutTab'
+
 import ProfileScreen from './screens/ProfileTab'
+import ProfilePostOptions from './screens/ProfileTab/ProfilePostOptions'
+import EditPublicInfo from './screens/ProfileTab/EditPublicInfo'
+import FullFriends from './screens/ProfileTab/FullFriends'
+import FriendOptions from './screens/ProfileTab/FriendOptions'
+
 import StoryDetailScreen from './screens/StoryDetail'
+
 import GroupSearch from './screens/Search/GroupSearch'
 import GroupCategory from './screens/GroupTab/GroupCategory'
 import GroupCategories from './screens/GroupTab/GroupCategories'
 import GroupProfile from './screens/GroupTab/Group'
+import GroupScreen from './screens/GroupTab'
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -149,6 +159,12 @@ function App() {
 					<rootStack.Screen options={{ gestureEnabled: false }} name="SeenVideos" component={SeenVideos} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchDetail" component={WatchDetail} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchDetailList" component={WatchDetailList} />
+
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="ProfilePostOptions" component={ProfilePostOptions} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="EditPublicInfo" component={EditPublicInfo} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="FullFriends" component={FullFriends} />
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="FriendOptions" component={FriendOptions} />
+
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
@@ -157,6 +173,7 @@ function App() {
 						name="GroupSearch" component={GroupSearch} />
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupProfile" component={GroupProfile} />
+
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="PostOptions" component={PostOptions} />

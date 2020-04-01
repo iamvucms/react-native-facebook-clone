@@ -2,10 +2,10 @@ import { groupPostsActions } from '../constants'
 import axios from 'axios'
 export const FetchGroupPostsRequest = (id = null) => {
     let taskURI = null
-    if (id !== null) taskURI = `/group_posts?group.id=${id}`
-    else taskURI = `/group_posts`
+    if (id !== null) taskURI = `/group_posts?_expand=user&group.id=${id}`
+    else taskURI = `/group_posts?_expand=user`
     return (dispatch) => {
-        axios.get(taskURI).then(v => { 
+        axios.get(taskURI).then(v => {
             const posts = v.data
             if (id !== null) dispatch(FetchInGroupPostsSuccess(posts))
             else dispatch(FetchAllGroupPostsSuccess(posts))

@@ -7,19 +7,19 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { permission } from '../../constants'
 import { connect } from 'react-redux'
 
-class Item extends Component {
+class ProfilePostItem extends Component {
     constructor(props) {
         super(props)
     }
     onPressHandle() {
         const { comments } = this.props.item
-        navigation.navigate('Comments', {
+        navigation.navigate('CommentsPopUp', {
             comments
         })
     }
     onPressPostOptionsIconHandler() {
         const { item } = this.props
-        navigation.navigate('PostOptions', {
+        navigation.navigate('ProfilePostOptions', {
             postDetail: item
         })
     }
@@ -31,7 +31,7 @@ class Item extends Component {
     onPressShareHandler() {
         const { item } = this.props
         navigation.navigate('SharePost', {
-            id: item.id
+            id: item?.id
         })
     }
     render() {
@@ -48,15 +48,15 @@ class Item extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.extraInfoWrapper}>
-                                <Text style={{ color: '#333', fontSize: 14 }}>{item.create_at}</Text>
+                                <Text style={{ color: '#333', fontSize: 14 }}>{item?.create_at}</Text>
                                 <Text style={{ fontSize: 16, marginHorizontal: 5 }}>·</Text>
-                                {item.permission == permission.PUBLIC && (
+                                {item?.permission == permission.PUBLIC && (
                                     <FontAwesome5Icon color='#333' name="globe-asia" />
                                 )}
-                                {item.permission == permission.SETTING && (
+                                {item?.permission == permission.SETTING && (
                                     <FontAwesome5Icon color='#333' name="cogs" />
                                 )}
-                                {item.permission == permission.GROUP && (
+                                {item?.permission == permission.GROUP && (
                                     <FontAwesome5Icon color='#333' name="newspaper" />
                                 )}
                             </View>
@@ -67,11 +67,11 @@ class Item extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contentContainer}>
-                    <Text style={styles.paragraph}>{item.content}</Text>
+                    <Text style={styles.paragraph}>{item?.content}</Text>
                 </View>
-                <TouchableOpacity onPress={this.onPressPostImageHandler.bind(this, item.id)}>
+                <TouchableOpacity onPress={this.onPressPostImageHandler.bind(this, item?.id)}>
                     <View style={styles.imageContainer}>
-                        <ScaledImage height={300} source={item.image}></ScaledImage>
+                        <ScaledImage height={300} source={item?.image}></ScaledImage>
                     </View>
                 </TouchableOpacity>
                 <View horizontal={true} style={styles.reactionContainer}>
@@ -118,7 +118,7 @@ class Item extends Component {
                         color="gray"
                         backgroundColor="white"
                         style={{ ...styles.reactionIcon, fontSize: 14 }}
-                    ><Text style={{ fontSize: 12 }}> {item.comments.length} comments</Text></Icon></TouchableOpacity>
+                    ><Text style={{ fontSize: 12 }}> {item?.comments.length} comments</Text></Icon></TouchableOpacity>
                     <TouchableOpacity onPress={this.onPressShareHandler.bind(this)} style={styles.shareIcon}><Icon name="share-alt"
                         color="gray" ><Text style={{ fontSize: 12, textAlignVertical: 'center' }}> Share</Text></Icon></TouchableOpacity>
                 </View>
@@ -140,7 +140,7 @@ const mapStateToProps = state => {
         user: state.user.user
     }
 }
-export default connect(mapStateToProps, null)(Item)
+export default connect(mapStateToProps, null)(ProfilePostItem)
 const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     customListView: {

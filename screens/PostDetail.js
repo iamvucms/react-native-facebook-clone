@@ -35,12 +35,11 @@ class PostDetailModal extends Component {
 
     }
     openCommentModal() {
-        const { closePostDetailModal, openCommentModal } = this.props
-        openCommentModal()
+        // const { closePostDetailModal, openCommentModal } = this.props
+        // openCommentModal()
     }
     onPressCommentsHandler() {
         const { showingPost } = this.props
-        const { closePostDetailModal, openCommentModal } = this.props
         const { comments } = showingPost.postDetail
         navigation.navigate('CommentsPopUp', {
             comments
@@ -65,7 +64,7 @@ class PostDetailModal extends Component {
     render() {
         const { showingPost } = this.props
         if (!showingPost.hasOwnProperty("isShowModal") || showingPost.isShowModal === false) return <View></View>
-        const { postDetail, isShowModal } = showingPost
+        const { postDetail } = showingPost
         let reactionValue = 0;
         for (let emoji in postDetail.reactions) {
             reactionValue += postDetail.reactions[emoji];
@@ -113,7 +112,7 @@ class PostDetailModal extends Component {
                     <View style={{ ...styles.postContentWrapper, display: this.state.detailDisplay }}>
                         <View>
                             <TouchableOpacity>
-                                <Text style={styles.name}>{postDetail.name}</Text>
+                                <Text style={styles.name}>{postDetail.user?.name}</Text>
                             </TouchableOpacity>
                             <Text style={styles.content}>{postDetail.content}</Text>
                             <Text style={styles.time}>{postDetail.create_at}</Text>
