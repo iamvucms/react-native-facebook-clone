@@ -34,6 +34,15 @@ class Item extends Component {
             id: item.id
         })
     }
+    onPressProfileHandler(userId) {
+        const { user } = this.props
+        if (userId === user.id) {
+            return navigation.navigate('Profile')
+        }
+        navigation.push('ProfileX', {
+            userId
+        })
+    }
     render() {
         const { user, item } = this.props
         return (
@@ -43,7 +52,7 @@ class Item extends Component {
                         <Image style={styles.avatar} source={{ uri: item.user?.avatar_url }}></Image>
                         <View style={styles.infoWrapper}>
                             <View style={styles.namesWrapper}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={this.onPressProfileHandler.bind(this, item.user?.id)}>
                                     <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.user?.name}</Text>
                                 </TouchableOpacity>
                             </View>

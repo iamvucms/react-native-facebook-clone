@@ -22,37 +22,49 @@ class index extends Component {
     onFullPostToolPressHandler() {
         navigation.navigate('FullPostTool')
     }
+    onPressPostToAnyOneHandler() {
+        const { userX } = this.props
+        navigation.navigate('FullPostTool', {
+            isPostToAnyOne: true,
+            userX
+        })
+    }
+    onPressSharePhotoToAnyOne() {
+
+    }
     render() {
-        const { user } = this.props
+        const { user, isWriteToAnyOne, userX } = this.props
         return (
             <View style={styles.container}>
                 <View style={styles.postToolWrapper}>
                     <TouchableOpacity activeOpacity={0.5} style={styles.userAvatarWrapper}>
                         <Image source={{ uri: user.avatar_url }} style={styles.userAvatar} ></Image>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.onFullPostToolPressHandler} style={styles.postInputWrapper}>
+                    <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressPostToAnyOneHandler.bind(this) : this.onFullPostToolPressHandler} style={styles.postInputWrapper}>
                         <View style={{ ...styles.postInput, backgroundColor: this.state.inputBgColor }}>
-                            <Text>What are you thinking ?</Text>
+                            <Text>{isWriteToAnyOne ? `Write somethings to ${userX.name}` : 'What are you thinking ?'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.postOptionsWrapper}>
-                    <TouchableOpacity onPress={this.onLiveStreamPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
-                        <View style={styles.postOptionItem}>
-                            <FontAweSome5 style={styles.postOptionIcon} name="video" color="red" size={16} />
-                            <Text>Live Stream</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+                    {!isWriteToAnyOne &&
+                        <TouchableOpacity onPress={this.onLiveStreamPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+                            <View style={styles.postOptionItem}>
+                                <FontAweSome5 style={styles.postOptionIcon} name="video" color="red" size={16} />
+                                <Text>Live Stream</Text>
+                            </View>
+                        </TouchableOpacity>
+                    }
+                    <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressPostToAnyOneHandler.bind(this) : this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
                         <View style={{ ...styles.postOptionItem, ...styles.postOptionItemMiddle }}>
-                            <FontAweSome5 style={styles.postOptionIcon} name="image" color="green" size={16} />
-                            <Text>Photo</Text>
+                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne ? 'edit' : 'image'} color="green" size={16} />
+                            <Text>{isWriteToAnyOne ? 'Write a post' : 'Photo'}</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+                    <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressSharePhotoToAnyOne.bind(this) : this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <FontAweSome5 style={styles.postOptionIcon} name="map-marker-alt" color="red" size={16} />
-                            <Text>Check in</Text>
+                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne ? 'image' : "map-marker-alt"} color="red" size={16} />
+                            <Text>{isWriteToAnyOne ? 'Share Photos' : 'Check in'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

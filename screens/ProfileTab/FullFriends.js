@@ -40,7 +40,6 @@ export default class FullFriends extends Component {
     }
     onScrollToActChangeTab({ nativeEvent }) {
         const offsetX = nativeEvent.contentOffset.x
-        console.log(nativeEvent, this._currentTab)
         if (offsetX > SCREEN_WIDTH / 2) {
             this.refs._horizontalScrollRef.scrollToEnd({ animated: true })
             this.setState({
@@ -63,6 +62,11 @@ export default class FullFriends extends Component {
     onPressFriendOptionsHandler(friend) {
         navigation.navigate("FriendOptions", {
             friend
+        })
+    }
+    onPressProfileHandler(userId) {
+        navigation.push('ProfileX', {
+            userId
         })
     }
     onPressSearchHandler() {
@@ -120,7 +124,7 @@ export default class FullFriends extends Component {
                                 <View key={index}>
                                     {
                                         friend.name.indexOf(keyword) > -1 ? (
-                                            <ExTouchableOpacity key={index} style={styles.friendItem}>
+                                            <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, friend.id)} key={index} style={styles.friendItem}>
                                                 <Image source={{ uri: friend.avatar_url }} style={styles.friendAvatar} />
                                                 <View style={styles.friendInfoWrapper}>
                                                     <Text style={styles.friendName}>{friend.name}</Text>

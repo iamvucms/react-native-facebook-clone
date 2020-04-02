@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, Image, Dimensions, Animated } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-export default class RecommandItem extends Component {
+import ExTouchableOpacity from '../ExTouchableOpacity'
+import { connect } from 'react-redux'
+import { navigation } from '../../rootNavigation'
+class RecommandItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,7 +22,15 @@ export default class RecommandItem extends Component {
                 isHidden: true
             })
         })
-
+    }
+    onPressProfileHandler(userId) {
+        const { user } = this.props
+        if (userId === user.id) {
+            return navigation.navigate('Profile')
+        }
+        navigation.push('ProfileX', {
+            userId
+        })
     }
     render() {
         const containerOpacity = this._containerOpacity
@@ -27,14 +38,14 @@ export default class RecommandItem extends Component {
         return (
             <Animated.View style={{ ...styles.container, display: this.state.isHidden ? 'none' : 'flex', opacity: containerOpacity }}>
                 <View style={styles.itemWrapper}>
-                    <TouchableOpacity activeOpacity={0.5}>
-                        <Image style={styles.avatar} source={{ uri: info.avatar_url }}></Image>
-                    </TouchableOpacity>
+                    <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, info.user?.id)} activeOpacity={0.5}>
+                        <Image style={styles.avatar} source={{ uri: info.user?.avatar_url }}></Image>
+                    </ExTouchableOpacity>
                     <View>
                         <View style={styles.infoWrapper}>
-                            <TouchableOpacity activeOpacity={0.5}>
-                                <Text style={styles.name}>{info.name}</Text>
-                            </TouchableOpacity>
+                            <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, info.user?.id)} activeOpacity={0.5}>
+                                <Text style={styles.name}>{info.user?.name}</Text>
+                            </ExTouchableOpacity>
                             <Text style={styles.mutualCount}>{info.mutualCount} mutual friends</Text>
                         </View>
                         <View style={styles.btnWrapper}>
@@ -51,6 +62,12 @@ export default class RecommandItem extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user.user
+    }
+}
+export default connect(mapStateToProps, null)(RecommandItem);
 const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     container: {

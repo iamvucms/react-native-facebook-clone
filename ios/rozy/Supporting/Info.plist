@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ROZY</string>
+	<string>Fakebook</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -79,7 +79,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow ROZY to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Allow ROZY to access your device's accelerometer</string>
+	<string>Allow ROZY to access your device&apos;s accelerometer</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Give ROZY permission to save photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -4,6 +4,8 @@ import RecommandItem from './RecommandItem'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import { FetchRecommandFriendsRequest } from '../../actions/friendActions'
+import ExTouchableOpacity from '../ExTouchableOpacity'
+import { navigation } from '../../rootNavigation'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +14,9 @@ class index extends Component {
     componentDidMount() {
         const { fetchRecommandFriends } = this.props
         fetchRecommandFriends()
+    }
+    onPressViewAllRecommandsHandler() {
+        navigation.navigate('FindFriends')
     }
     onScrollHandler(event) {
         const offsetX = event.nativeEvent.contentOffset.x
@@ -49,7 +54,7 @@ class index extends Component {
     }
     render() {
         const { recommandFriends } = this.props
-        if (recommandFriends === undefined) return <View></View>
+        if (recommandFriends === undefined || recommandFriends.length === 0) return <View></View>
         return (
             <View style={styles.container}>
                 <View style={styles.headerWrapper}>
@@ -71,10 +76,10 @@ class index extends Component {
                     ))}
                 </ScrollView>
                 <View>
-                    <TouchableOpacity style={styles.btnSeeAll}>
+                    <ExTouchableOpacity onPress={this.onPressViewAllRecommandsHandler} style={styles.btnSeeAll}>
                         <Text>See all recommands</Text>
                         <FontAwesome5Icon style={styles.seeAllIcon} name="chevron-right"></FontAwesome5Icon>
-                    </TouchableOpacity>
+                    </ExTouchableOpacity>
                 </View>
             </View>
         )
@@ -82,7 +87,7 @@ class index extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        recommandFriends: state.recommandFriends
+        recommandFriends: state.friends.recommandFriends
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

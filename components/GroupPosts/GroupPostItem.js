@@ -6,6 +6,7 @@ import * as navigation from '../../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { permission } from '../../constants'
 import { connect } from 'react-redux'
+import ExTouchableOpacity from '../ExTouchableOpacity'
 class Item extends Component {
     constructor(props) {
         super(props)
@@ -41,6 +42,15 @@ class Item extends Component {
             id: item.id
         })
     }
+    onPressProfileHandler(userId) {
+        const { user } = this.props
+        if (userId === user.id) {
+            return navigation.navigate('Profile')
+        }
+        navigation.push('ProfileX', {
+            userId
+        })
+    }
     render() {
         const { user, item, isInGroup } = this.props
         return (
@@ -50,9 +60,9 @@ class Item extends Component {
                         <Image style={styles.avatar} source={{ uri: item.user?.avatar_url }}></Image>
                         <View style={styles.infoWrapper}>
                             <View style={styles.namesWrapper}>
-                                <TouchableOpacity>
+                                <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, item.user?.id)}>
                                     <Text style={{ fontSize: 16, fontWeight: '500' }}>{item.user?.name}</Text>
-                                </TouchableOpacity>
+                                </ExTouchableOpacity>
                                 {!isInGroup && (
                                     <>
                                         <Text style={{ fontSize: 16, fontWeight: '500', marginHorizontal: 5 }}>▶</Text>

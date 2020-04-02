@@ -26,10 +26,14 @@ import WatchDetail from './screens/WatchTab/WatchDetail';
 import ShortCutScreen from './screens/ShortCutTab'
 
 import ProfileScreen from './screens/ProfileTab'
+import ProfileX from './screens/ProfileTab/ProfileX'
 import ProfilePostOptions from './screens/ProfileTab/ProfilePostOptions'
 import EditPublicInfo from './screens/ProfileTab/EditPublicInfo'
 import FullFriends from './screens/ProfileTab/FullFriends'
 import FriendOptions from './screens/ProfileTab/FriendOptions'
+import AvatarOptions from './screens/ProfileTab/AvatarOptions'
+import FindFriends from './screens/ProfileTab/FindFriends'
+import FriendRequests from './screens/ProfileTab/FriendRequests'
 
 import StoryDetailScreen from './screens/StoryDetail'
 
@@ -164,6 +168,10 @@ function App() {
 					<rootStack.Screen options={{ gestureEnabled: false }} name="EditPublicInfo" component={EditPublicInfo} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="FullFriends" component={FullFriends} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="FriendOptions" component={FriendOptions} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="FindFriends" component={FindFriends} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="FriendRequests" component={FriendRequests} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="ProfileX" component={ProfileX} />
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="AvatarOptions" component={AvatarOptions} />
 
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />

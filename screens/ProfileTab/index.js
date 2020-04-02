@@ -20,18 +20,22 @@ class index extends PureComponent {
             highlightPhotos
         })
     }
-    onPressViewAllFriendsHandler() {
-        const { friends } = this.props
-        navigation.navigate("FullFriends", {
-            friends
+    scrollToTop() {
+        this.refs._scrollView.scrollTo({
+            x: 0,
+            y: 0,
+            animated: true
         })
+    }
+    onPressAvatarOptionsHandler() {
+        navigation.navigate('AvatarOptions')
     }
     render() {
         const { user, highlightPhotos, profilePosts } = this.props
         if (!user.hasOwnProperty('id')) return <View></View>
         const friends = [...this.props.friends]
         return (
-            <ScrollView bounces={false} style={styles.container}>
+            <ScrollView ref="_scrollView" bounces={false} style={styles.container}>
                 <View style={styles.infoWrapper}>
                     <View style={styles.avatarCoverWrapper}>
                         <TouchableOpacity activeOpacity={0.8}>
@@ -44,7 +48,7 @@ class index extends PureComponent {
                             <TouchableOpacity activeOpacity={0.9}>
                                 <Image style={styles.avatar} source={{ uri: user.avatar_url }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnChangeAvatar}>
+                            <TouchableOpacity onPress={this.onPressAvatarOptionsHandler} style={styles.btnChangeAvatar}>
                                 <FontAwesome5Icon size={18} name="camera" />
                             </TouchableOpacity>
                         </View>
@@ -59,7 +63,7 @@ class index extends PureComponent {
                                 <Text style={{ fontSize: 16, fontWeight: '500', color: '#fff', marginLeft: 5 }}>Add to your story</Text>
                             </TouchableOpacity>
                             <TouchableOpacity activeOpacity={0.8} style={styles.btnOption}>
-                                <FontAwesome5Icon size={20} color="#fff" name="ellipsis-h" />
+                                <FontAwesome5Icon size={20} color="#000" name="ellipsis-h" />
                             </TouchableOpacity>
                         </View>
                     </View>
