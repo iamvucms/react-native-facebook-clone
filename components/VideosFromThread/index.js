@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import VideoThreadItem from './VideoThreadItem'
 import { FetchVideosFromThreadRequest, SetThreadWatchingStatus } from '../../actions/watchVideosActions'
-import { SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -117,6 +117,6 @@ const styles = StyleSheet.create({
 
     },
     videosWrapper: {
-        height: SCREEN_HEIGHT - 44 - 40 // statusBar - topOptionsTool
+        height: SCREEN_HEIGHT - STATUSBAR_HEIGHT - 40 // statusBar - topOptionsTool
     }
 })

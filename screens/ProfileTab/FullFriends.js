@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 import { navigation } from '../../rootNavigation'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     navigationBar: {
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         flexDirection: 'row',
         height: 94,
         alignItems: 'center',
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
         padding: 15,
         paddingTop: 0,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT - 94 - 120,//navigation bar searchTool
+        height: SCREEN_HEIGHT - (STATUSBAR_HEIGHT + 50) - 120,//navigation bar searchTool
     },
     friendsCount: {
         fontSize: 18,

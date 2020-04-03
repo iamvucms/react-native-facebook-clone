@@ -16,7 +16,8 @@ class index extends Component {
         })
     }
     onPressProfileHandler(userId) {
-        const { isUserX, fetchUserInfo, ProfileXscrollToTop } = this.props
+        const { isUserX, fetchUserInfo, ProfileXscrollToTop, user } = this.props
+        if (user.id === userId) return navigation.goBack()
         if (isUserX) {
             ProfileXscrollToTop()
             return fetchUserInfo(userId)
@@ -81,7 +82,8 @@ class index extends Component {
 }
 const mapStateToProps = state => {
     return {
-        myFriends: state.user.friends
+        myFriends: state.user.friends,
+        user: state.user.user
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

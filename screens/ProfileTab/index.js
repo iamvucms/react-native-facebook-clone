@@ -30,6 +30,9 @@ class index extends PureComponent {
     onPressAvatarOptionsHandler() {
         navigation.navigate('AvatarOptions')
     }
+    onPressProfileSettingHandler(){
+        navigation.navigate('ProfileSetting')
+    }
     render() {
         const { user, highlightPhotos, profilePosts } = this.props
         if (!user.hasOwnProperty('id')) return <View></View>
@@ -62,7 +65,7 @@ class index extends PureComponent {
                                 <FontAwesome5Icon size={16} color="#fff" name="plus-circle" />
                                 <Text style={{ fontSize: 16, fontWeight: '500', color: '#fff', marginLeft: 5 }}>Add to your story</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={0.8} style={styles.btnOption}>
+                            <TouchableOpacity onPress={this.onPressProfileSettingHandler} activeOpacity={0.8} style={styles.btnOption}>
                                 <FontAwesome5Icon size={20} color="#000" name="ellipsis-h" />
                             </TouchableOpacity>
                         </View>

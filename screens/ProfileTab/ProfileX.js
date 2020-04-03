@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 import * as navigation from '../../rootNavigation'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import PostTool from '../../components/PostTool'
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     navigationBar: {
         height: 94,
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         backgroundColor: '#fff',
         flexDirection: 'row',
         alignItems: 'center',
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     container: {
-        height: SCREEN_HEIGHT - 94
+        height: SCREEN_HEIGHT - (STATUSBAR_HEIGHT + 50)
     },
     infoWrapper: {
         padding: 15,

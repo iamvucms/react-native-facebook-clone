@@ -17,6 +17,9 @@ import axios from 'axios'
 
 import NotificationScreen from './screens/NotificationTab'
 
+import PhotoChooser from './screens/PhotoChooser'
+import Camera from './screens/CameraTool'
+
 import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
 import WatchOptions from './screens/WatchTab/WatchOptions'
@@ -27,6 +30,7 @@ import ShortCutScreen from './screens/ShortCutTab'
 
 import ProfileScreen from './screens/ProfileTab'
 import ProfileX from './screens/ProfileTab/ProfileX'
+import ProfileSetting from './screens/ProfileTab/ProfileSetting'
 import ProfilePostOptions from './screens/ProfileTab/ProfilePostOptions'
 import EditPublicInfo from './screens/ProfileTab/EditPublicInfo'
 import FullFriends from './screens/ProfileTab/FullFriends'
@@ -49,7 +53,7 @@ const rootStack = createStackNavigator();
 import { FullPostTool, CheckIn, PhotoUploader, LiveStream } from './screens/PostTools/'
 import { Platform } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll'
-import { BASE_URL } from './constants'
+import { BASE_URL, STATUSBAR_HEIGHT } from './constants'
 import SeenVideos from './screens/WatchTab/SeenVideos';
 
 
@@ -113,7 +117,7 @@ const shortCutTab = () => {
 const MainTab = () => {
 	const navigationOptions = {
 		style: {
-			paddingTop: 44
+			paddingTop: STATUSBAR_HEIGHT
 		},
 		showIcon: true,
 		showLabel: false,
@@ -158,6 +162,10 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
+
+					<rootStack.Screen options={{ gestureEnabled: false }} name="PhotoChooser" component={PhotoChooser} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="Camera" component={Camera} />
+
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchSearch" component={WatchSearch} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="SeenVideos" component={SeenVideos} />
@@ -170,6 +178,7 @@ function App() {
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="FriendOptions" component={FriendOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="FindFriends" component={FindFriends} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="FriendRequests" component={FriendRequests} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="ProfileSetting" component={ProfileSetting} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="ProfileX" component={ProfileX} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="AvatarOptions" component={AvatarOptions} />
 

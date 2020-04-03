@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, TouchableOpacity, Clipboard } from 'react-nativ
 import Toast from 'react-native-root-toast';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import * as navigation from '../../rootNavigation'
+import ExTouchableOpacity from '../../components/ExTouchableOpacity';
 export default class AvatarOptions extends Component {
     constructor(props) {
         super(props)
@@ -10,7 +11,11 @@ export default class AvatarOptions extends Component {
             isVisible: false
         }
     }
-
+    onPressSelectProfilePictureHandler() {
+        navigation.navigate('PhotoChooser', {
+            isMutiple: false
+        })
+    }
     onPressBackdropHandler() {
         navigation.goBack()
     }
@@ -18,68 +23,61 @@ export default class AvatarOptions extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.backdrop}>
-                    <TouchableOpacity onPress={this.onPressBackdropHandler.bind(this)} style={{ width: '100%', height: '100%' }}>
+                    <ExTouchableOpacity onPress={this.onPressBackdropHandler.bind(this)} style={{ width: '100%', height: '100%' }}>
 
-                    </TouchableOpacity>
+                    </ExTouchableOpacity>
                 </View>
                 <View style={styles.postOptionsWrapper}>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="bookmark" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="crop-alt" size={24}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Add wrapper</Text>
+                                <Text style={styles.postOptionTitle}>Add Frame</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    </ExTouchableOpacity>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="minus-square" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="video" size={20}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Record video avatar</Text>
+                                <Text style={styles.postOptionTitle}>Record Profile Video</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    </ExTouchableOpacity>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="globe-asia" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="file-video" size={24}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Select video avatar</Text>
+                                <Text style={styles.postOptionTitle}>Select Profile Video</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    </ExTouchableOpacity>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper} onPress={this.onPressSelectProfilePictureHandler}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="trash-alt" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="images" size={20}></FontAwesome5Icon></View>
                             <View>
-                                <Text style={styles.postOptionTitle}>Select avatar</Text>
+                                <Text style={styles.postOptionTitle}>Select profile picture</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    </ExTouchableOpacity>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="history" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="shield-alt" size={24}></FontAwesome5Icon></View>
                             <View>
                                 <Text style={styles.postOptionTitle}>Turn on avatar shield</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.postOptionItemWrapper}>
+                    </ExTouchableOpacity>
+                    <ExTouchableOpacity style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <View style={styles.optionIcon}><FontAwesome5Icon name="bell" size={24}></FontAwesome5Icon></View>
+                            <View style={styles.optionIcon}><FontAwesome5Icon name="magic" size={20}></FontAwesome5Icon></View>
                             <View>
                                 <Text style={styles.postOptionTitle}>Create design</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </ExTouchableOpacity>
 
                 </View>
-                <Toast
-                    visible={this.state.isVisible}
-                    position={Toast.positions.BOTTOM}
-                    shadow={false}
-                    animation={false}
-                    hideOnPress={true}
-                >Copied to clipboard</Toast>
             </View>
         )
     }
@@ -87,6 +85,7 @@ export default class AvatarOptions extends Component {
 
 const styles = StyleSheet.create({
     container: {
+
         height: "100%",
         width: '100%',
         position: 'relative',
@@ -97,6 +96,8 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
     postOptionsWrapper: {
+        borderTopColor: '#ddd',
+        borderTopWidth: 1,
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -113,11 +114,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     optionIcon: {
-        width: 35,
-        alignItems: 'center'
+        width: 30,
+
     },
     postOptionTitle: {
-        fontSize: 16
+        fontSize: 16,
+        textTransform: 'capitalize'
     },
     postOptionSubtitle: {
         fontSize: 12

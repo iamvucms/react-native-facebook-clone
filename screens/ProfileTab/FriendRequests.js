@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { connect } from 'react-redux'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
 import { FetchFriendRequestsRequest } from '../../actions/friendActions'
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     navigationBar: {
         flexDirection: 'row',
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         height: 94,
         alignItems: 'center',
         borderBottomColor: '#ddd',
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         paddingHorizontal: 15,
-        height: SCREEN_HEIGHT - 94
+        height: SCREEN_HEIGHT - (STATUSBAR_HEIGHT + 50)
     },
     friendRequestsWrapper: {
         paddingVertical: 15

@@ -14,7 +14,7 @@ class index extends Component {
         navigation.navigate('LiveStream')
     }
     onPhotoUploaderPressHandler() {
-        navigation.navigate('PhotoUploader')
+        navigation.navigate('PhotoChooser')
     }
     onCheckInPressHandler() {
         navigation.navigate('CheckIn')
@@ -29,8 +29,9 @@ class index extends Component {
             userX
         })
     }
-    onPressSharePhotoToAnyOne() {
 
+    onPressSharePhotoToAnyOne() {
+        navigation.navigate('PhotoChooser')
     }
     render() {
         const { user, isWriteToAnyOne, userX } = this.props

@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, ScrollView } from 'react-native'
 import SeenVideoItem from '../../components/SeenVideoItem'
 import { connect } from 'react-redux'
 import { FetchSeenWatchVideosRequest } from '../../actions/watchVideosActions'
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import * as navigation from '../../rootNavigation'
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical: 7.5,
         // marginBottom: 101.5,
-        height: SCREEN_HEIGHT - 94 - 15 //topBarHeight marginVertical
+        height: SCREEN_HEIGHT - (STATUSBAR_HEIGHT + 50) - 15 //topBarHeight marginVertical
     }
 })

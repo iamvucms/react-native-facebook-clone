@@ -1,16 +1,33 @@
-import { systemImagesActions } from '../constants'
-import * as FileSystem from 'expo-file-system';
+import { systemImagesActions, permission } from '../constants'
+import * as MediaLibrary from 'expo-media-library';
+import * as Permissions from 'expo-permissions';
 import axios from 'axios'
+import { Alert } from 'react-native';
 const taskURI = '/'
 //waiting for next solution
 export const FetchSystemImagesRequest = () => {
-    return (dispatch) => {
-        axios.get(taskURI).then(v => {
-            const images = v.data
-            dispatch(FetchSystemImagesSuccess(images))
+    const getPhotos = (dispatch) => {
+        MediaLibrary.getAssetsAsync({
+            mediaType: MediaLibrary.MediaType.photo
+        }).then(result => {
+            dispatch(FetchSystemImagesSuccess(result.assets))
         }).catch(error => {
             dispatch(FetchSystemImagesFailure(error))
         })
+    }
+    return (dispatch) => {
+        MediaLibrary.getPermissionsAsync().then(permission => {
+            if (permission.granted) {
+                getPhotos(dispatch)
+            } else {
+                MediaLibrary.requestPermissionsAsync().then(permission => {
+                    if (permission.granted) {
+                        getPhotos(dispatch)
+                    } else Alert.alert("You need to grant permission to get system photos")
+                })
+            }
+        })
+
     }
 }
 const FetchDefaultState = () => {

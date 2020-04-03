@@ -6,6 +6,7 @@ import JoinGroupListItem from '../../components/GroupCategories/JoinGroupListIte
 import CategoryGroupList from '../../components/GroupCategories/CategoryGroupList'
 import { StackActions } from '@react-navigation/native';
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
+import { STATUSBAR_HEIGHT } from '../../constants'
 class GroupCategory extends PureComponent {
     constructor(props) {
         super(props)
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: 94,
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         left: 0,
         top: 0,
         zIndex: 99

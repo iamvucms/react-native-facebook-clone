@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, ScrollView, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import { SCREEN_HEIGHT } from '../../constants'
+import { SCREEN_HEIGHT, STATUSBAR_HEIGHT } from '../../constants'
 import * as navigation from '../../rootNavigation'
 import HighlightPhotos from '../../components/HighlightPhotos'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     navigationBar: {
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         flexDirection: 'row',
         height: 94,
         alignItems: 'center',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     },
     detailsWrapper: {
         padding: 15,
-        height: SCREEN_HEIGHT - 94
+        height: SCREEN_HEIGHT - (50 + STATUSBAR_HEIGHT)
     },
     detail: {
         borderBottomColor: '#ddd',

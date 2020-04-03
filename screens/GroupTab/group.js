@@ -5,7 +5,7 @@ import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import GroupPostTool from '../../components/PostTool/GroupPostTool'
 import { connect } from 'react-redux'
 import { FetchGroupDetailRequest } from '../../actions/groupDetailActions'
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants'
+import { SCREEN_HEIGHT, SCREEN_WIDTH, STATUSBAR_HEIGHT } from '../../constants'
 import * as navigation from '../../rootNavigation'
 import GroupPosts from '../../components/GroupPosts'
 class Group extends Component {
@@ -27,7 +27,7 @@ class Group extends Component {
     onScrollHandler({ nativeEvent }) {
         const { isScrollOverLimit } = this.state
         const offsetY = nativeEvent.contentOffset.y
-        const limit = 250 - 94 //cover height - topbar height
+        const limit = 250 - (STATUSBAR_HEIGHT + 50) //cover height - topbar height
         if (offsetY > limit && isScrollOverLimit !== true) {
             Animated.timing(this._groupTitleOpacity, {
                 toValue: 1,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: 94,
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         left: 0,
         top: 0,
         zIndex: 99,

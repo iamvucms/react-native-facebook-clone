@@ -6,6 +6,7 @@ import VideosFromThread from '../../components/VideosFromThread'
 import { SetThreadWatchingStatus, PauseThreadWatchingStatus } from '../../actions/watchVideosActions'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
+import { STATUSBAR_HEIGHT } from '../../constants'
 class WatchDetailList extends Component {
 
     pauseThreadWatchingStatusFn = () => { }
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch, props) => {
 export default connect(null, mapDispatchToProps)(WatchDetailList)
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 44,
+        paddingTop: STATUSBAR_HEIGHT,
         backgroundColor: '#000'
     },
     topOptiions: {
