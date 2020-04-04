@@ -41,6 +41,7 @@ import FindFriends from './screens/ProfileTab/FindFriends'
 import FriendRequests from './screens/ProfileTab/FriendRequests'
 
 import StoryDetailScreen from './screens/StoryDetail'
+import Search from './screens/Search/'
 
 import GroupSearch from './screens/Search/GroupSearch'
 import GroupCategory from './screens/GroupTab/GroupCategory'
@@ -166,6 +167,7 @@ function App() {
 
 					<rootStack.Screen options={{ gestureEnabled: false }} name="PhotoChooser" component={PhotoChooser} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Camera" component={Camera} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="Search" component={Search} />
 
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchSearch" component={WatchSearch} />
@@ -185,14 +187,10 @@ function App() {
 
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="NotificationOptions" component={NotificationOptions} />
 
-					<rootStack.Screen options={{ gestureEnabled: false }}
-						name="GroupCategory" component={GroupCategory} />
-					<rootStack.Screen options={{ gestureEnabled: false }}
-						name="GroupCategories" component={GroupCategories} />
-					<rootStack.Screen options={{ gestureEnabled: false }}
-						name="GroupSearch" component={GroupSearch} />
-					<rootStack.Screen options={{ gestureEnabled: false }}
-						name="GroupProfile" component={GroupProfile} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupCategory" component={GroupCategory} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupCategories" component={GroupCategories} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupSearch" component={GroupSearch} />
+					<rootStack.Screen options={{ gestureEnabled: false }} name="GroupProfile" component={GroupProfile} />
 
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="CommentsPopUp" component={CommentsPopUp} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="SharePost" component={SharePost} />

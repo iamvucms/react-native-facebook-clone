@@ -59,7 +59,7 @@ class FriendRequests extends Component {
                                         <Text style={styles.mutualCount}>{friendRequest.mutualCount} mutual friends</Text>
                                         <View style={styles.btnActionsWrapper}>
                                             <TouchableOpacity style={styles.btnAddFriend}>
-                                                <Text style={{ color: '#fff', fontWeight: '500', fontSize: 16 }}>Accept</Text>
+                                                <Text style={{ color: '#fff', fontWeight: '500', fontSize: 16 }}>Confirm</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={this.onPressRemoveFriendRequest.bind(this, index)} style={styles.btnHide}>
                                                 <Text style={{ color: '#000', fontWeight: '500', fontSize: 16 }}>Remove</Text>
