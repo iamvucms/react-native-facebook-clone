@@ -17,6 +17,7 @@ import watchVideosReducer from './watchVideosReducer'
 import videoControlReducer from './videoControlReducer'
 import watchSearchRecommandsReducer from './watchSearchRecommandsReducer'
 import userXreducer from './userXreducer'
+import notificationsReducer from './notificationsReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
     watch: watchVideosReducer,
     videoControl: videoControlReducer,
     watchSearchRecommands: watchSearchRecommandsReducer,
-    userX: userXreducer
+    userX: userXreducer,
+    notifications: notificationsReducer
 })
 export default rootReducer

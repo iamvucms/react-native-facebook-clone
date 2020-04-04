@@ -152,11 +152,7 @@
     "stories": [
         {
             "id": 1,
-            "user": {
-                "id": 1,
-                "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "name": "Hoàng Vũ"
-            },
+            "userId": 1,
             "images": [
                 {
                     "id": 1,
@@ -174,11 +170,7 @@
         },
         {
             "id": 2,
-            "user": {
-                "id": 2,
-                "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "name": "Thành Đạt"
-            },
+            "userId": 2,
             "images": [
                 {
                     "id": 1,
@@ -208,11 +200,7 @@
         },
         {
             "id": 3,
-            "user": {
-                "id": 3,
-                "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "name": "Anh Khôi"
-            },
+            "userId": 3,
             "images": [
                 {
                     "id": 1,
@@ -230,11 +218,7 @@
         },
         {
             "id": 4,
-            "user": {
-                "id": 1,
-                "avatar_url": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "name": "Hoàng Vũ"
-            },
+            "userId": 5,
             "images": [
                 {
                     "id": 1,
@@ -3032,7 +3016,7 @@
             "image": "https://gamek.mediacdn.vn/2019/10/20/photo-1-1571521922264714072244.jpg",
             "create_at": "12h ago",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
-            "userId": 1,
+            "userId": 3,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -3126,7 +3110,7 @@
             "image": "https://images.unsplash.com/photo-1534142499731-a32a99935397?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
             "create_at": "Just now",
             "content": "nine program next article distant cream swam possibly mother laugh copper given stuck return invented building shot red list better correctly proper safety hardly",
-            "userId": 7,
+            "userId": 3,
             "reactions": {
                 "love": 12,
                 "like": 20,
@@ -4354,6 +4338,159 @@
             "userId": 1,
             "isHighLight": false,
             "photo_url": "https://1.bp.blogspot.com/-u6Tnl422BnM/Vh95Hho1dYI/AAAAAAAAAb0/HeEARXOxWIA/s1600/Eru-Chitanda-hyouka-35028943-1280-720.png"
+        }
+    ],
+    "notifications": [
+        {
+            "id": 1,
+            "isSeen": true,
+            "type": 1,
+            "userId": 3,
+            "group_postId": 1,
+            "groupId": 1,
+            "create_at": "Just now",
+            "postId": 0
+        },
+        {
+            "id": 2,
+            "isSeen": false,
+            "type": 2,
+            "userId": 3,
+            "group_postId": 1,
+            "groupId": 1,
+            "create_at": "10 mins ago",
+            "postId": 0
+        },
+        {
+            "id": 3,
+            "isSeen": false,
+            "type": 3,
+            "userId": 4,
+            "postId": 1,
+            "reactionType": 2,
+            "remainingCount": 999,
+            "create_at": "10 mins ago",
+            "groupId": 0,
+            "group_postId": 0
+        },
+        {
+            "id": 4,
+            "isSeen": false,
+            "type": 4,
+            "userId": 3,
+            "commentId": 1,
+            "postId": 1,
+            "reactionType": 3,
+            "remainingCount": 999,
+            "create_at": "10 mins ago",
+            "groupId": 0,
+            "group_postId": 0
+        },
+        {
+            "id": 5,
+            "isSeen": false,
+            "type": 5,
+            "userId": 3,
+            "storyId": 1,
+            "create_at": "5 mins ago",
+            "group_postId": 0,
+            "postId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 6,
+            "isSeen": true,
+            "type": 6,
+            "userId": 1,
+            "postId": 1,
+            "commentId": 1,
+            "create_at": "2 mins ago",
+            "group_postId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 7,
+            "isSeen": false,
+            "type": 7,
+            "userId": 3,
+            "create_at": "10 mins ago",
+            "groupId": 0,
+            "group_postId": 0,
+            "postId": 0
+        },
+        {
+            "id": 8,
+            "isSeen": true,
+            "type": 8,
+            "userId": 6,
+            "group_postId": 1,
+            "preview": "able nose outside smallest soon than ",
+            "groupId": 1,
+            "create_at": "1 mins ago",
+            "postId": 0
+        },
+        {
+            "id": 9,
+            "isSeen": false,
+            "type": 9,
+            "userId": 3,
+            "group_postId": 0,
+            "ownUser": {
+                "id": 4,
+                "name": "Thành Đạt4"
+            },
+            "preview": "able nose outside smallest soon than ",
+            "postId": 3,
+            "create_at": "10 mins ago",
+            "groupId": 0
+        },
+        {
+            "id": 10,
+            "isSeen": false,
+            "type": 10,
+            "userId": 6,
+            "group_postId": 1,
+            "commentId": 1,
+            "groupId": 1,
+            "create_at": "10 mins ago",
+            "postId": 0
+        },
+        {
+            "id": 11,
+            "isSeen": false,
+            "type": 11,
+            "userId": 3,
+            "groupId": 0,
+            "postId": 3,
+            "group_postId": 0,
+            "ownUser": {
+                "id": 4,
+                "name": "Thành Đạt4"
+            },
+            "create_at": "10 mins ago"
+        },
+        {
+            "id": 12,
+            "isSeen": false,
+            "type": 12,
+            "userId": 3,
+            "liveId": 1,
+            "group_postId": 0,
+            "create_at": "10 mins ago",
+            "postId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 13,
+            "isSeen": true,
+            "type": 13,
+            "userId": 5,
+            "group_postId": 1,
+            "commentId": 1,
+            "preview": "able nose outside smallest soon than ",
+            "groupId": 1,
+            "create_at": "10 mins ago",
+            "postId": 0
         }
     ]
 }

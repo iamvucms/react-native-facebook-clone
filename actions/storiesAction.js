@@ -1,6 +1,6 @@
 import {actionStories} from '../constants'
 import axios from 'axios'
-const taskURI  = '/stories'
+const taskURI  = '/stories?_expand=user'
 export const FetchStoriesRequest = ()=>{
     return (dispatch)=>{
         dispatch(FetchDefaultState())

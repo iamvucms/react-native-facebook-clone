@@ -16,6 +16,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import axios from 'axios'
 
 import NotificationScreen from './screens/NotificationTab'
+import NotificationOptions from './screens/NotificationTab/NotificationOptions'
 
 import PhotoChooser from './screens/PhotoChooser'
 import Camera from './screens/CameraTool'
@@ -181,6 +182,8 @@ function App() {
 					<rootStack.Screen options={{ gestureEnabled: false }} name="ProfileSetting" component={ProfileSetting} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="ProfileX" component={ProfileX} />
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="AvatarOptions" component={AvatarOptions} />
+
+					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="NotificationOptions" component={NotificationOptions} />
 
 					<rootStack.Screen options={{ gestureEnabled: false }}
 						name="GroupCategory" component={GroupCategory} />
