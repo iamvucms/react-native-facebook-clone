@@ -52,9 +52,9 @@ class FriendRequests extends Component {
                         <Text style={styles.friendRequestsTitle}>Friend Requests</Text>
                         <View style={styles.friendRequests}>
                             {friendRequests.map((friendRequest, index) => (
-                                <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, friendRequest.user.id)} key={index} style={styles.recommandFriendItem}>
+                                <ExTouchableOpacity onPress={this.onPressProfileHandler.bind(this, friendRequest.user.id)} key={index} style={styles.recommendFriendItem}>
                                     <Image style={styles.avatar} source={{ uri: friendRequest.user.avatar_url }} />
-                                    <View style={styles.recommandInfo}>
+                                    <View style={styles.recommendInfo}>
                                         <Text style={styles.name}>{friendRequest.user.name}</Text>
                                         <Text style={styles.mutualCount}>{friendRequest.mutualCount} mutual friends</Text>
                                         <View style={styles.btnActionsWrapper}>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     friendRequests: {
         paddingVertical: 7.5
     },
-    recommandFriendItem: {
+    recommendFriendItem: {
         flexDirection: 'row',
         marginVertical: 7.5,
         alignItems: 'center'
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 100
     },
-    recommandInfo: {
+    recommendInfo: {
         width: SCREEN_WIDTH - 30 - 100,
         paddingLeft: 10
     },

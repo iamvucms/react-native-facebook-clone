@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
-import RecommandItem from './RecommandItem'
+import RecommendItem from './RecommendItem'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
-import { FetchRecommandFriendsRequest } from '../../actions/friendActions'
+import { FetchRecommendFriendsRequest } from '../../actions/friendActions'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
 class index extends Component {
@@ -12,10 +12,10 @@ class index extends Component {
         this._pivotX = 0
     }
     componentDidMount() {
-        const { fetchRecommandFriends } = this.props
-        fetchRecommandFriends()
+        const { fetchRecommendFriends } = this.props
+        fetchRecommendFriends()
     }
-    onPressViewAllRecommandsHandler() {
+    onPressViewAllRecommendsHandler() {
         navigation.navigate('FindFriends')
     }
     onScrollHandler(event) {
@@ -53,8 +53,8 @@ class index extends Component {
         this._pivotX = offsetX
     }
     render() {
-        const { recommandFriends } = this.props
-        if (recommandFriends === undefined || recommandFriends.length === 0) return <View></View>
+        const { recommendFriends } = this.props
+        if (recommendFriends === undefined || recommendFriends.length === 0) return <View></View>
         return (
             <View style={styles.container}>
                 <View style={styles.headerWrapper}>
@@ -69,15 +69,15 @@ class index extends Component {
                     ref='_scrollView'
                     onMomentumScrollEnd={this.onScrollHandler.bind(this)}
                     onScrollEndDrag={this.onScrollHandler.bind(this)}
-                    style={styles.recommandsWrapper}
+                    style={styles.recommendsWrapper}
                     bounces={false} horizontal={true}>
-                    {recommandFriends.map((profile, index) => (
-                        <RecommandItem key={index} info={profile}></RecommandItem>
+                    {recommendFriends.map((profile, index) => (
+                        <RecommendItem key={index} info={profile}></RecommendItem>
                     ))}
                 </ScrollView>
                 <View>
-                    <ExTouchableOpacity onPress={this.onPressViewAllRecommandsHandler} style={styles.btnSeeAll}>
-                        <Text>See all recommands</Text>
+                    <ExTouchableOpacity onPress={this.onPressViewAllRecommendsHandler} style={styles.btnSeeAll}>
+                        <Text>See all recommends</Text>
                         <FontAwesome5Icon style={styles.seeAllIcon} name="chevron-right"></FontAwesome5Icon>
                     </ExTouchableOpacity>
                 </View>
@@ -87,12 +87,12 @@ class index extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        recommandFriends: state.friends.recommandFriends
+        recommendFriends: state.friends.recommendFriends
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchRecommandFriends: () => dispatch(FetchRecommandFriendsRequest())
+        fetchRecommendFriends: () => dispatch(FetchRecommendFriendsRequest())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         right: 10,
         top: 0,
     },
-    recommandsWrapper: {
+    recommendsWrapper: {
         marginBottom: 10
     },
     btnSeeAll: {

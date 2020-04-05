@@ -5,7 +5,7 @@ import { LoginRequest } from '../actions/userActions'
 import { StyleSheet, Text, View, Button, ScrollView, Alert } from 'react-native';
 
 import { Dimensions } from "react-native";
-import RecommandFriends from '../components/RecommandFriends'
+import RecommendFriends from '../components/RecommendFriends'
 import Item from '../components/Item'
 import Stories from '../components/Stories'
 import PostTool from '../components/PostTool'
@@ -30,7 +30,7 @@ class Home extends Component {
 					<Stories></Stories>
 					{posts.map((item, index) => (
 						<View key={index}>
-							{index === 1 && <RecommandFriends ></RecommandFriends>}
+							{index === 1 && <RecommendFriends ></RecommendFriends>}
 							<Item item={item} key={index} ></Item>
 						</View>
 					))}

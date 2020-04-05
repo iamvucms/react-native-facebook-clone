@@ -1,20 +1,20 @@
 import { friendActions } from '../constants'
 import { Alert } from 'react-native'
 const defaultState = {
-    recommandFriends: [],
+    recommendFriends: [],
     friendRequests: []
 }
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case friendActions.FETCH_RECOMMAND_FRIENDS_REQUEST:
-            state = { ...state, recommandFriends: [] }
+        case friendActions.FETCH_RECOMMEND_FRIENDS_REQUEST:
+            state = { ...state, recommendFriends: [] }
             return state
             break
-        case friendActions.FETCH_RECOMMAND_FRIENDS_SUCCESS:
-            state = { ...state, recommandFriends: [...action.payload] }
+        case friendActions.FETCH_RECOMMEND_FRIENDS_SUCCESS:
+            state = { ...state, recommendFriends: [...action.payload] }
             return state
             break
-        case friendActions.FETCH_RECOMMAND_FRIENDS_FAILURE:
+        case friendActions.FETCH_RECOMMEND_FRIENDS_FAILURE:
             const { message } = action.error
             Alert.alert("Error", message)
             state = defaultState

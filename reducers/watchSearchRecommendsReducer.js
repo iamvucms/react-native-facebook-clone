@@ -1,17 +1,17 @@
-import { watchSearchRecommandActions } from '../constants'
+import { watchSearchRecommendActions } from '../constants'
 import { Alert } from 'react-native'
 const defaultState = []
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case watchSearchRecommandActions.FETCH_WATCH_SEARCH_RECOMMANDS_REQUEST:
+        case watchSearchRecommendActions.FETCH_WATCH_SEARCH_RECOMMENDS_REQUEST:
             state = defaultState
             return state
             break
-        case watchSearchRecommandActions.FETCH_WATCH_SEARCH_RECOMMANDS_SUCCESS:
+        case watchSearchRecommendActions.FETCH_WATCH_SEARCH_RECOMMENDS_SUCCESS:
             state = action.payload
             return state
             break
-        case watchSearchRecommandActions.FETCH_WATCH_SEARCH_RECOMMANDS_REQUEST:
+        case watchSearchRecommendActions.FETCH_WATCH_SEARCH_RECOMMENDS_REQUEST:
             const { message } = action.error
             Alert.alert('Error', message)
             return defaultState

@@ -4,7 +4,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { connect } from 'react-redux'
 import { navigation } from '../../rootNavigation'
-class RecommandItem extends Component {
+class RecommendItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
         user: state.user.user
     }
 }
-export default connect(mapStateToProps, null)(RecommandItem);
+export default connect(mapStateToProps, null)(RecommendItem);
 const screenWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
     container: {

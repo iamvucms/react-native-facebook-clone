@@ -24,7 +24,30 @@ export const FetchGroupHistoriesFailure = (error) => {
 }
 export const FetchGroupHistoriesSuccess = (groups) => {
     return {
-        type: historyActions.FETCH_GROUP_HISTOIES_SUCCESS,
+        type: historyActions.FETCH_GROUP_HISTORIES_SUCCESS,
         payload: groups
+    }
+}
+export const FetchHomeHistoriesRequest = () => {
+    const taskURI = '/search_recents?_expand=user&_expand=page&_expand=group'
+    return (dispatch) => {
+        axios.get(taskURI).then(result => {
+            const searchs = result.data
+            dispatch(FetchHomeHistoriesSuccess(searchs))
+        }).catch(error => {
+            dispatch(FetchHomeHistoriesFailure(error))
+        })
+    }
+}
+export const FetchHomeHistoriesFailure = (error) => {
+    return {
+        type: historyActions.FETCH_HOME_HISTORIES_FAILURE,
+        error
+    }
+}
+export const FetchHomeHistoriesSuccess = (searchs) => {
+    return {
+        type: historyActions.FETCH_HOME_HISTORIES_SUCCESS,
+        payload: searchs
     }
 }

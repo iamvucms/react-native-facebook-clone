@@ -4,7 +4,7 @@ import userReducer from './userReducer'
 import postsReducer from './postsReducer'
 import showingStoryReducer from './showingStoryReducer'
 import postDetailReducer from './postDetailReducer'
-import recommandFriendsReducer from './friendsReducer'
+import recommendFriendsReducer from './friendsReducer'
 import bgColorsReducer from './bgColorsReducer'
 import systemImagesReducer from './systemImagesReducer'
 import groupsReducer from './groupsReducer'
@@ -15,16 +15,17 @@ import groupDetailReducer from './groupDetailReducer'
 import categoryGroupListReducer from './categoryGroupListReducer'
 import watchVideosReducer from './watchVideosReducer'
 import videoControlReducer from './videoControlReducer'
-import watchSearchRecommandsReducer from './watchSearchRecommandsReducer'
+import watchSearchRecommendsReducer from './watchSearchRecommendsReducer'
 import userXreducer from './userXreducer'
 import notificationsReducer from './notificationsReducer'
+import searchResultReducer from './searchResultReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
     posts: postsReducer,
     showingStory: showingStoryReducer,
     showingPost: postDetailReducer,
-    friends: recommandFriendsReducer,
+    friends: recommendFriendsReducer,
     bgColors: bgColorsReducer,
     systemImages: systemImagesReducer,
     groups: groupsReducer,
@@ -35,8 +36,9 @@ const rootReducer = combineReducers({
     categoryGroupList: categoryGroupListReducer,
     watch: watchVideosReducer,
     videoControl: videoControlReducer,
-    watchSearchRecommands: watchSearchRecommandsReducer,
+    watchSearchRecommends: watchSearchRecommendsReducer,
     userX: userXreducer,
-    notifications: notificationsReducer
+    notifications: notificationsReducer,
+    searchResult: searchResultReducer
 })
 export default rootReducer

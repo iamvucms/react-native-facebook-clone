@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import WatchSearchRecommandItem from './WatchSearchRecommandItem'
-import { FetchWatchSearchRecommandsRequest } from '../../actions/watchSearchRecommandsActions'
+import WatchSearchRecommendItem from './WatchSearchRecommendItem'
+import { FetchWatchSearchRecommendsRequest } from '../../actions/watchSearchRecommendsActions'
 class index extends Component {
     constructor(props) {
         super(props)
     }
     componentDidMount() {
-        const { fetchWatchSearchRecommands } = this.props
-        fetchWatchSearchRecommands()
+        const { fetchWatchSearchRecommends } = this.props
+        fetchWatchSearchRecommends()
     }
     render() {
-        const { watchSearchRecommands } = this.props
-        if (watchSearchRecommands.length === 0) return <View></View>
+        const { watchSearchRecommends } = this.props
+        if (watchSearchRecommends.length === 0) return <View></View>
         return (
             <ScrollView bounces={false} style={styles.container} bounces={false}>
-                {watchSearchRecommands.map((recommand, index) => (
-                    <WatchSearchRecommandItem key={index} recommand={recommand} />
+                {watchSearchRecommends.map((recommend, index) => (
+                    <WatchSearchRecommendItem key={index} recommend={recommend} />
                 ))}
             </ScrollView>
         )
@@ -25,12 +25,12 @@ class index extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        watchSearchRecommands: state.watchSearchRecommands
+        watchSearchRecommends: state.watchSearchRecommends
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchWatchSearchRecommands: () => dispatch(FetchWatchSearchRecommandsRequest())
+        fetchWatchSearchRecommends: () => dispatch(FetchWatchSearchRecommendsRequest())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)

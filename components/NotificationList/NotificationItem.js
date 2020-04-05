@@ -184,7 +184,7 @@ class NotificationItem extends Component {
                     size: 24,
                 }
                 Description = () => <Text style={styles.pureTxt}>
-                    <Text style={styles.hightlightTxt}>{item.user.name}</Text> react your comment.</Text>
+                    <Text style={styles.hightlightTxt}>{item.user.name}</Text> and {item.remainingCount} another people react your comment.</Text>
                 break
             case notificationTypes.ANYONE_REACT_YOUR_POST:
                 icon = {
@@ -193,7 +193,7 @@ class NotificationItem extends Component {
                     size: 24,
                 }
                 Description = () => <Text style={styles.pureTxt}>
-                    <Text style={styles.hightlightTxt}>{item.user.name}</Text> react your post.</Text>
+                    <Text style={styles.hightlightTxt}>{item.user.name}</Text> and {item.remainingCount} another people react your post.</Text>
                 break
             case notificationTypes.ANYONE_TAG_YOU_ON_POST_IN_GROUP:
                 icon = {

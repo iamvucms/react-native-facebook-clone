@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image } from 'react-native'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import * as navigation from '../../rootNavigation'
-export default class WatchSearchRecommandItem extends Component {
-    onPressRecommandHandler() {
+export default class WatchSearchRecommendItem extends Component {
+    onPressRecommendHandler() {
         // navigation.
     }
     render() {
-        const { recommand } = this.props
+        const { recommend } = this.props
         return (
-            <ExTouchableOpacity onPress={this.onPressRecommandHandler.bind(this)}>
+            <ExTouchableOpacity onPress={this.onPressRecommendHandler.bind(this)}>
                 <View style={styles.container}>
-                    <Image source={{ uri: recommand.page.avatar_url }} style={styles.recommandAvatar}></Image>
-                    <Text style={styles.recommandTxt}>{recommand.page.name}</Text>
+                    <Image source={{ uri: recommend.page.avatar_url }} style={styles.recommendAvatar}></Image>
+                    <Text style={styles.recommendTxt}>{recommend.page.name}</Text>
                 </View>
             </ExTouchableOpacity>
         )
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         flexDirection: 'row'
     },
-    recommandAvatar: {
+    recommendAvatar: {
         height: 30,
         width: 30,
         borderRadius: 50,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.3,
         marginRight: 10
     },
-    recommandTxt: {
+    recommendTxt: {
         fontSize: 16,
         fontWeight: '500'
     }

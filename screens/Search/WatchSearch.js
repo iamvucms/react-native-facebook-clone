@@ -6,7 +6,7 @@ import GroupCategories from '../../components/GroupCategories'
 import { FetchGroupHistoriesRequest } from '../../actions/historyActions'
 import { connect } from 'react-redux'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
-import WatchSearchRecommands from '../../components/WatchSearchRecommands'
+import WatchSearchRecommends from '../../components/WatchSearchRecommends'
 class WatchSearch extends PureComponent {
     constructor(props) {
         super(props)
@@ -42,11 +42,11 @@ class WatchSearch extends PureComponent {
                         <Text style={{ fontSize: 16 }}>Watched videos</Text>
                     </ExTouchableOpacity>
                 </View>
-                <View style={styles.watchRecommandsWrapper}>
-                    <View style={styles.watchRecommandsTitle}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Recommands in Watch</Text>
+                <View style={styles.watchRecommendsWrapper}>
+                    <View style={styles.watchRecommendsTitle}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Recommends in Watch</Text>
                     </View>
-                    <WatchSearchRecommands />
+                    <WatchSearchRecommends />
                 </View>
                 <View style={styles.descriptionWrapper}>
                     <Text style={styles.descriptionTitle}>Search videos in Watch</Text>
@@ -103,11 +103,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 40
     },
-    watchRecommandsWrapper: {
+    watchRecommendsWrapper: {
         borderBottomColor: '#ddd',
         borderBottomWidth: 1
     },
-    watchRecommandsTitle: {
+    watchRecommendsTitle: {
         paddingHorizontal: 15,
         height: 40,
         justifyContent: 'center',

@@ -369,7 +369,7 @@ class FullPostTool extends Component {
                                 <TouchableOpacity onPress={() => console.log('do not thing')}>
                                     <View style={{ ...styles.optionTitle, justifyContent: 'flex-start' }}>
                                         <Image style={{ ...styles.optionImage, width: 30, marginRight: 15 }} source={require('../../assets/icons/like.png')}></Image>
-                                        <Text style={{ fontSize: 16 }}>Request recommands</Text>
+                                        <Text style={{ fontSize: 16 }}>Request recommends</Text>
                                     </View>
                                 </TouchableOpacity>
                             </Animated.View>

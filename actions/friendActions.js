@@ -1,30 +1,30 @@
 import { friendActions } from '../constants'
 import axios from 'axios'
-const taskURI = '/recommand_friends?_expand=user'
-export const FetchRecommandFriendsRequest = () => {
+const taskURI = '/recommend_friends?_expand=user'
+export const FetchRecommendFriendsRequest = () => {
     return (dispatch) => {
         axios.get(taskURI).then(v => {
             const friends = v.data
-            dispatch(FetchRecommandFriendsSuccess(friends))
+            dispatch(FetchRecommendFriendsSuccess(friends))
         }).catch(error => {
-            dispatch(FetchRecommandFriendsFailure(error))
+            dispatch(FetchRecommendFriendsFailure(error))
         })
     }
 }
 const FetchDefaultState = () => {
     return {
-        type: friendActions.FETCH_RECOMMAND_FRIENDS_REQUEST,
+        type: friendActions.FETCH_RECOMMEND_FRIENDS_REQUEST,
     }
 }
-export const FetchRecommandFriendsFailure = (error) => {
+export const FetchRecommendFriendsFailure = (error) => {
     return {
-        type: friendActions.FETCH_RECOMMAND_FRIENDS_FAILURE,
+        type: friendActions.FETCH_RECOMMEND_FRIENDS_FAILURE,
         error
     }
 }
-export const FetchRecommandFriendsSuccess = (friends) => {
+export const FetchRecommendFriendsSuccess = (friends) => {
     return {
-        type: friendActions.FETCH_RECOMMAND_FRIENDS_SUCCESS,
+        type: friendActions.FETCH_RECOMMEND_FRIENDS_SUCCESS,
         payload: friends
     }
 }

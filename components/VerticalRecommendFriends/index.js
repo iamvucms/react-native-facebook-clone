@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import VerticalRecommandItem from './VerticalRecommandItem'
+import VerticalRecommendItem from './VerticalRecommendItem'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
 
@@ -9,23 +9,23 @@ class index extends Component {
     constructor(props) {
         super(props)
     }
-    onPressViewAllRecommandsHandler() {
+    onPressViewAllRecommendsHandler() {
         navigation.navigate('FindFriends')
     }
     render() {
-        const recommandFriends = [...this.props.recommandFriends]
-        if (recommandFriends.length === 0) return <View></View>
+        const recommendFriends = [...this.props.recommendFriends]
+        if (recommendFriends.length === 0) return <View></View>
         return (
             <View style={styles.container}>
                 <View>
                     <Text style={styles.title}>People you may know</Text>
                 </View>
-                {recommandFriends.splice(0, 2).map((recommand, index) => (
-                    <VerticalRecommandItem key={index} item={recommand} />
+                {recommendFriends.splice(0, 2).map((recommend, index) => (
+                    <VerticalRecommendItem key={index} item={recommend} />
                 ))}
-                <ExTouchableOpacity onPress={this.onPressViewAllRecommandsHandler} style={styles.btnViewAll}>
+                <ExTouchableOpacity onPress={this.onPressViewAllRecommendsHandler} style={styles.btnViewAll}>
                     <Text style={{ fontSize: 14, fontWeight: '500' }}>
-                        View all recommands
+                        View all recommends
                     </Text>
                 </ExTouchableOpacity>
             </View>
@@ -34,7 +34,7 @@ class index extends Component {
 }
 const mapStateToProps = state => {
     return {
-        recommandFriends: state.friends.recommandFriends
+        recommendFriends: state.friends.recommendFriends
     }
 }
 export default connect(mapStateToProps, null)(index);

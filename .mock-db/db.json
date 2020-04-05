@@ -2576,7 +2576,7 @@
             "avatar_url": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/p720x720/86370478_619895375244123_7254001103526690816_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_eui2=AeHUZrRLoQykjTFqt7gs5L9lh09Rz8nyoZsSI_2eLwXRugMlgYrJH0Qqu8DK5WTvrjWLpY_zrc3NLHmA8Dna0XX4BUHlvYNAbmXP28w0B48LXg&_nc_oc=AQm8_ZGccvvCMu4FMBStgtxlUwzkj91GIoB7VAE4PrVO3DwnOCvZBfaOo-jliFWmZFbOj3xyVeXgGAeLbgJ0xRAP&_nc_pt=1&_nc_ht=scontent-sin6-1.xx&_nc_tp=6&oh=3b517b78285307fb143f674b0ef4de4c&oe=5E9E84E0"
         }
     ],
-    "recommand_friends": [
+    "recommend_friends": [
         {
             "userId": 11,
             "mutualCount": 7
@@ -3607,6 +3607,96 @@
             ]
         }
     ],
+    "search_recents": [
+        {
+            "id": 1,
+            "type": 0,
+            "keyword": "H",
+            "userId": 0,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 2,
+            "type": 1,
+            "userId": 7,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 3,
+            "type": 1,
+            "userId": 5,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 4,
+            "type": 2,
+            "userId": 0,
+            "pageId": 1,
+            "groupId": 0
+        },
+        {
+            "id": 5,
+            "type": 0,
+            "keyword": "T",
+            "userId": 0,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 6,
+            "type": 3,
+            "userId": 0,
+            "pageId": 0,
+            "groupId": 2
+        },
+        {
+            "id": 7,
+            "type": 3,
+            "userId": 0,
+            "pageId": 0,
+            "groupId": 1
+        },
+        {
+            "id": 8,
+            "type": 1,
+            "userId": 27,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 9,
+            "type": 2,
+            "userId": 0,
+            "pageId": 1,
+            "groupId": 0
+        },
+        {
+            "id": 10,
+            "type": 2,
+            "userId": 0,
+            "pageId": 3,
+            "groupId": 0
+        },
+        {
+            "id": 11,
+            "type": 0,
+            "keyword": "Hoang Vu",
+            "userId": 0,
+            "pageId": 0,
+            "groupId": 0
+        },
+        {
+            "id": 12,
+            "type": 2,
+            "keyword": "A",
+            "userId": 0,
+            "pageId": 4,
+            "groupId": 0
+        }
+    ],
     "history": {
         "groups": [
             {
@@ -3628,43 +3718,55 @@
                 "isResult": false,
                 "keyword": "Hello"
             }
-        ],
-        "home": []
+        ]
     },
     "pages": [
         {
             "id": 1,
             "name": "News center VTV24",
+            "like_count": 693,
             "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
         },
         {
             "id": 2,
             "name": "Gaming Center",
+            "like_count": 5238,
             "avatar_url": "https://mk0vojovoweumgjb625j.kinstacdn.com/wp-content/uploads/2019/06/25.6.19_header.jpg"
         },
         {
             "id": 3,
-            "name": "News center VTV24",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+            "name": "Peter Barrett",
+            "like_count": 171,
+            "avatar_url": "https://live.staticflickr.com/8387/8626981500_0c7e5a0d4a_z.jpg"
         },
         {
             "id": 4,
-            "name": "News center VTV24",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+            "name": "Sophie Clarke",
+            "like_count": 3505,
+            "avatar_url": "data:image/jpeg;base64,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"
         },
         {
             "id": 5,
-            "name": "News center VTV24",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+            "name": "Dale Long",
+            "like_count": 7807,
+            "avatar_url": "https://pbs.twimg.com/profile_images/2981740322/39067138d931633a6ea1b629b3c46b30_400x400.jpeg"
         },
         {
             "id": 6,
-            "name": "News center VTV24",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
+            "name": "Kate Fernandez",
+            "like_count": 6418,
+            "avatar_url": "https://vice-images.vice.com/images/content-images-crops/2016/07/20/john-bradley-of-games-of-thrones-told-us-about-how-his-nice-face-can-hide-inner-evil-body-image-1469033461-size_1000.jpg?output-quality=75"
         },
         {
             "id": 7,
-            "name": "News center VTV24",
+            "name": "Mark Zuckerberg",
+            "like_count": 1450,
+            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWu600vbQUpM0C1D9sn1cZpsXXQUjsLKS6radwjFrGFV-lJDZL&usqp=CAU"
+        },
+        {
+            "id": 8,
+            "name": "Gabriel Guzman",
+            "like_count": 3718,
             "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZro-T0Y02YF4AxTbRn4xrHiporqpdVt_FFDevPC8QwZ6LBTlP"
         }
     ],
@@ -4255,7 +4357,7 @@
             "name": "Movie"
         }
     ],
-    "watch_search_recommands": [
+    "watch_search_recommends": [
         {
             "pageId": 1
         },

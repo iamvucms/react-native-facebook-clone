@@ -60,11 +60,11 @@ class index extends Component {
                                 <Text style={styles.navigatorText}>Setting</Text>
                             </TouchableOpacity>
                         </ScrollView>
-                        <ScrollView bounces={false} showsHorizontalScrollIndicator={false} horizontal={true} style={styles.recommandsWrapper}>
+                        <ScrollView bounces={false} showsHorizontalScrollIndicator={false} horizontal={true} style={styles.recommendsWrapper}>
                             {groups.map((group, index) => (
                                 <View key={index}>
                                     {(index < groups.length - 1 || index > 9) &&
-                                        <TouchableOpacity onPress={this.onPressGoToGroupHandler.bind(this, group.id)} style={{ ...styles.recommandItem, marginRight: 10 }}>
+                                        <TouchableOpacity onPress={this.onPressGoToGroupHandler.bind(this, group.id)} style={{ ...styles.recommendItem, marginRight: 10 }}>
                                             {group.isPin &&
                                                 (
                                                     <View style={styles.pinBtn}>
@@ -79,7 +79,7 @@ class index extends Component {
                                 </View>
                             )
                             )}
-                            <TouchableOpacity style={{ ...styles.recommandItem, marginRight: 30 }}>
+                            <TouchableOpacity style={{ ...styles.recommendItem, marginRight: 30 }}>
                                 <View style={styles.remainingNumberWrapper}>
                                     <Text style={styles.remainingNumber}>+{groups.length > 10 ? groups.length - 10 : 1}</Text>
                                 </View>
@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         fontWeight: '500'
     },
-    recommandsWrapper: {
+    recommendsWrapper: {
         paddingHorizontal: 15,
         marginTop: 15
     },
-    recommandItem: {
+    recommendItem: {
         width: 100,
         position: 'relative',
     },

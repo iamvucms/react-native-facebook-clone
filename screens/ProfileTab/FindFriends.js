@@ -23,7 +23,7 @@ class FindFriends extends Component {
         navigation.push('FriendRequests')
     }
     render() {
-        const { recommandFriends } = this.props
+        const { recommendFriends } = this.props
         return (
             <View style={styles.container}>
                 <View style={styles.navigationBar}>
@@ -50,15 +50,15 @@ class FindFriends extends Component {
                             <Text style={{ fontSize: 16, fontWeight: '500' }}>All Friends</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.recommandFriendsWrapper}>
-                        <Text style={styles.recommandFriendsTitle}>People you may know</Text>
-                        <View style={styles.recommandFriends}>
-                            {recommandFriends.map((recommand, index) => (
-                                <ExTouchableOpacity key={index} style={styles.recommandFriendItem}>
-                                    <Image style={styles.avatar} source={{ uri: recommand.user.avatar_url }} />
-                                    <View style={styles.recommandInfo}>
-                                        <Text style={styles.name}>{recommand.user.name}</Text>
-                                        <Text style={styles.mutualCount}>{recommand.mutualCount} mutual friends</Text>
+                    <View style={styles.recommendFriendsWrapper}>
+                        <Text style={styles.recommendFriendsTitle}>People you may know</Text>
+                        <View style={styles.recommendFriends}>
+                            {recommendFriends.map((recommend, index) => (
+                                <ExTouchableOpacity key={index} style={styles.recommendFriendItem}>
+                                    <Image style={styles.avatar} source={{ uri: recommend.user.avatar_url }} />
+                                    <View style={styles.recommendInfo}>
+                                        <Text style={styles.name}>{recommend.user.name}</Text>
+                                        <Text style={styles.mutualCount}>{recommend.mutualCount} mutual friends</Text>
                                         <View style={styles.btnActionsWrapper}>
                                             <TouchableOpacity style={styles.btnAddFriend}>
                                                 <Text style={{ color: '#fff', fontWeight: '500', fontSize: 16 }}>Add Friend</Text>
@@ -79,7 +79,7 @@ class FindFriends extends Component {
 }
 const maptStateToProps = state => {
     return {
-        recommandFriends: state.friends.recommandFriends,
+        recommendFriends: state.friends.recommendFriends,
         friends: state.user.friends,
     }
 }
@@ -128,17 +128,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         height: SCREEN_HEIGHT - (STATUSBAR_HEIGHT + 50)
     },
-    recommandFriendsWrapper: {
+    recommendFriendsWrapper: {
         paddingVertical: 15
     },
-    recommandFriendsTitle: {
+    recommendFriendsTitle: {
         fontSize: 20,
         fontWeight: '600'
     },
-    recommandFriends: {
+    recommendFriends: {
         paddingVertical: 7.5
     },
-    recommandFriendItem: {
+    recommendFriendItem: {
         flexDirection: 'row',
         marginVertical: 7.5,
         alignItems: 'center'
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 100
     },
-    recommandInfo: {
+    recommendInfo: {
         width: SCREEN_WIDTH - 30 - 100,
         paddingLeft: 10
     },

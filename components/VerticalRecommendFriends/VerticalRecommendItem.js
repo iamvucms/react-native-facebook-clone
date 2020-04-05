@@ -4,11 +4,11 @@ import { SCREEN_WIDTH } from '../../constants'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
 
-export default class VerticalRecommandItem extends Component {
+export default class VerticalRecommendItem extends Component {
     constructor(props) {
         super(props)
     }
-    onPressRecommandItemHandler() {
+    onPressRecommendItemHandler() {
         const { item } = this.props
         navigation.navigate('ProfileX', {
             userId: item.user.id
@@ -18,10 +18,10 @@ export default class VerticalRecommandItem extends Component {
         const { item } = this.props
         return (
             <ExTouchableOpacity
-                onPress={this.onPressRecommandItemHandler.bind(this)}
+                onPress={this.onPressRecommendItemHandler.bind(this)}
                 style={styles.container}>
                 <Image style={styles.avatar} source={{ uri: item.user.avatar_url }} />
-                <View style={styles.recommandInfo}>
+                <View style={styles.recommendInfo}>
                     <Text style={styles.name}>{item.user.name}</Text>
                     <Text style={styles.mutualCount}>{item.mutualCount} mutual friends</Text>
                     <View style={styles.btnActionsWrapper}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         borderColor: "#333",
         borderWidth: 0.3
     },
-    recommandInfo: {
+    recommendInfo: {
         width: SCREEN_WIDTH - 30 - 100,
         paddingLeft: 10
     },
