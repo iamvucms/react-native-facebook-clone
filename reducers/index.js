@@ -19,6 +19,7 @@ import watchSearchRecommendsReducer from './watchSearchRecommendsReducer'
 import userXreducer from './userXreducer'
 import notificationsReducer from './notificationsReducer'
 import searchResultReducer from './searchResultReducer'
+import productsReducer from './productsReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
     watchSearchRecommends: watchSearchRecommendsReducer,
     userX: userXreducer,
     notifications: notificationsReducer,
-    searchResult: searchResultReducer
+    searchResult: searchResultReducer,
+    marketplaceProducts: productsReducer
 })
 export default rootReducer

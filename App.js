@@ -29,6 +29,10 @@ import WatchDetail from './screens/WatchTab/WatchDetail';
 
 import ShortCutScreen from './screens/ShortCutTab'
 import Marketplace from './screens/ShortCutTab/Marketplace'
+import MarketplaceArea from './screens/ShortCutTab/MarketplaceArea'
+import MarketplaceProductDetail from './screens/ShortCutTab/MarketplaceProductDetail'
+import MarketplaceCategory from './screens/ShortCutTab/MarketplaceCategory'
+import MarketplaceSearch from './screens/Search/MarketplaceSearch'
 
 import ProfileScreen from './screens/ProfileTab'
 import ProfileX from './screens/ProfileTab/ProfileX'
@@ -166,8 +170,12 @@ function App() {
 					<rootStack.Screen component={MainTab} name="MainTab" />
 					<rootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
 					<rootStack.Screen name="PostDetail" component={PostDetail} />
-					
+
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="Marketplace" component={Marketplace} />
+					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceSearch" component={MarketplaceSearch} />
+					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceProductDetail" component={MarketplaceProductDetail} />
+					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceCategory" component={MarketplaceCategory} />
+					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceArea" component={MarketplaceArea} />
 
 					<rootStack.Screen options={{ gestureEnabled: false }} name="PhotoChooser" component={PhotoChooser} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Camera" component={Camera} />
