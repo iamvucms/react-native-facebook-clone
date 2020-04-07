@@ -37,7 +37,7 @@ class index extends Component {
                 break;
             case searchType.PAGE:
                 navigation.navigate('Page', {
-                    id: searching.page.id
+                    pageId: searching.page.id
                 })
                 break;
             case searchType.GROUP:

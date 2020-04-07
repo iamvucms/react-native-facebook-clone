@@ -23,10 +23,10 @@ class index extends Component {
         navigation.navigate('FullPostTool')
     }
     onPressPostToAnyOneHandler() {
-        const { userX } = this.props
+        const { userX, page } = this.props
         navigation.navigate('FullPostTool', {
             isPostToAnyOne: true,
-            userX
+            userX: userX || page
         })
     }
 
@@ -34,7 +34,7 @@ class index extends Component {
         navigation.navigate('PhotoChooser')
     }
     render() {
-        const { user, isWriteToAnyOne, userX } = this.props
+        const { user, isWriteToAnyOne, userX, isWriteToPage, page } = this.props
         return (
             <View style={styles.container}>
                 <View style={styles.postToolWrapper}>
@@ -43,12 +43,12 @@ class index extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressPostToAnyOneHandler.bind(this) : this.onFullPostToolPressHandler} style={styles.postInputWrapper}>
                         <View style={{ ...styles.postInput, backgroundColor: this.state.inputBgColor }}>
-                            <Text>{isWriteToAnyOne ? `Write somethings to ${userX.name}` : 'What are you thinking ?'}</Text>
+                            <Text>{isWriteToAnyOne || isWriteToPage ? `Write somethings to ${userX?.name || page?.name}` : 'What are you thinking ?'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.postOptionsWrapper}>
-                    {!isWriteToAnyOne &&
+                    {!isWriteToAnyOne && !isWriteToPage &&
                         <TouchableOpacity onPress={this.onLiveStreamPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
                             <View style={styles.postOptionItem}>
                                 <FontAweSome5 style={styles.postOptionIcon} name="video" color="red" size={16} />
@@ -56,16 +56,16 @@ class index extends Component {
                             </View>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressPostToAnyOneHandler.bind(this) : this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressPostToAnyOneHandler.bind(this) : this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
                         <View style={{ ...styles.postOptionItem, ...styles.postOptionItemMiddle }}>
-                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne ? 'edit' : 'image'} color="green" size={16} />
-                            <Text>{isWriteToAnyOne ? 'Write a post' : 'Photo'}</Text>
+                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'edit' : 'image'} color="green" size={16} />
+                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Write a post' : 'Photo'}</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={isWriteToAnyOne ? this.onPressSharePhotoToAnyOne.bind(this) : this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressSharePhotoToAnyOne.bind(this) : this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
                         <View style={styles.postOptionItem}>
-                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne ? 'image' : "map-marker-alt"} color="red" size={16} />
-                            <Text>{isWriteToAnyOne ? 'Share Photos' : 'Check in'}</Text>
+                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'image' : "map-marker-alt"} color="red" size={16} />
+                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Share Photos' : 'Check in'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

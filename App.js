@@ -21,6 +21,8 @@ import NotificationOptions from './screens/NotificationTab/NotificationOptions'
 import PhotoChooser from './screens/PhotoChooser'
 import Camera from './screens/CameraTool'
 
+import Page from './screens/Pages'
+
 import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
 import WatchOptions from './screens/WatchTab/WatchOptions'
@@ -177,6 +179,8 @@ function App() {
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceCategory" component={MarketplaceCategory} />
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceArea" component={MarketplaceArea} />
 
+					<rootStack.Screen options={{ gestureEnabled: false }} name="Page" component={Page} />
+
 					<rootStack.Screen options={{ gestureEnabled: false }} name="PhotoChooser" component={PhotoChooser} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Camera" component={Camera} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Search" component={Search} />
@@ -185,7 +189,7 @@ function App() {
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="WatchOptions" component={WatchOptions} />
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="WatchSearch" component={WatchSearch} />
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="SeenVideos" component={SeenVideos} />
-					<rootStack.Screen options={{ gestureEnabled: false }} name="WatchDetail" component={WatchDetail} />
+					<rootStack.Screen options={{ gestureEnabled: true }} name="WatchDetail" component={WatchDetail} />
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="WatchDetailList" component={WatchDetailList} />
 
 					<rootStack.Screen options={{ cardStyle: { backgroundColor: 'transparent' } }} name="ProfilePostOptions" component={ProfilePostOptions} />

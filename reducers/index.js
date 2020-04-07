@@ -20,6 +20,7 @@ import userXreducer from './userXreducer'
 import notificationsReducer from './notificationsReducer'
 import searchResultReducer from './searchResultReducer'
 import productsReducer from './productsReducer'
+import pageDetailReducer from './pageReducer'
 const rootReducer = combineReducers({
     stories: storiesReducer,
     user: userReducer,
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
     userX: userXreducer,
     notifications: notificationsReducer,
     searchResult: searchResultReducer,
-    marketplaceProducts: productsReducer
+    marketplaceProducts: productsReducer,
+    page: pageDetailReducer
 })
 export default rootReducer
