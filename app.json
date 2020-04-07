@@ -24,8 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "config": {
+        "googleMapsApiKey":"AIzaSyD1C4ESn8sDcD6f0nzWw9Oaw5syCwU43rw"
+      },
       "supportsTablet": true,
-      "bundleIdentifier": "ios",
+      "bundleIdentifier": "com.vucms.map",
       "publishBundlePath": "ios/rozy/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/rozy/Supporting/shell-app-manifest.json"
     },
