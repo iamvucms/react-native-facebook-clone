@@ -22,6 +22,7 @@ import PhotoChooser from './screens/PhotoChooser'
 import Camera from './screens/CameraTool'
 
 import Page from './screens/Pages'
+import PagePostDetail from './screens/Pages/PagePostDetail'
 
 import WatchScreen from './screens/WatchTab'
 import WatchDetailList from './screens/WatchTab/WatchDetailList'
@@ -180,6 +181,7 @@ function App() {
 					<rootStack.Screen options={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }} name="MarketplaceArea" component={MarketplaceArea} />
 
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Page" component={Page} />
+					<rootStack.Screen options={{ gestureEnabled: true }} name="PagePostDetail" component={PagePostDetail} />
 
 					<rootStack.Screen options={{ gestureEnabled: false }} name="PhotoChooser" component={PhotoChooser} />
 					<rootStack.Screen options={{ gestureEnabled: false }} name="Camera" component={Camera} />

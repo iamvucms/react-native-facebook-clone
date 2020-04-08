@@ -7,7 +7,7 @@ import { Video } from 'expo-av'
 import { connect } from 'react-redux'
 import { SCREEN_WIDTH } from '../../constants'
 import { navigation } from '../../rootNavigation'
-
+import PagePostList from '../PagePostList'
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -17,8 +17,13 @@ class Home extends Component {
             id: videoId
         })
     }
+    onPressPhotoDetailHandler(postId) {
+        navigation.navigate('PagePostDetail', {
+            postId
+        })
+    }
     render() {
-        const { page, videos, photos } = this.props
+        const { page, videos, photos, posts } = this.props
         const previewVideos = [...videos].splice(0, 4)
         const previewPhotos = [...photos].splice(0, 4)
         const fans = [...page.fans]
@@ -184,6 +189,7 @@ class Home extends Component {
                         showsHorizontalScrollIndicator={false}>
                         {previewVideos.map((video, index) => (
                             <ExTouchableOpacity
+                                key={index}
                                 onPress={this.onPressVideoDetailHandler.bind(this, video.id)}
                                 style={styles.videoItem}>
                                 <Video
@@ -225,26 +231,18 @@ class Home extends Component {
                         fontWeight: 'bold'
                     }}>Photos by {page.name}</Text>
                     <ScrollView
+                        style={styles.previewPhotosWrapper}
                         bounces={false}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}>
-                        {previewVideos.map((video, index) => (
+                        {previewPhotos.map((photo, index) => (
                             <ExTouchableOpacity
-                                onPress={this.onPressVideoDetailHandler.bind(this, video.id)}
-                                style={styles.videoItem}>
-                                <Image />
-                                <View style={{
-                                    paddingHorizontal: 15,
-                                    marginVertical: 5
+                                key={index}
+                                onPress={this.onPressPhotoDetailHandler.bind(this, photo.id)}
+                                style={{
+                                    marginRight: index === previewPhotos.length - 1 ? 31 : 1
                                 }}>
-                                    <Text style={{
-                                        fontWeight: '500',
-                                        fontSize: 16
-                                    }}>{video.title}</Text>
-                                    <Text style={{
-                                        color: '#333'
-                                    }}>{video.create_at} - {video.seeCount > 1000 ? Math.round(video.seeCount / 1000) + 'k' : video.seeCount} views</Text>
-                                </View>
+                                <Image style={styles.previewPhotoItem} source={{ uri: photo.image }} />
                             </ExTouchableOpacity>
                         ))}
 
@@ -256,6 +254,7 @@ class Home extends Component {
                         <FontAwesome5Icon name="chevron-right" size={16} />
                     </ExTouchableOpacity>
                 </View>
+                <PagePostList pagePosts={posts} />
             </View>
         )
     }
@@ -263,7 +262,8 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         videos: state.page.videos,
-        photos: state.page.photos
+        photos: state.page.photos,
+        posts: state.page.posts
     }
 }
 export default connect(mapStateToProps, null)(Home);
@@ -361,5 +361,14 @@ const styles = StyleSheet.create({
     videoItem: {
         borderWidth: 1,
         borderColor: '#ddd',
+    },
+    previewPhotoItem: {
+        width: SCREEN_WIDTH * 0.4,
+        height: 150,
+        marginHorizontal: 1
+    },
+    previewPhotosWrapper: {
+        paddingHorizontal: 15,
+        paddingBottom: 10,
     }
 })

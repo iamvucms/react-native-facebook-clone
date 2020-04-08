@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image } from 'react-native'
+import { Text, StyleSheet, View, Image, Animated } from 'react-native'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
@@ -9,15 +9,17 @@ import { FetchPageDetailRequest } from '../../actions/pageDetailActions'
 import { navigation } from '../../rootNavigation'
 import {
     Home, Introduction, Posts,
-    Videos, Photos, Event, Communication
+    Videos, Photos, Event, Community
 } from '../../components/PageNavigations'
 class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isOverScrollLimit: false,
-            currentNavigationTab: pageNavigationTypes.HOME
+            currentNavigationTab: pageNavigationTypes.HOME,
+            isFixedNavigationBar: false
         }
+        this._currentScrollOffsetY = 0
     }
     componentDidMount() {
         const { pageId } = this.props.route.params
@@ -28,6 +30,13 @@ class index extends Component {
         navigation.goBack()
     }
     onPressChangeTabHandler(tabId) {
+        setTimeout(() => {
+            this.refs._mainScrollRef.scrollTo({
+                x: 0,
+                y: this._currentScrollOffsetY,
+                animated: true
+            })
+        }, 200);
         this.refs._tabScrollRef.scrollTo({
             x: tabId * SCREEN_WIDTH,
             y: 0,
@@ -80,7 +89,23 @@ class index extends Component {
     }
     onScrollHandler({ nativeEvent }) {
         const offsetY = nativeEvent.contentOffset.y
-        const { isOverScrollLimit } = this.state
+        this._currentScrollOffsetY = offsetY
+        const { isOverScrollLimit, isFixedNavigationBar } = this.state
+        if (offsetY > OFFSETY_LIMIT_FOR_FIX_NAVIGATION_BAR) {
+            if (!isFixedNavigationBar) {
+                this.setState({
+                    ...this.state,
+                    isFixedNavigationBar: true
+                })
+            }
+        } else {
+            if (isFixedNavigationBar) {
+                this.setState({
+                    ...this.state,
+                    isFixedNavigationBar: false
+                })
+            }
+        }
         if (isOverScrollLimit && offsetY < 250) {
             this.setState({
                 ...this.state,
@@ -95,13 +120,32 @@ class index extends Component {
         }
     }
     render() {
-        const { currentNavigationTab, isOverScrollLimit } = this.state
+        const { currentNavigationTab, isOverScrollLimit, isFixedNavigationBar } = this.state
         const { pageDetail } = this.props
-        console.log(pageDetail.id)
         if (!pageDetail.hasOwnProperty("id")) return <View></View>
         const friendsLikePage = [...pageDetail.friendsLikePage]
         return (
             <View style={styles.container}>
+                <View style={{
+                    ...styles.bottomOptions,
+                    display: isFixedNavigationBar ? 'flex' : 'none',
+                }}>
+                    <View style={{
+                        ...styles.introOptionsWrapper,
+                        marginTop: 0,
+                    }}>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.btnAddStory}>
+                            <FontAwesome5Icon size={20} color="#fff" name={"video"} />
+                            <Text style={{ fontSize: 16, fontWeight: '500', color: '#fff', marginLeft: 5 }}>Watch video</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.btnOption}>
+                            <FontAwesome5Icon size={20} color="#000" name="facebook-messenger" />
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.btnOption}>
+                            <FontAwesome5Icon size={20} color="#000" name="ellipsis-h" />
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <View style={{
                     ...styles.navigationBar,
                     backgroundColor: isOverScrollLimit ? '#fff' : 'rgba(0,0,0,0)'
@@ -121,8 +165,93 @@ class index extends Component {
                     <ExTouchableOpacity style={styles.btnBack}>
                         <FontAwesome5Icon name="share" size={20} color={isOverScrollLimit ? '#000' : "#fff"} />
                     </ExTouchableOpacity>
+                    <View style={{
+                        borderTopColor: '#ddd',
+                        borderTopWidth: 0.5,
+                        borderBottomColor: '#ddd',
+                        borderBottomWidth: 1,
+                        display: isFixedNavigationBar ? 'flex' : 'none',
+                        position: 'absolute',
+                        top: STATUSBAR_HEIGHT + 50,
+                        left: 0,
+                        width: '100%',
+                        zIndex: 999
+                    }}>
+                        <ScrollView
+                            bounces={false}
+                            showsHorizontalScrollIndicator={false}
+                            horizontal={true}
+                            style={styles.navigationTabs}>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.HOME)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.HOME ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.HOME ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Home</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.INTRODUCTION)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.INTRODUCTION ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.INTRODUCTION ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>About</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.POSTS)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.POSTS ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.POSTS ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Posts</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.VIDEOS)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.VIDEOS ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.VIDEOS ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Videos</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.PHOTOS)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.PHOTOS ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.PHOTOS ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Photos</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.EVENT)} style={{
+                                ...styles.tab,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.EVENT ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.EVENT ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Events</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.COMMUNICATION)} style={{
+                                ...styles.tab,
+                                marginRight: 20,
+                                borderBottomWidth: currentNavigationTab === pageNavigationTypes.COMMUNICATION ? 2 : 0,
+                            }}>
+                                <Text style={{
+                                    color: currentNavigationTab === pageNavigationTypes.COMMUNICATION ? '#318bfb' : 'gray',
+                                    fontWeight: '600'
+                                }}>Community</Text>
+                            </TouchableOpacity>
+                        </ScrollView>
+
+                    </View>
                 </View>
                 <ScrollView
+                    ref="_mainScrollRef"
                     scrollEventThrottle={60}
                     onScroll={this.onScrollHandler.bind(this)}
                     bounces={false}
@@ -240,7 +369,7 @@ class index extends Component {
                                 <Text style={{
                                     color: currentNavigationTab === pageNavigationTypes.EVENT ? '#318bfb' : 'gray',
                                     fontWeight: '600'
-                                }}>Event</Text>
+                                }}>Events</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.onPressChangeTabHandler.bind(this, pageNavigationTypes.COMMUNICATION)} style={{
                                 ...styles.tab,
@@ -250,7 +379,7 @@ class index extends Component {
                                 <Text style={{
                                     color: currentNavigationTab === pageNavigationTypes.COMMUNICATION ? '#318bfb' : 'gray',
                                     fontWeight: '600'
-                                }}>Communication</Text>
+                                }}>Community</Text>
                             </TouchableOpacity>
                         </ScrollView>
                         <ScrollView
@@ -260,26 +389,54 @@ class index extends Component {
                             scrollEnabled={false}
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}>
-                            <View style={{ width: SCREEN_WIDTH }}>
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.HOME ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.HOME ? 'auto' : 0
+                            }}>
                                 <Home page={pageDetail} />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
-                                <Introduction />
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.INTRODUCTION ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.INTRODUCTION ? 'auto' : 0
+                            }}>
+                                <Introduction page={pageDetail} />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
-                                <Posts />
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.POSTS ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.POSTS ? 'auto' : 0
+                            }}>
+                                <Posts page={pageDetail} />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.VIDEOS ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.VIDEOS ? 'auto' : 0
+                            }}>
                                 <Videos />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
-                                <Photos />
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.PHOTOS ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.PHOTOS ? 'auto' : 0
+                            }}>
+                                <Photos page={pageDetail} />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.EVENT ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.EVENT ? 'auto' : 0
+                            }}>
                                 <Event />
                             </View>
-                            <View style={{ width: SCREEN_WIDTH }}>
-                                <Communication />
+                            <View style={{
+                                width: SCREEN_WIDTH,
+                                opacity: currentNavigationTab === pageNavigationTypes.COMMUNICATION ? 1 : 0,
+                                height: currentNavigationTab === pageNavigationTypes.COMMUNICATION ? 'auto' : 0
+                            }}>
+                                <Community page={pageDetail} />
                             </View>
 
 
@@ -302,11 +459,24 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index)
+const OFFSETY_LIMIT_FOR_FIX_NAVIGATION_BAR = 250 + 64 + 10 + 15 + 40 + 36 + 30 - STATUSBAR_HEIGHT - 50
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
         width: '100%',
         height: '100%'
+    },
+    bottomOptions: {
+        bottom: 0,
+        zIndex: 99999,
+        position: 'absolute',
+        left: 0,
+        justifyContent: 'center',
+        alignItems: "center",
+        width: '100%',
+        backgroundColor: 'rgb(242,242,242)',
+        padding: 5,
+        paddingBottom: 20
     },
     navigationBar: {
         zIndex: 999,

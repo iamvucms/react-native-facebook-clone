@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Animated } from 'react-native'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
-import { closePostDetailModal, openCommentModal, FetchPostDetailRequest } from '../actions/postDetailActions'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import * as navigation from '../rootNavigation'
+import * as navigation from '../../rootNavigation'
+import { FetchPagePostDetailRequest } from '../../actions/pageDetailActions'
 class PostDetailModal extends Component {
     constructor(props) {
         super(props)
@@ -15,9 +15,9 @@ class PostDetailModal extends Component {
         this.optionBottom = new Animated.Value(-screenHeight)
     }
     componentDidMount() {
-        const { id } = this.props.route.params
-        const { fetchPostDetail } = this.props
-        fetchPostDetail(id, true)
+        const { postId } = this.props.route.params
+        const { fetchPagePostDetail } = this.props
+        fetchPagePostDetail(postId)
     }
     onPressOptionIconHandler() {
         Animated.timing(this.optionBottom, {
@@ -28,9 +28,10 @@ class PostDetailModal extends Component {
     onPressProfileLinkHandler() {
 
     }
+
     onPressCommentsHandler() {
-        const { showingPost } = this.props
-        const { comments } = showingPost.postDetail
+        const { postDetail } = this.props
+        const { comments } = postDetail
         navigation.navigate('CommentsPopUp', {
             comments
         })
@@ -52,9 +53,8 @@ class PostDetailModal extends Component {
 
     }
     render() {
-        const { showingPost } = this.props
-        if (!showingPost.hasOwnProperty("isShowModal") || showingPost.isShowModal === false) return <View></View>
-        const { postDetail } = showingPost
+        const { postDetail } = this.props
+        if (!postDetail.hasOwnProperty('id')) return <View></View>
         let reactionValue = 0;
         for (let emoji in postDetail.reactions) {
             reactionValue += postDetail.reactions[emoji];
@@ -102,7 +102,7 @@ class PostDetailModal extends Component {
                     <View style={{ ...styles.postContentWrapper, display: this.state.detailDisplay }}>
                         <View>
                             <TouchableOpacity>
-                                <Text style={styles.name}>{postDetail.user?.name}</Text>
+                                <Text style={styles.name}>{postDetail.page?.name}</Text>
                             </TouchableOpacity>
                             <Text style={styles.content}>{postDetail.content}</Text>
                             <Text style={styles.time}>{postDetail.create_at}</Text>
@@ -150,14 +150,12 @@ class PostDetailModal extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        showingPost: state.showingPost
+        postDetail: state.page.postDetail
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        closePostDetailModal: () => dispatch(closePostDetailModal()),
-        openCommentModal: () => dispatch(openCommentModal()),
-        fetchPostDetail: (id) => dispatch(FetchPostDetailRequest(id))
+        fetchPagePostDetail: (postId) => dispatch(FetchPagePostDetailRequest(postId))
     }
 }
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -224,7 +222,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: 'bold',
-        color: '#fff'
+        color: '#fff',
+        fontSize: 16
     },
     content: {
         color: '#fff'
