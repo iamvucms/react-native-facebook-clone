@@ -3,7 +3,6 @@ import { Text, StyleSheet, View, ImageBackground } from 'react-native'
 import { SCREEN_WIDTH } from '../../constants'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
-import { IntlProvider, FormattedNumber } from 'react-intl'
 export default class ProductItem extends Component {
     constructor(props) {
         super(props)
@@ -16,6 +15,7 @@ export default class ProductItem extends Component {
     }
     render() {
         const { isShowMoreInfo, item } = this.props
+        const numberFormat = new Intl.NumberFormat('ja-JP')
         return (
             <ExTouchableOpacity
                 onPress={this.onPressProductHandler.bind(this)}
@@ -23,18 +23,13 @@ export default class ProductItem extends Component {
                 <ImageBackground style={styles.bgContainer} source={{ uri: item.images[0] }}>
                     {!isShowMoreInfo && (
                         <View style={styles.priceWrapper}>
-                            <IntlProvider textComponent={Text} locale="en">
-                                <Text style={{ color: '#fff', fontWeight: '500' }}><FormattedNumber value={item.price} /> VND</Text>
-                            </IntlProvider>
+                            <Text style={{ color: '#fff', fontWeight: '500' }}>{numberFormat.format(item.price)} VND</Text>
                         </View>
                     )}
                 </ImageBackground>
                 {isShowMoreInfo && (
                     <View style={styles.moreInfo}>
-                        <IntlProvider textComponent={Text} locale="en">
-                            <Text style={{ fontWeight: 'bold' }}><FormattedNumber value={item.price} /> VND</Text>
-                        </IntlProvider>
-
+                        <Text style={{ fontWeight: 'bold' }}>{numberFormat.format(item.price)} VND</Text>
                         <Text style={{ color: '#333' }}>{item.sell_in},</Text>
                     </View>
                 )}

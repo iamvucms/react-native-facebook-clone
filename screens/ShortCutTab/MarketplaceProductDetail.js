@@ -5,7 +5,6 @@ import SwiperImages from '../../components/SwiperImages'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { navigation } from '../../rootNavigation'
-import { IntlProvider, FormattedNumber } from 'react-intl'
 export default class MarketplaceProductDetail extends Component {
     constructor(props) {
         super(props)
@@ -49,6 +48,7 @@ export default class MarketplaceProductDetail extends Component {
     }
     render() {
         const { item } = this.props.route.params
+        const numberFormat = new Intl.NumberFormat('ja-JP')
         return (
             <View style={styles.container}>
                 <View style={styles.statusBar} >
@@ -77,12 +77,10 @@ export default class MarketplaceProductDetail extends Component {
                                 fontSize: 20,
                                 fontWeight: 'bold'
                             }}>{item.title}</Text>
-                            <IntlProvider textComponent={Text} locale="en">
-                                <Text style={{
-                                    fontSize: 18,
-                                    fontWeight: '500', marginVertical: 10
-                                }}><FormattedNumber value={item.price} /> VND</Text>
-                            </IntlProvider>
+                            <Text style={{
+                                fontSize: 18,
+                                fontWeight: '500', marginVertical: 10
+                            }}>{numberFormat.format(item.price)} VND</Text>
                             <Text style={{
                                 fontSize: 14,
                                 fontWeight: '500', color: '#333'
