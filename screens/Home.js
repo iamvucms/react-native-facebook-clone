@@ -43,7 +43,7 @@ class Home extends Component {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		fetchPosts: () => dispatch(FetchPostsRequest()),
-		postLogin: () => dispatch(LoginRequest("vucms", "timboy900"))
+		postLogin: () => dispatch(LoginRequest("vucms", "vucms"))
 	}
 }
 const mapStateToProps = (state) => {
