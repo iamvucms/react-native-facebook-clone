@@ -171,6 +171,7 @@ class index extends Component {
                         borderBottomColor: '#ddd',
                         borderBottomWidth: 1,
                         display: isFixedNavigationBar ? 'flex' : 'none',
+                        opacity: isFixedNavigationBar ? 1 : 0,
                         position: 'absolute',
                         top: STATUSBAR_HEIGHT + 50,
                         left: 0,

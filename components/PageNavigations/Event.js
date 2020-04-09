@@ -24,7 +24,7 @@ class Event extends Component {
                     </Text>
                     <View style={styles.eventsWrapper}>
                         {upcomingEvents.map((event, index) => (
-                            <View style={styles.eventItem}>
+                            <View key={index} style={styles.eventItem}>
                                 <View style={styles.shortTime}>
                                     <Text style={{
                                         color: 'red'
@@ -71,7 +71,7 @@ class Event extends Component {
                     </Text>
                     <View style={styles.eventsWrapper}>
                         {pastEvents.map((event, index) => (
-                            <View style={styles.eventItem}>
+                            <View key={index} style={styles.eventItem}>
                                 <View style={styles.shortTime}>
                                     <Text style={{
                                         color: 'red'

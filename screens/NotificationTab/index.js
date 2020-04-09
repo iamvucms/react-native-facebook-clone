@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     titleWrapper: {
+        marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: 40,
