@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, ImageBackground } from 'react-native'
 import { SCREEN_WIDTH } from '../../constants'
 import ExTouchableOpacity from '../ExTouchableOpacity'
 import { navigation } from '../../rootNavigation'
-
+import { IntlProvider, FormattedNumber } from 'react-intl'
 export default class ProductItem extends Component {
     constructor(props) {
         super(props)
@@ -24,13 +24,18 @@ export default class ProductItem extends Component {
                 <ImageBackground style={styles.bgContainer} source={{ uri: item.images[0] }}>
                     {!isShowMoreInfo && (
                         <View style={styles.priceWrapper}>
-                            <Text style={{ color: '#fff', fontWeight: '500' }}>{numberFormat.format(item.price)} VND</Text>
+                            <IntlProvider textComponent={Text} locale="en">
+                                <Text style={{ color: '#fff', fontWeight: '500' }}><FormattedNumber value={item.price} /> VND</Text>
+                            </IntlProvider>
                         </View>
                     )}
                 </ImageBackground>
                 {isShowMoreInfo && (
                     <View style={styles.moreInfo}>
-                        <Text style={{ fontWeight: 'bold' }}>{numberFormat.format(item.price)} VND</Text>
+                        <IntlProvider textComponent={Text} locale="en">
+                            <Text style={{ fontWeight: 'bold' }}><FormattedNumber value={item.price} /> VND</Text>
+                        </IntlProvider>
+
                         <Text style={{ color: '#333' }}>{item.sell_in},</Text>
                     </View>
                 )}
