@@ -49,7 +49,6 @@ export default class MarketplaceProductDetail extends Component {
     }
     render() {
         const { item } = this.props.route.params
-        const numberFormat = new Intl.NumberFormat('ja-JP')
         return (
             <View style={styles.container}>
                 <View style={styles.statusBar} >

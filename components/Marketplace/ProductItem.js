@@ -16,7 +16,6 @@ export default class ProductItem extends Component {
     }
     render() {
         const { isShowMoreInfo, item } = this.props
-        const numberFormat = new Intl.NumberFormat('ja-JP')
         return (
             <ExTouchableOpacity
                 onPress={this.onPressProductHandler.bind(this)}
