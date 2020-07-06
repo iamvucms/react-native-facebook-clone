@@ -1,6 +1,8 @@
 # Demo
 
-[![Demo Doccou alpha](https://j.gifs.com/ZYx3Rg.gif)](https://www.youtube.com/watch?v=OiMRxVndTeU)\
+[![Demo Doccou alpha](https://j.gifs.com/ZYx3Rg.gif)](https://www.youtube.com/watch?v=OiMRxVndTeU)
+
+
 [![Demo Doccou alpha](https://j.gifs.com/wVzOAX.gif)](https://www.youtube.com/watch?v=OiMRxVndTeU)
 
 # Introduction
