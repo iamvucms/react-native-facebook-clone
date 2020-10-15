@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
         paddingVertical: 15
     },
     friendsBar: {
-        borderRadius: 5,
+        borderRadius: 6,
         paddingVertical: 10,
         backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     btnFindFriends: {
-        paddingHorizontal: 10
+        paddingHorizontal: 11
     },
     friendGallery: {
         flexDirection: 'row',
