@@ -14,7 +14,7 @@
     "@react-navigation/material-top-tabs": "^5.1.1",
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "~36.0.0",
     "expo-av": "^8.0.0",
     "expo-camera": "^8.2.0",
